@@ -1,6 +1,6 @@
 {
   "name": "andywendt/socialite-extender",
-  "description": "An easy way to extend laravel/socialite",
+  "description": "An easy way to extend Laravel Socialite",
   "require": {
     "php": ">=5.4.0",
     "illuminate/support": "~5.0",
