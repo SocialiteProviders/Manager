@@ -172,6 +172,6 @@ class ProviderNameExtendSocialite
 * Look at the already made [providers](#available-providers) for inspiration.
 * [See this article on Medium](https://medium.com/@morrislaptop/adding-auth-providers-to-laravel-socialite-ca0335929e42)
 
-## Overriding a Provider
+## Overriding a Built-in Provider
 
 Coming soon!
