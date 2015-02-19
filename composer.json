@@ -1,0 +1,22 @@
+{
+  "name": "andywendt/socialite-extender",
+  "description": "An easy way to extend laravel/socialite",
+  "require": {
+    "php": ">=5.4.0",
+    "illuminate/support": "~5.0",
+    "laravel/socialite": "~2.0"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andy Wendt",
+      "email": "andy@awendt.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "AndyWendt\\Socialite\\Extender\\": "src/"
+    }
+  }
+}
