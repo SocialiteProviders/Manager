@@ -1,5 +1,20 @@
-# Socialite-Extender
-An easy way to extend Laravel Socialite
+# Socialite Extender
+An easy way to extend Laravel Socialite 
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Contents
+
+- [Installation](#installation)
+  - [Composer](#composer)
+  - [Service Provider](#service-provider)
+  - [Event and Provider Listeners](#event-and-provider-listeners)
+    - [Available Providers](#available-providers)
+  - [Usage](#usage)
+- [Creating a Handler](#creating-a-handler)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 ## Installation
 
@@ -59,7 +74,7 @@ return Socialite::with('providername')->redirect();
 ```
 
 
-## Creating Handlers and Providers
+## Creating a Handler
 
 Below is an example handler.  You need to add this full class name to the `listen[]` in the `EventServiceProvider`.
 
