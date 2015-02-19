@@ -21,25 +21,25 @@ An easy way to extend Laravel Socialite
 ### Composer
 
 ```bash
-composer require andywendt/socialite-extender
+composer require socialiteproviders/manager
 ```
 
 ### Service Provider
 
-Add `AndyWendt\Socialite\Extender\ServiceProvider` to your `providers[]` in `config\app.php`.
+Add `SocialiteProviders\Manager\ServiceProvider` to your `providers[]` in `config\app.php`.
 
 e.g.: 
 
 ```php
 'providers' => [
     // a whole bunch of providers
-    `AndyWendt\Socialite\Extender\ServiceProvider`
+    `SocialiteProviders\Manager\ServiceProvider`
 ];
 ```
 
 ### Event and Provider Listeners
 
-Add `AndyWendt\Socialite\Extender\SocialiteWasCalled` to your `listen[]` in `<app>/Providers/EventServiceProvider`.
+Add `SocialiteProviders\Manager\SocialiteWasCalled` to your `listen[]` in `<app>/Providers/EventServiceProvider`.
 
 [See also the Laravel docs about events](http://laravel.com/docs/5.0/events).
 
@@ -52,7 +52,7 @@ For example:
  * @var array
  */
 protected $listen = [
-    `AndyWendt\Socialite\Extender\SocialiteWasCalled` => [
+    `SocialiteProviders\Manager\SocialiteWasCalled` => [
         'Your\Name\Space\ProviderNameExtendSocialite@handle', 
         // This is where we define all of our ExtendSocialite listeners (i.e. new providers)
     ],
@@ -61,7 +61,7 @@ protected $listen = [
 
 #### Available Providers
 
-* [Meetup.com](https://github.com/AndyWendt/Socialite-Meetup)
+* [Meetup.com](https://github.com/SocialiteProviders/Meetup)
 * You can also make your own or modify someone else's
 
 ### Usage
@@ -86,7 +86,7 @@ Below is an example handler.  You need to add this full class name to the `liste
 ```php
 namespace Your\Name\Space;
 
-use AndyWendt\Socialite\Extender\SocialiteWasCalled;
+use SocialiteProviders\Manager\SocialiteWasCalled;
 
 class ProviderNameExtendSocialite
 {
