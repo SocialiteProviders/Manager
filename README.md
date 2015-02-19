@@ -1,4 +1,4 @@
-# Socialite Extender
+# Socialite Providers Manager
 An easy way to extend Laravel Socialite 
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->

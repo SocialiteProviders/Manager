@@ -1,5 +1,5 @@
 <?php
-namespace AndyWendt\Socialite\Extender;
+namespace SocialiteProviders\Manager;
 
 class SocialiteWasCalled
 {

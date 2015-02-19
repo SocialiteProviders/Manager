@@ -1,5 +1,5 @@
 {
-  "name": "andywendt/socialite-extender",
+  "name": "socialiteproviders/manager",
   "description": "An easy way to extend Laravel Socialite",
   "require": {
     "php": ">=5.4.0",
@@ -16,7 +16,7 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "AndyWendt\\Socialite\\Extender\\": "src/"
+      "SocialiteProviders\\Manager\\": "src/"
     }
   }
 }
