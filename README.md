@@ -46,6 +46,7 @@ A package for Laravel Socialite that allows you to easily add new providers or o
 Note: You will not need to do this if you require one of the available providers.
 
 ```bash
+// This assumes that you have composer installed globally
 composer require socialiteproviders/manager
 ```
 
