@@ -5,12 +5,11 @@ use Laravel\Socialite\SocialiteServiceProvider;
 
 class ServiceProvider extends SocialiteServiceProvider
 {
-
     /**
      * {@inheritdoc}
      */
     public function boot()
     {
-        \Event::fire(new SocialiteWasCalled());
+        event(new SocialiteWasCalled());
     }
 }

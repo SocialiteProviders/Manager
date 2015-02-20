@@ -9,7 +9,7 @@ class SocialiteWasCalled
      */
     public function extendSocialite($providerName, $providerClass)
     {
-        $socialite = \App::make('Laravel\Socialite\Contracts\Factory');
+        $socialite = app()->make('Laravel\Socialite\Contracts\Factory');
         $socialite->extend(
             $providerName,
             function ($app) use ($socialite, $providerName, $providerClass) {
