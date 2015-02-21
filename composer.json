@@ -3,9 +3,7 @@
   "description": "Easily add new or override built-in providers in Laravel Socialite.",
   "require": {
     "php": ">=5.4.0",
-    "illuminate/support": "5.0.*",
-    "illuminate/events": "5.0.*",
-    "illuminate/foundation": "1.1.*",
+    "laravel/framework": "5.0.*",
     "laravel/socialite": "~2.0"
   },
   "license": "MIT",
