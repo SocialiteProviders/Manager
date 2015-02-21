@@ -36,7 +36,7 @@ A package for Laravel Socialite that allows you to easily add new providers or o
 
 ## Available Providers
 
-* [Meetup.com](https://github.com/SocialiteProviders/Meetup)
+* See the [SocialiteProviders](https://github.com/SocialiteProviders) list
 * You can also make your own or modify someone else's
 
 ## Installation
@@ -175,4 +175,4 @@ class ProviderNameExtendSocialite
 
 ## Overriding a Built-in Provider
 
-Coming soon!
+You can easily override a built-in `laravel/socialite` provider by creating a new one with exactly the same name.
