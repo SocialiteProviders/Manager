@@ -31,21 +31,21 @@ class SocialiteWasCalled
      * @param string $providerName 'meetup'
      * @param string $providerClass 'Your\Name\Space\ClassNameProvider' must extend
      *      either Laravel\Socialite\Two\AbstractProvider or Laravel\Socialite\One\AbstractProvider
-     * @param string $providerServer 'Your\Name\Space\ClassNameServer' must extend League\OAuth1\Client\Server\Server
+     * @param string $oauth1Server 'Your\Name\Space\ClassNameServer' must extend League\OAuth1\Client\Server\Server
      */
-    public function extendSocialite($providerName, $providerClass, $providerServer = null)
+    public function extendSocialite($providerName, $providerClass, $oauth1Server = null)
     {
         /** @var SocialiteManager $socialite */
         $socialite = app()->make('Laravel\Socialite\Contracts\Factory');
 
         $socialite->extend(
             $providerName,
-            function ($app) use ($socialite, $providerName, $providerClass, $providerServer) {
+            function ($app) use ($socialite, $providerName, $providerClass, $oauth1Server) {
                 /** @var LaravelApp $app */
                 $config = $app['config']['services.' . $providerName];
 
-                if ($this->isOAuth1Provider($providerServer)) {
-                    return $this->buildOAuth1Provider($app, $providerClass, $providerServer, $config);
+                if ($this->isOAuth1Provider($oauth1Server)) {
+                    return $this->buildOAuth1Provider($app, $providerClass, $oauth1Server, $config);
                 }
 
                 return $this->buildOAuth2Provider($socialite, $providerClass, $config);
@@ -70,13 +70,13 @@ class SocialiteWasCalled
      *
      * @param  LaravelApp $app
      * @param  string $providerClass must extend Laravel\Socialite\One\AbstractProvider
-     * @param  string $providerServer must extend League\OAuth1\Client\Server\Server
+     * @param  string $oauth1Server must extend League\OAuth1\Client\Server\Server
      * @param  array $config
      * @return \Laravel\Socialite\One\AbstractProvider
      */
-    protected function buildOAuth1Provider(LaravelApp $app, $providerClass, $providerServer, array $config)
+    protected function buildOAuth1Provider(LaravelApp $app, $providerClass, $oauth1Server, array $config)
     {
-        return new $providerClass($app['request'], new $providerServer($this->buildOAuth1Config($config)));
+        return new $providerClass($app['request'], new $oauth1Server($this->buildOAuth1Config($config)));
     }
 
     /**
@@ -110,11 +110,11 @@ class SocialiteWasCalled
     /**
      * Check if a server is given, which indicates that OAuth1 is used.
      *
-     * @param  string $providerServer
+     * @param  string $oauth1Server
      * @return boolean
      */
-    private function isOAuth1Provider($providerServer)
+    private function isOAuth1Provider($oauth1Server)
     {
-        return (!empty($providerServer));
+        return (!empty($oauth1Server));
     }
 }
