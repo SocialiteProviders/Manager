@@ -11,6 +11,6 @@ class ServiceProvider extends SocialiteServiceProvider
      */
     public function boot(Dispatcher $event)
     {
-        $event->fire(new SocialiteWasCalled());
+        $event->fire(new SocialiteWasCalled($this->app));
     }
 }
