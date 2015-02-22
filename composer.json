@@ -13,7 +13,7 @@
       "email": "andy@awendt.com"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
       "SocialiteProviders\\Manager\\": "src/"
