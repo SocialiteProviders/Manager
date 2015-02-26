@@ -24,6 +24,19 @@ trait ManagerTestTrait
     }
 
     /**
+     * @param array $config
+     * @return array
+     */
+    protected function oauth1FormattedConfig(array $config)
+    {
+        return [
+            'identifier' => $config['client_id'],
+            'secret' => $config['client_secret'],
+            'callback_uri' => $config['redirect'],
+        ];
+    }
+
+    /**
      * @return \Mockery\MockInterface
      */
     protected function appMock()

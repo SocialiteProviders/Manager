@@ -1,5 +1,6 @@
 <?php
 namespace SocialiteProviders\Manager;
+
 use Mockery as m;
 
 class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
@@ -79,6 +80,8 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
         $providerName = 'baz';
 
         $socialite = $this->socialiteMock();
+        $socialite->shouldReceive('formatConfig')->with($this->config())
+            ->andReturn($this->oauth1FormattedConfig($this->config()));
 
         $app = $this->appMock();
         $app->shouldReceive('make')->andReturn($socialite);

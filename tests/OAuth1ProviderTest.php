@@ -20,6 +20,8 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
         $providerName = 'bar';
 
         $socialite = $this->socialiteMock();
+        $socialite->shouldReceive('formatConfig')->with($this->config())
+            ->andReturn($this->oauth1FormattedConfig($this->config()));
         $socialite->shouldReceive('extend')->withArgs(
             [
                 $providerName,
@@ -52,6 +54,8 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
         $providerName = 'foo';
 
         $socialite = $this->socialiteMock();
+        $socialite->shouldReceive('formatConfig')->with($this->config())
+            ->andReturn($this->oauth1FormattedConfig($this->config()));
 
         $app = $this->appMock();
         $app->shouldReceive('make')->andReturn($socialite);
@@ -71,6 +75,8 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
         $providerName = 'bar';
 
         $socialite = $this->socialiteMock();
+        $socialite->shouldReceive('formatConfig')->with($this->config())
+            ->andReturn($this->oauth1FormattedConfig($this->config()));
 
         $app = $this->appMock();
         $app->shouldReceive('make')->andReturn($socialite);
