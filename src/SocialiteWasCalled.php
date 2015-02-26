@@ -6,26 +6,6 @@ use Laravel\Socialite\SocialiteManager;
 
 class SocialiteWasCalled
 {
-    /**
-     * The OAuth1 config-key for the client ID.
-     *
-     * @var string
-     */
-    protected $clientIdConfigKey = 'identifier';
-
-    /**
-     * The OAuth1 config-key for the client secret.
-     *
-     * @var string
-     */
-    protected $clientSecretConfigKey = 'secret';
-
-    /**
-     * The OAuth1 config-key for the callback url.
-     *
-     * @var string
-     */
-    protected $redirectConfigKey = 'callback_uri';
 
     /**
      * @var LaravelApp
@@ -61,18 +41,6 @@ class SocialiteWasCalled
     }
 
     /**
-     * @param string $clientIdKey key for 'client_id' replaces 'identifier'
-     * @param string $clientSecretKey key for 'client_secret' replaces 'secret'
-     * @param string $redirectKey key for 'redirect' replaces 'callback_uri'
-     */
-    public function overrideOAuth1ConfigFormat($clientIdKey, $clientSecretKey, $redirectKey)
-    {
-        $this->clientIdConfigKey = $clientIdKey;
-        $this->clientSecretConfigKey = $clientSecretKey;
-        $this->redirectConfigKey = $redirectKey;
-    }
-
-    /**
      * @param SocialiteManager $socialite
      * @param $providerName
      * @param string $providerClass
@@ -83,7 +51,7 @@ class SocialiteWasCalled
     {
         $config = $this->getConfig($providerName);
         if ($this->isOAuth1($oauth1Server)) {
-            return $this->buildOAuth1Provider($providerClass, $oauth1Server, $config);
+            return $this->buildOAuth1Provider($providerClass, $oauth1Server, $socialite->formatConfig($config));
         }
 
         return $this->buildOAuth2Provider($socialite, $providerClass, $config);
@@ -103,7 +71,7 @@ class SocialiteWasCalled
         $this->classExtends($oauth1Server, 'League\OAuth1\Client\Server\Server');
 
         return new $providerClass(
-            $this->app->offsetGet('request'), new $oauth1Server($this->buildOAuth1Config($config))
+            $this->app->offsetGet('request'), new $oauth1Server($config)
         );
     }
 
@@ -118,22 +86,17 @@ class SocialiteWasCalled
     protected function buildOAuth2Provider(SocialiteManager $socialite, $providerClass, array $config)
     {
         $this->classExtends($providerClass, 'Laravel\Socialite\Two\AbstractProvider');
+
         return $socialite->buildProvider($providerClass, $config);
     }
 
     /**
-     * Format the OAuth1 server configuration.
-     *
-     * @param  array $config
+     * @param string $providerName
      * @return array
      */
-    protected function buildOAuth1Config(array $config)
+    protected function getConfig($providerName)
     {
-        return [
-            $this->clientIdConfigKey => $config['client_id'],
-            $this->clientSecretConfigKey => $config['client_secret'],
-            $this->redirectConfigKey => $config['redirect'],
-        ];
+        return $this->app->offsetGet('config')['services.'.$providerName];
     }
 
     /**
@@ -158,14 +121,5 @@ class SocialiteWasCalled
             $message = $class.' does not extend '.$baseClass;
             throw new InvalidArgumentException($message);
         }
-    }
-
-    /**
-     * @param string $providerName
-     * @return array
-     */
-    private function getConfig($providerName)
-    {
-        return $this->app->offsetGet('config')['services.'.$providerName];
     }
 }
