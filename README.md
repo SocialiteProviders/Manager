@@ -25,6 +25,8 @@
 
 ## About
 
+[![Build Status](https://travis-ci.org/SocialiteProviders/Manager.svg)](https://travis-ci.org/SocialiteProviders/Manage) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/?branch=master)
+
 A package for Laravel Socialite that allows you to easily add new providers or override current providers.  
   
 ### Benefits
