@@ -8,9 +8,10 @@ class ServiceProvider extends SocialiteServiceProvider
 {
     /**
      * @param Dispatcher $event
+     * @param SocialiteWasCalled $socialiteWasCalled
      */
-    public function boot(Dispatcher $event)
+    public function boot(Dispatcher $event, SocialiteWasCalled $socialiteWasCalled)
     {
-        $event->fire(new SocialiteWasCalled($this->app));
+        $event->fire($socialiteWasCalled);
     }
 }
