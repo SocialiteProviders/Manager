@@ -1,5 +1,7 @@
 # Socialite Providers Manager
 
+[![Build Status](https://travis-ci.org/SocialiteProviders/Manager.svg)](https://travis-ci.org/SocialiteProviders/Manage) [![Code Coverage](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/?branch=master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/?branch=master) [![Latest Stable Version](https://poser.pugx.org/socialiteproviders/manager/v/stable.svg)](https://packagist.org/packages/socialiteproviders/manager) [![Total Downloads](https://poser.pugx.org/socialiteproviders/manager/downloads.svg)](https://packagist.org/packages/socialiteproviders/manager) [![Latest Unstable Version](https://poser.pugx.org/socialiteproviders/manager/v/unstable.svg)](https://packagist.org/packages/socialiteproviders/manager) [![License](https://poser.pugx.org/socialiteproviders/manager/license.svg)](https://packagist.org/packages/socialiteproviders/manager)
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Contents
@@ -24,8 +26,6 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## About
-
-[![Build Status](https://travis-ci.org/SocialiteProviders/Manager.svg)](https://travis-ci.org/SocialiteProviders/Manage) [![Code Coverage](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/?branch=master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/?branch=master) [![Latest Stable Version](https://poser.pugx.org/socialiteproviders/manager/v/stable.svg)](https://packagist.org/packages/socialiteproviders/manager) [![Total Downloads](https://poser.pugx.org/socialiteproviders/manager/downloads.svg)](https://packagist.org/packages/socialiteproviders/manager) [![Latest Unstable Version](https://poser.pugx.org/socialiteproviders/manager/v/unstable.svg)](https://packagist.org/packages/socialiteproviders/manager) [![License](https://poser.pugx.org/socialiteproviders/manager/license.svg)](https://packagist.org/packages/socialiteproviders/manager)
 
 A package for Laravel Socialite that allows you to easily add new providers or override current providers.  
   
