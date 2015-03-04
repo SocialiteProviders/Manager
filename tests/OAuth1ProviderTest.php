@@ -31,7 +31,7 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
 
                         return is_callable($closure);
                     }
-                )
+                ),
             ]
         );
 
