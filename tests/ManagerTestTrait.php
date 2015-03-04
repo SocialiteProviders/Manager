@@ -5,7 +5,6 @@ use Mockery as m;
 
 trait ManagerTestTrait
 {
-
     protected function expectManagerInvalidArgumentException()
     {
         $this->setExpectedException($this->fullClassName('InvalidArgumentException'));
@@ -17,21 +16,22 @@ trait ManagerTestTrait
     protected function config()
     {
         return [
-            'client_id' => 'test',
+            'client_id'     => 'test',
             'client_secret' => 'test',
-            'redirect' => 'test'
+            'redirect'      => 'test',
         ];
     }
 
     /**
      * @param array $config
+     *
      * @return array
      */
     protected function oauth1FormattedConfig(array $config)
     {
         return [
-            'identifier' => $config['client_id'],
-            'secret' => $config['client_secret'],
+            'identifier'   => $config['client_id'],
+            'secret'       => $config['client_secret'],
             'callback_uri' => $config['redirect'],
         ];
     }
@@ -91,6 +91,7 @@ trait ManagerTestTrait
 
     /**
      * @param string $stub
+     *
      * @return m\MockInterface
      */
     protected function mockStub($stub)
@@ -100,6 +101,7 @@ trait ManagerTestTrait
 
     /**
      * @param string $stub
+     *
      * @return string
      */
     protected function fullStubClassName($stub)
@@ -109,6 +111,7 @@ trait ManagerTestTrait
 
     /**
      * @param string $class
+     *
      * @return string
      */
     protected function fullClassName($class)
@@ -118,6 +121,7 @@ trait ManagerTestTrait
 
     /**
      * @param string $providerName
+     *
      * @return array
      */
     protected function servicesArray($providerName)
@@ -127,6 +131,7 @@ trait ManagerTestTrait
 
     /**
      * @param string $providerName
+     *
      * @return string
      */
     protected function providerConfigKey($providerName)
