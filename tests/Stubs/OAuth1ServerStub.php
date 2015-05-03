@@ -1,4 +1,5 @@
 <?php
+
 namespace SocialiteProviders\Manager\Stubs;
 
 use Laravel\Socialite\One\User;
