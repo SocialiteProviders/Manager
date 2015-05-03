@@ -1,4 +1,5 @@
 <?php
+
 namespace SocialiteProviders\Manager;
 
 use Mockery as m;

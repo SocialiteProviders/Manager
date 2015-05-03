@@ -1,4 +1,5 @@
 <?php
+
 namespace SocialiteProviders\Manager;
 
 use Illuminate\Contracts\Foundation\Application as LaravelApp;
@@ -108,7 +109,7 @@ class SocialiteWasCalled
      *
      * @param string $oauth1Server
      *
-     * @return boolean
+     * @return bool
      */
     private function isOAuth1($oauth1Server)
     {
