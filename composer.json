@@ -3,7 +3,7 @@
   "description": "Easily add new or override built-in providers in Laravel Socialite.",
   "require": {
     "php": ">=5.4.0",
-    "laravel/framework": "5.0.*",
+    "laravel/framework": "~5.0",
     "laravel/socialite": "~2.0"
   },
   "require-dev": {
