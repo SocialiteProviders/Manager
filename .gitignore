@@ -1,7 +1,5 @@
-.idea
 /vendor/
 composer.phar
 composer.lock
-.DS_Store
 Thumbs.db
 coverage.clover
