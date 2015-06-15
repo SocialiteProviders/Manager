@@ -44,8 +44,8 @@ class SocialiteWasCalled
     /**
      * @param SocialiteManager $socialite
      * @param $providerName
-     * @param string           $providerClass
-     * @param null|string      $oauth1Server
+     * @param string      $providerClass
+     * @param null|string $oauth1Server
      *
      * @return \Laravel\Socialite\One\AbstractProvider|\Laravel\Socialite\Two\AbstractProvider
      */
