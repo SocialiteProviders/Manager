@@ -1,26 +1,25 @@
 {
-  "name": "socialiteproviders/manager",
-  "description": "Easily add new or override built-in providers in Laravel Socialite.",
-  "require": {
-    "php": ">=5.4.0",
-    "laravel/framework": "~5.0",
-    "laravel/socialite": "~2.0"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "4.5.*",
-    "mockery/mockery": "0.9.*"
-  },
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Andy Wendt",
-      "email": "andy@awendt.com"
-    }
-  ],
-  "minimum-stability": "stable",
-  "autoload": {
-    "psr-4": {
-      "SocialiteProviders\\Manager\\": "src/"
-    }
-  }
+    "name": "socialiteproviders/manager",
+    "description": "Easily add new or override built-in providers in Laravel Socialite.",
+    "license": "MIT",
+    "authors": [{
+        "name": "Andy Wendt",
+        "email": "andy@awendt.com"
+    }],
+    "require": {
+        "php": ">=5.5.0",
+        "laravel/framework": "~5.0",
+        "laravel/socialite": "~2.0",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.5.*",
+        "mockery/mockery": "0.9.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "SocialiteProviders\\Manager\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
 }

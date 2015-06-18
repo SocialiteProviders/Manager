@@ -17,9 +17,9 @@ trait ManagerTestTrait
     protected function config()
     {
         return [
-            'client_id'     => 'test',
+            'client_id' => 'test',
             'client_secret' => 'test',
-            'redirect'      => 'test',
+            'redirect' => 'test',
         ];
     }
 
@@ -31,8 +31,8 @@ trait ManagerTestTrait
     protected function oauth1FormattedConfig(array $config)
     {
         return [
-            'identifier'   => $config['client_id'],
-            'secret'       => $config['client_secret'],
+            'identifier' => $config['client_id'],
+            'secret' => $config['client_secret'],
             'callback_uri' => $config['redirect'],
         ];
     }
