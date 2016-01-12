@@ -52,7 +52,7 @@ class ProviderNameExtendSocialite
 {
     public function handle(SocialiteWasCalled $socialiteWasCalled)
     {
-        $socialiteWasCalled->extendSocialite('providername', 'Your\Name\Space\ProviderName');
+        $socialiteWasCalled->extendSocialite('providername', \Your\Name\Space\Provider::class);
     }
 }
 ```
