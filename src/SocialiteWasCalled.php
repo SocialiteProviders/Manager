@@ -104,10 +104,10 @@ class SocialiteWasCalled
     protected function getConfig($providerName)
     {
         try {
-            /** @var Contracts\Config $config */
+            /** @var Contracts\ConfigInterface $config */
             $config = $this->app->make('SocialiteProviders.config.'.$providerName);
 
-            if (!($config instanceof Contracts\Config)) {
+            if (!($config instanceof Contracts\ConfigInterface)) {
                 throw new InvalidArgumentException('Config class does not implement config contract');
             }
 

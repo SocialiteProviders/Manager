@@ -3,7 +3,7 @@ namespace SocialiteProviders\Manager;
 
 use SocialiteProviders\Manager\Contracts;
 
-class Config implements Contracts\Config
+class Config implements Contracts\ConfigInterface
 {
 
     protected $config;

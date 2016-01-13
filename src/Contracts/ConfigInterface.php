@@ -1,7 +1,7 @@
 <?php
 namespace SocialiteProviders\Manager\Contracts;
 
-interface Config
+interface ConfigInterface
 {
     /**
      * @return array
