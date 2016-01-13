@@ -4,6 +4,7 @@ namespace SocialiteProviders\Manager;
 
 use Illuminate\Contracts\Foundation\Application as LaravelApp;
 use Laravel\Socialite\SocialiteManager;
+use SocialiteProviders\Manager\Contracts;
 
 class SocialiteWasCalled
 {
@@ -23,7 +24,8 @@ class SocialiteWasCalled
     /**
      * @param string $providerName  'meetup'
      * @param string $providerClass 'Your\Name\Space\ClassNameProvider' must extend
-     *                              either Laravel\Socialite\Two\AbstractProvider or Laravel\Socialite\One\AbstractProvider
+     *                              either Laravel\Socialite\Two\AbstractProvider or
+     *                              Laravel\Socialite\One\AbstractProvider
      * @param string $oauth1Server  'Your\Name\Space\ClassNameServer' must extend League\OAuth1\Client\Server\Server
      *
      * @throws InvalidArgumentException
@@ -31,7 +33,7 @@ class SocialiteWasCalled
     public function extendSocialite($providerName, $providerClass, $oauth1Server = null)
     {
         /** @var SocialiteManager $socialite */
-        $socialite = $this->app->make('Laravel\Socialite\Contracts\Factory');
+        $socialite = $this->app->make(\Laravel\Socialite\Contracts\Factory::class);
         $provider = $this->buildProvider($socialite, $providerName, $providerClass, $oauth1Server);
         $socialite->extend(
             $providerName,
@@ -43,9 +45,9 @@ class SocialiteWasCalled
 
     /**
      * @param SocialiteManager $socialite
-     * @param $providerName
-     * @param string      $providerClass
-     * @param null|string $oauth1Server
+     * @param                  $providerName
+     * @param string           $providerClass
+     * @param null|string      $oauth1Server
      *
      * @return \Laravel\Socialite\One\AbstractProvider|\Laravel\Socialite\Two\AbstractProvider
      */
@@ -70,8 +72,8 @@ class SocialiteWasCalled
      */
     protected function buildOAuth1Provider($providerClass, $oauth1Server, array $config)
     {
-        $this->classExtends($providerClass, 'Laravel\Socialite\One\AbstractProvider');
-        $this->classExtends($oauth1Server, 'League\OAuth1\Client\Server\Server');
+        $this->classExtends($providerClass, \Laravel\Socialite\One\AbstractProvider::class);
+        $this->classExtends($oauth1Server, \League\OAuth1\Client\Server\Server::class);
 
         return new $providerClass(
             $this->app->offsetGet('request'), new $oauth1Server($config)
@@ -89,7 +91,7 @@ class SocialiteWasCalled
      */
     protected function buildOAuth2Provider(SocialiteManager $socialite, $providerClass, array $config)
     {
-        $this->classExtends($providerClass, 'Laravel\Socialite\Two\AbstractProvider');
+        $this->classExtends($providerClass, \Laravel\Socialite\Two\AbstractProvider::class);
 
         return $socialite->buildProvider($providerClass, $config);
     }
@@ -101,7 +103,18 @@ class SocialiteWasCalled
      */
     protected function getConfig($providerName)
     {
-        return $this->app->offsetGet('config')['services.'.$providerName];
+        try {
+            /** @var Contracts\Config $config */
+            $config = $this->app->make('SocialiteProviders.config.'.$providerName);
+
+            if (!($config instanceof Contracts\Config)) {
+                throw new InvalidArgumentException('Config class does not implement config contract');
+            }
+
+            return $config->get();
+        } catch (\ReflectionException $e) {
+            return $this->app->offsetGet('config')['services.'.$providerName];
+        }
     }
 
     /**

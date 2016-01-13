@@ -10,13 +10,13 @@ class Config implements Contracts\Config
 
     public function __construct($key, $secret, $callbackUri)
     {
-         $this->config = [
-             'client_id' => $key,
-             'client_secret' => $secret,
-             'redirect' => $callbackUri
-         ];
+        $this->config = [
+            'client_id'     => $key,
+            'client_secret' => $secret,
+            'redirect'      => $callbackUri,
+        ];
     }
-    
+
     /**
      * @return array
      */

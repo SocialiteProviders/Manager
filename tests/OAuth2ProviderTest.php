@@ -23,6 +23,38 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException \SocialiteProviders\Manager\InvalidArgumentException
+     */
+    public function it_should_blow_up_if_the_config_passed_does_not_implement_config_contract()
+    {
+        $providerName = 'bar';
+
+        $socialite = $this->socialiteMock();
+        $socialite->shouldReceive('buildProvider')->withArgs([$this->oauth2ProviderStubName(), $this->config()])
+            ->andReturn($this->oauth2ProviderStub());
+        $socialite->shouldReceive('extend')->withArgs(
+            [
+                $providerName,
+                m::on(
+                    function ($closure) {
+                        $this->assertInstanceOf($this->oauth2ProviderStubName(), $closure());
+
+                        return is_callable($closure);
+                    }
+                ),
+            ]
+        );
+
+        $app = $this->appMock();
+        $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
+        $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andReturn('foobar');
+
+        $s = new SocialiteWasCalled($app);
+        $s->extendSocialite($providerName, $this->oauth2ProviderStubName());
+    }
+
+    /**
+     * @test
      */
     public function it_should_build_a_provider_and_extend_socialite()
     {
@@ -44,8 +76,15 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
+        $config = new Config(
+            $this->config()['client_id'],
+            $this->config()['client_secret'],
+            $this->config()['redirect']
+        );
+
         $app = $this->appMock();
-        $app->shouldReceive('make')->andReturn($socialite);
+        $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
+        $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andReturn($config);
         $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
 
         $s = new SocialiteWasCalled($app);

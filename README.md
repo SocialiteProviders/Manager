@@ -66,3 +66,15 @@ class ProviderNameExtendSocialite
 ## Overriding a Built-in Provider
 
 You can easily override a built-in `laravel/socialite` provider by creating a new one with exactly the same name (i.e. 'facebook').
+
+
+## Dynamically Passing a Config
+
+You can dynamically pass a config by using:
+```
+$key = 'SocialiteProviders.config.<provider_name>';
+$config = new \SocialiteProviders\Manager\Config('key', 'secret', 'callbackUri');
+$this->app->instance($key, $config)
+```
+
+**You must call this before you run any Socialite methods.**

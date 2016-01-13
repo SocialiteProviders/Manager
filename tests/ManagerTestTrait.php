@@ -17,9 +17,9 @@ trait ManagerTestTrait
     protected function config()
     {
         return [
-            'client_id' => 'test',
+            'client_id'     => 'test',
             'client_secret' => 'test',
-            'redirect' => 'test',
+            'redirect'      => 'test',
         ];
     }
 
@@ -31,8 +31,8 @@ trait ManagerTestTrait
     protected function oauth1FormattedConfig(array $config)
     {
         return [
-            'identifier' => $config['client_id'],
-            'secret' => $config['client_secret'],
+            'identifier'   => $config['client_id'],
+            'secret'       => $config['client_secret'],
             'callback_uri' => $config['redirect'],
         ];
     }
@@ -42,7 +42,7 @@ trait ManagerTestTrait
      */
     protected function appMock()
     {
-        return m::mock('Illuminate\Contracts\Foundation\Application');
+        return m::mock(\Illuminate\Contracts\Foundation\Application::class);
     }
 
     /**
@@ -50,7 +50,7 @@ trait ManagerTestTrait
      */
     protected function socialiteMock()
     {
-        return m::mock('Laravel\Socialite\SocialiteManager');
+        return m::mock(\Laravel\Socialite\SocialiteManager::class);
     }
 
     protected function oauth2ProviderStub()
@@ -145,7 +145,7 @@ trait ManagerTestTrait
      */
     protected function buildRequest()
     {
-        return m::mock('\Illuminate\Http\Request');
+        return m::mock(\Illuminate\Http\Request::class);
     }
 
     /**
