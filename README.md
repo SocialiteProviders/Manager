@@ -79,7 +79,7 @@ $this->app->instance($key, $config)
 
 **You must call this before you run any Socialite methods.**
 
-## Accessing the Access Token Response Body
+## Getting the Access Token Response Body
 
 Laravel Socialite by default only allows access to the `access_token`.  Which can be accessed 
 via the `\Laravel\Socialite\User->token` public property.  Sometimes you need access to the whole response body which
