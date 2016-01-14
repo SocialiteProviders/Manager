@@ -71,6 +71,27 @@ class OAuthTwoTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
+     */
+    public function regular_laravel_socialite_class_works_as_well()
+    {
+        $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
+        $request = Request::create('foo', 'GET', ['state' => str_repeat('A', 40), 'code' => 'code']);
+        $request->setSession($session = m::mock('Symfony\Component\HttpFoundation\Session\SessionInterface'));
+        $session->shouldReceive('pull')->once()->with('state')->andReturn(str_repeat('A', 40));
+        $provider = new OAuthTwoTestProviderStub($request, 'client_id', 'client_secret', 'redirect_uri');
+        $provider->http = m::mock('StdClass');
+        $provider->http->shouldReceive('post')->once()->with('http://token.url', [
+            'headers' => ['Accept' => 'application/json'], 'form_params' => ['client_id' => 'client_id', 'client_secret' => 'client_secret', 'code' => 'code', 'redirect_uri' => 'redirect_uri'],
+        ])->andReturn($response = m::mock('StdClass'));
+        $response->shouldReceive('getBody')->andReturn($accessTokenResponseBody);
+        $user = $provider->user();
+
+        $this->assertInstanceOf(\Laravel\Socialite\Two\User::class, $user);
+        $this->assertEquals('foo', $user->id);
+    }
+
+    /**
+     * @test
      * @expectedException Laravel\Socialite\Two\InvalidStateException
      */
     public function exceptionIsThrownIfStateIsInvalid()

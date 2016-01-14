@@ -157,6 +157,45 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException \SocialiteProviders\Manager\InvalidArgumentException
+     */
+    public function it_throws_if_given_a_bad_provider_class_name()
+    {
+        $providerName = 'bar';
+
+        $socialite = $this->socialiteMock();
+        $socialite->shouldReceive('buildProvider')->withArgs([$this->oauth2ProviderStubName(), $this->config()])
+            ->andReturn($this->oauth2ProviderStub());
+        $socialite->shouldReceive('extend')->withArgs(
+            [
+                $providerName,
+                m::on(
+                    function ($closure) {
+                        $this->assertInstanceOf($this->oauth2ProviderStubName(), $closure());
+
+                        return is_callable($closure);
+                    }
+                ),
+            ]
+        );
+
+        $config = new Config(
+            $this->config()['client_id'],
+            $this->config()['client_secret'],
+            $this->config()['redirect']
+        );
+
+        $app = $this->appMock();
+        $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
+        $app->shouldReceive('make')->with('SocialiteProviders.config.' . $providerName)->andReturn($config);
+        $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
+
+        $s = new SocialiteWasCalled($app);
+        $s->extendSocialite($providerName, 'foobar');
+    }
+
+    /**
+     * @test
      */
     public function it_throws_if_given_an_invalid_oauth2_provider()
     {
