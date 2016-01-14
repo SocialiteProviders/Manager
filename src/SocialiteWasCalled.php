@@ -113,7 +113,7 @@ class SocialiteWasCalled
 
             return $config->get();
         } catch (\ReflectionException $e) {
-            return $this->app->offsetGet('config')['services.' . $providerName] ?: [];
+            return $this->app->offsetGet('config')['services.' . $providerName] ?: (new Config('foobar', 'foobar', 'foobar'))->get();
         }
     }
 

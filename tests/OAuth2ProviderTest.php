@@ -93,7 +93,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
         $providerName = 'bar';
 
         $socialite = $this->socialiteMock();
-        $socialite->shouldReceive('buildProvider')->withArgs([$this->oauth2ProviderStubName(), []])
+        $socialite->shouldReceive('buildProvider')->withArgs([$this->oauth2ProviderStubName(), (new Config('foobar', 'foobar', 'foobar'))->get()])
             ->andReturn($this->oauth2ProviderStub());
         $socialite->shouldReceive('extend')->withArgs(
             [
