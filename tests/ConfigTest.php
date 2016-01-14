@@ -21,9 +21,9 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $callbackUri = 'uri';
 
         $result = [
-            'client_id'     => $key,
+            'client_id' => $key,
             'client_secret' => $secret,
-            'redirect'      => $callbackUri,
+            'redirect' => $callbackUri,
         ];
 
         $config = new Config($key, $secret, $callbackUri);

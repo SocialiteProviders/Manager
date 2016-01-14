@@ -78,3 +78,16 @@ $this->app->instance($key, $config)
 ```
 
 **You must call this before you run any Socialite methods.**
+
+## Accessing the Access Token Response Body
+
+Laravel Socialite by default only allows access to the `access_token`.  Which can be accessed 
+via the `\Laravel\Socialite\User->token` public property.  Sometimes you need access to the whole response body which
+may contain items such as a `refresh_token`.  
+
+To make this possible, the OAuth2 provider class needs to extend `\SocialiteProviders\Manager\OAuth2\AbstractProvider`.
+
+Currently, not all providers in the Socialite Providers have this implemented.  If you need this, submit and issue for 
+the specific provider.
+
+For the repositories that do support this, you can access it from the user object like so: `$user->accessTokenResponseBody`
