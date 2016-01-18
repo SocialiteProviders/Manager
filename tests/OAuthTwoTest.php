@@ -30,6 +30,16 @@ class OAuthTwoTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function it_can_return_the_service_container_key()
+    {
+        $result = OAuthTwoTestProviderStub::serviceContainerKey(OAuthTwoTestProviderStub::PROVIDER_NAME);
+
+        $this->assertEquals('SocialiteProviders.config.test', $result);
+    }
+
+    /**
+     * @test
+     */
     public function userReturnsAUserInstanceForTheAuthenticatedRequest()
     {
         $request = Request::create('foo', 'GET', ['state' => str_repeat('A', 40), 'code' => 'code']);
@@ -119,7 +129,14 @@ class OAuthTwoTest extends PHPUnit_Framework_TestCase
 
 class OAuthTwoTestProviderStub extends AbstractProvider
 {
+    const PROVIDER_NAME = 'test';
+
     public $http;
+
+    public static function providerName()
+    {
+        return 'test';
+    }
 
     protected function getAuthUrl($state)
     {

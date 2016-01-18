@@ -8,6 +8,8 @@ use SocialiteProviders\Manager\Contracts;
 
 class SocialiteWasCalled
 {
+    const SERVICE_CONTAINER_PREFIX = 'SocialiteProviders.config.';
+
     /**
      * @var LaravelApp
      */
@@ -105,7 +107,7 @@ class SocialiteWasCalled
     {
         try {
             /** @var Contracts\ConfigInterface $config */
-            $config = $this->app->make('SocialiteProviders.config.' . $providerName);
+            $config = $this->app->make(self::SERVICE_CONTAINER_PREFIX . $providerName);
 
             if (!($config instanceof Contracts\ConfigInterface)) {
                 throw new InvalidArgumentException('Config class does not implement config contract');
