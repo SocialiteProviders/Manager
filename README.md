@@ -87,7 +87,7 @@ may contain items such as a `refresh_token`.
 
 To make this possible, the OAuth2 provider class needs to extend `\SocialiteProviders\Manager\OAuth2\AbstractProvider`.
 
-Currently, not all providers in the Socialite Providers have this implemented.  If you need this, submit and issue for 
+Currently, not all providers in the Socialite Providers have this implemented.  If you need this, submit an issue for 
 the specific provider.
 
 For the repositories that do support this, you can access it from the user object like so: `$user->accessTokenResponseBody`
