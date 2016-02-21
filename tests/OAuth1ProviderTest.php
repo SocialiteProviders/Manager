@@ -44,7 +44,7 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
 
         $app = $this->appMock();
         $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
-        $app->shouldReceive('make')->with('SocialiteProviders.config.' . $providerName)->andReturn($config);
+        $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andReturn($config);
         $app->shouldReceive('offsetGet')->with('request')->andReturn($this->buildRequest());
         $app->shouldReceive('offsetGet')->with('config')->andReturn($this->servicesArray($providerName));
 

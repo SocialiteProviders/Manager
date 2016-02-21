@@ -1,11 +1,9 @@
 <?php
-namespace SocialiteProviders\Manager;
 
-use SocialiteProviders\Manager\Contracts;
+namespace SocialiteProviders\Manager;
 
 class Config implements Contracts\ConfigInterface
 {
-
     protected $config;
 
     public function __construct($key, $secret, $callbackUri, array $additionalConfig = [])

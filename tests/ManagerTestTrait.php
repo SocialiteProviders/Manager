@@ -107,7 +107,7 @@ trait ManagerTestTrait
      */
     protected function fullStubClassName($stub)
     {
-        return __NAMESPACE__ . '\Stubs\\' . $stub;
+        return __NAMESPACE__.'\Stubs\\'.$stub;
     }
 
     /**
@@ -117,7 +117,7 @@ trait ManagerTestTrait
      */
     protected function fullClassName($class)
     {
-        return __NAMESPACE__ . '\\' . $class;
+        return __NAMESPACE__.'\\'.$class;
     }
 
     /**
@@ -137,7 +137,7 @@ trait ManagerTestTrait
      */
     protected function providerConfigKey($providerName)
     {
-        return 'services.' . $providerName;
+        return 'services.'.$providerName;
     }
 
     /**

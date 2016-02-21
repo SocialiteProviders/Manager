@@ -1,4 +1,5 @@
 <?php
+
 namespace SocialiteProviders\Manager\Contracts;
 
 interface ConfigInterface

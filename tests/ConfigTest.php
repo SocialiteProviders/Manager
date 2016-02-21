@@ -2,8 +2,6 @@
 
 namespace SocialiteProviders\Manager;
 
-use Mockery as m;
-
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
     public function tearDown()
