@@ -2,7 +2,6 @@
 
 namespace SocialiteProviders\Manager;
 
-use Mockery as m;
 use SocialiteProviders\Manager\OAuth2\User;
 
 class UserTest extends \PHPUnit_Framework_TestCase

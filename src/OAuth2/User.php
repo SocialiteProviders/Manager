@@ -1,10 +1,11 @@
 <?php
+
 namespace SocialiteProviders\Manager\OAuth2;
 
 class User extends \Laravel\Socialite\Two\User
 {
     /**
-     * The User Credentials
+     * The User Credentials.
      *
      * e.g. access_token, refresh_token, etc.
      *

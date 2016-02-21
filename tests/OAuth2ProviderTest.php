@@ -47,7 +47,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
 
         $app = $this->appMock();
         $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
-        $app->shouldReceive('make')->with('SocialiteProviders.config.' . $providerName)->andReturn('foobar');
+        $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andReturn('foobar');
 
         $s = new SocialiteWasCalled($app);
         $s->extendSocialite($providerName, $this->oauth2ProviderStubName());
@@ -78,7 +78,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
 
         $app = $this->appMock();
         $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
-        $app->shouldReceive('make')->with('SocialiteProviders.config.' . $providerName)->andThrow(new \ReflectionException());
+        $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andThrow(new \ReflectionException());
         $app->shouldReceive('offsetGet')->with('config')->andReturn($this->servicesArray($providerName));
 
         $s = new SocialiteWasCalled($app);
@@ -110,7 +110,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
 
         $app = $this->appMock();
         $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
-        $app->shouldReceive('make')->with('SocialiteProviders.config.' . $providerName)->andThrow(new \ReflectionException());
+        $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andThrow(new \ReflectionException());
         $app->shouldReceive('offsetGet')->with('config')->andReturn(null);
 
         $s = new SocialiteWasCalled($app);
@@ -148,7 +148,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
 
         $app = $this->appMock();
         $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
-        $app->shouldReceive('make')->with('SocialiteProviders.config.' . $providerName)->andReturn($config);
+        $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andReturn($config);
         $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
 
         $s = new SocialiteWasCalled($app);
@@ -187,7 +187,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
 
         $app = $this->appMock();
         $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
-        $app->shouldReceive('make')->with('SocialiteProviders.config.' . $providerName)->andReturn($config);
+        $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andReturn($config);
         $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
 
         $s = new SocialiteWasCalled($app);

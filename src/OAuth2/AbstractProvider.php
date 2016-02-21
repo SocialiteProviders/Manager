@@ -1,4 +1,5 @@
 <?php
+
 namespace SocialiteProviders\Manager\OAuth2;
 
 use GuzzleHttp\ClientInterface;
@@ -14,7 +15,7 @@ abstract class AbstractProvider extends \Laravel\Socialite\Two\AbstractProvider
 
     public static function serviceContainerKey($providerName)
     {
-        return SocialiteWasCalled::SERVICE_CONTAINER_PREFIX . $providerName;
+        return SocialiteWasCalled::SERVICE_CONTAINER_PREFIX.$providerName;
     }
 
     /**
@@ -23,7 +24,7 @@ abstract class AbstractProvider extends \Laravel\Socialite\Two\AbstractProvider
     public function user()
     {
         if ($this->hasInvalidState()) {
-            throw new InvalidStateException;
+            throw new InvalidStateException();
         }
 
         $user = $this->mapUserToObject($this->getUserByToken(
@@ -42,7 +43,8 @@ abstract class AbstractProvider extends \Laravel\Socialite\Two\AbstractProvider
     /**
      * Get the access token for the given code.
      *
-     * @param  string $code
+     * @param string $code
+     *
      * @return string
      */
     public function getAccessToken($code)
