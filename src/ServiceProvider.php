@@ -15,4 +15,19 @@ class ServiceProvider extends SocialiteServiceProvider
     {
         $event->fire($socialiteWasCalled);
     }
+
+    /**
+     * Register the service provider.
+     */
+    public function register()
+    {
+        $this->app->singleton(\SocialiteProviders\Contracts\Factory::class, function ($app) {
+            return new SocialiteProvidersManager($app);
+        });
+    }
+
+    public function provides()
+    {
+        return [\Laravel\Socialite\Contracts\Factory::class, \SocialiteProviders\Contracts\Factory::class];
+    }
 }
