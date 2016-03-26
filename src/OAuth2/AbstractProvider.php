@@ -4,9 +4,11 @@ namespace SocialiteProviders\Manager\OAuth2;
 
 use GuzzleHttp\ClientInterface;
 use Laravel\Socialite\Two\InvalidStateException;
+use SocialiteProviders\Manager\Contracts\OAuth2\Provider;
 use SocialiteProviders\Manager\SocialiteWasCalled;
+use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
 
-abstract class AbstractProvider extends \Laravel\Socialite\Two\AbstractProvider
+abstract class AbstractProvider extends \Laravel\Socialite\Two\AbstractProvider implements Provider
 {
     /**
      * @var array
@@ -16,6 +18,21 @@ abstract class AbstractProvider extends \Laravel\Socialite\Two\AbstractProvider
     public static function serviceContainerKey($providerName)
     {
         return SocialiteWasCalled::SERVICE_CONTAINER_PREFIX.$providerName;
+    }
+
+    /**
+     * @param Config $config
+     *
+     * @return $this
+     */
+    public function config(Config $config)
+    {
+        $config = $config->get();
+        $this->clientId = $config['client_id'];
+        $this->redirectUrl = $config['redirect'];
+        $this->clientSecret = $config['client_secret'];
+
+        return $this;
     }
 
     /**

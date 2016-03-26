@@ -104,18 +104,7 @@ class SocialiteWasCalled
      */
     protected function getConfig($providerName)
     {
-        try {
-            /** @var Contracts\ConfigInterface $config */
-            $config = $this->app->make(self::SERVICE_CONTAINER_PREFIX.$providerName);
-
-            if (!($config instanceof Contracts\ConfigInterface)) {
-                throw new InvalidArgumentException('Config class does not implement config contract');
-            }
-
-            return $config->get();
-        } catch (\ReflectionException $e) {
-            return $this->app->offsetGet('config')['services.'.$providerName] ?: (new Config('foobar', 'foobar', 'foobar'))->get();
-        }
+        return $this->app->offsetGet('config')['services.'.$providerName];
     }
 
     /**
