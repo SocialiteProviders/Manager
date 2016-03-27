@@ -53,7 +53,13 @@ class ConfigRetrieverInterface implements \SocialiteProviders\Manager\Contracts\
     {
         $this->providerName = $providerName;
 
-        throw new \Exception('not implemented');
+        return new Config(
+            $this->getFromServices('client_id'),
+            $this->getFromServices('client_secret'),
+            $this->getFromServices('redirect'),
+            $this->getConfigItems($additionalConfigKeys, function ($key) {
+                return $this->getFromServices($key);
+            }));
     }
 
     /**
