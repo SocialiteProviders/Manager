@@ -4,11 +4,11 @@ namespace SocialiteProviders\Manager\OAuth2;
 
 use GuzzleHttp\ClientInterface;
 use Laravel\Socialite\Two\InvalidStateException;
-use SocialiteProviders\Manager\Contracts\OAuth2\Provider;
+use SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
 
-abstract class AbstractProvider extends \Laravel\Socialite\Two\AbstractProvider implements Provider
+abstract class AbstractProvider extends \Laravel\Socialite\Two\AbstractProvider implements ProviderInterface
 {
     /**
      * @var array
