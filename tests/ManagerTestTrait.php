@@ -3,6 +3,8 @@
 namespace SocialiteProviders\Manager\Test;
 
 use Mockery as m;
+use SocialiteProviders\Manager\Config;
+use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 
 trait ManagerTestTrait
 {
@@ -17,10 +19,31 @@ trait ManagerTestTrait
     {
         m::close();
     }
+
+    /**
+     * @return m\MockInterface
+     */
+    protected function configRetrieverMock()
+    {
+        return m::mock(ConfigRetrieverInterface::class);
+    }
     
     protected function expectManagerInvalidArgumentException()
     {
-        $this->setExpectedException($this->fullClassName('InvalidArgumentException'));
+        $this->setExpectedException(\SocialiteProviders\Manager\Exception\InvalidArgumentException::class);
+    }
+
+    protected function configObject()
+    {
+        return new Config('test', 'test', 'test');
+    }
+
+    protected function configRetrieverMockWithDefaultExpectations()
+    {
+        $configRetriever = $this->configRetrieverMock();
+        $configRetriever->shouldReceive('fromEnv')->andReturn($this->configObject());
+
+        return $configRetriever;
     }
 
     /**

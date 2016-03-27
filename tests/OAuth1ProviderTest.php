@@ -51,7 +51,7 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
         $app->shouldReceive('offsetGet')->with('request')->andReturn($this->buildRequest());
         $app->shouldReceive('offsetGet')->with('config')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app, m::mock(ConfigRetrieverInterface::class));
+        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations());
         $s->extendSocialite($providerName, $this->oauth1ProviderStubName(), $this->oauth1ServerStubName());
     }
 
@@ -72,7 +72,7 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
         $app->shouldReceive('make')->andReturn($socialite);
         $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app, m::mock(ConfigRetrieverInterface::class));
+        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations());
         $s->extendSocialite($providerName, $this->invalidClass(), $this->oauth1ServerStubName());
     }
 
@@ -93,7 +93,7 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
         $app->shouldReceive('make')->andReturn($socialite);
         $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app, m::mock(ConfigRetrieverInterface::class));
+        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations());
         $s->extendSocialite($providerName, $this->oauth1ProviderStubName(), $this->invalidClass());
     }
 }

@@ -64,7 +64,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
         $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
         $app->shouldReceive('offsetGet')->with('config')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app, m::mock(ConfigRetrieverInterface::class));
+        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations());
         $s->extendSocialite($providerName, $this->oauth2ProviderStubName());
     }
 
@@ -102,7 +102,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
         $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andReturn($config);
         $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app, m::mock(ConfigRetrieverInterface::class));
+        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations());
         $s->extendSocialite($providerName, $this->oauth2ProviderStubName());
     }
 
@@ -141,7 +141,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
         $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andReturn($config);
         $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app, m::mock(ConfigRetrieverInterface::class));
+        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations());
         $s->extendSocialite($providerName, 'foobar');
     }
 
@@ -160,7 +160,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
         $app->shouldReceive('make')->andReturn($socialite);
         $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app, m::mock(ConfigRetrieverInterface::class));
+        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations());
         $s->extendSocialite($providerName, $this->invalidClass());
     }
 
@@ -181,7 +181,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
         $app->shouldReceive('make')->andReturn($socialite);
         $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app, m::mock(ConfigRetrieverInterface::class));
+        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations());
         $s->extendSocialite($providerName, $this->oauth2ProviderStubName(), $this->oauth1ServerStubName());
     }
 }

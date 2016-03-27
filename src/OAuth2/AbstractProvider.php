@@ -20,6 +20,11 @@ abstract class AbstractProvider extends \Laravel\Socialite\Two\AbstractProvider 
         return SocialiteWasCalled::SERVICE_CONTAINER_PREFIX.$providerName;
     }
 
+    public static function additionalConfigKeys()
+    {
+        return [];
+    }
+
     /**
      * @param Config $config
      *

@@ -48,6 +48,7 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
      * @param array  $additionalConfigKeys
      *
      * @return ConfigInterface
+     * @throws MissingConfigException
      */
     public function fromServices($providerName, array $additionalConfigKeys = [])
     {
