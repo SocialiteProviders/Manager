@@ -39,7 +39,7 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
             $this->getFromEnv("SECRET"),
             $this->getFromEnv("REDIRECT_URI"),
             $this->getConfigItems($additionalConfigKeys, function ($key) {
-                return $this->getFromEnv($key);
+                return $this->getFromEnv(strtoupper($key));
             }));
     }
 
@@ -53,13 +53,14 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
     public function fromServices($providerName, array $additionalConfigKeys = [])
     {
         $this->providerName = $providerName;
+        $this->getConfigFromServicesArray($providerName);
 
         return new Config(
             $this->getFromServices('client_id'),
             $this->getFromServices('client_secret'),
             $this->getFromServices('redirect'),
             $this->getConfigItems($additionalConfigKeys, function ($key) {
-                return $this->getFromServices($key);
+                return $this->getFromServices(strtolower($key));
             }));
     }
 
@@ -131,11 +132,13 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
     protected function getConfigFromServicesArray($providerName)
     {
         if (!$this->servicesArray) {
-            $providerArray = app()->offsetGet('config')['services.'.$providerName];
+            $providerArray = config('services.'.$providerName);
 
             if (empty($providerArray)) {
                 throw new MissingConfigException("There is no services entry for $providerName");
             }
+
+            $this->servicesArray = $providerArray;
         }
 
         return $this->servicesArray;
