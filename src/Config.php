@@ -6,13 +6,21 @@ class Config implements Contracts\ConfigInterface
 {
     protected $config;
 
-    public function __construct($key, $secret, $callbackUri, array $additionalConfig = [])
+    /**
+     * Config constructor.
+     *
+     * @param string $key
+     * @param string $secret
+     * @param string $callbackUri
+     * @param array  $additionalProviderConfig
+     */
+    public function __construct($key, $secret, $callbackUri, array $additionalProviderConfig = [])
     {
         $this->config = array_merge([
             'client_id' => $key,
             'client_secret' => $secret,
             'redirect' => $callbackUri,
-        ], $additionalConfig);
+        ], $additionalProviderConfig);
     }
 
     /**

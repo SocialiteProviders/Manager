@@ -2,7 +2,7 @@
 
 namespace SocialiteProviders\Manager\Stubs;
 
-use Laravel\Socialite\Two\AbstractProvider;
+use SocialiteProviders\Manager\OAuth2\AbstractProvider;
 
 class OAuth2ProviderStub extends AbstractProvider
 {
