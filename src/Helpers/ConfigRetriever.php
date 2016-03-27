@@ -96,6 +96,12 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
         return $out;
     }
 
+    /**
+     * @param string $key
+     *
+     * @return string
+     * @throws MissingConfigException
+     */
     private function getFromServices($key)
     {
         if (!array_key_exists($key, $this->servicesArray)) {
@@ -124,7 +130,7 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
     }
 
     /**
-     * @param $providerName
+     * @param string $providerName
      *
      * @return array
      * @throws MissingConfigException
