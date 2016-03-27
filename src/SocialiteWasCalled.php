@@ -132,7 +132,7 @@ class SocialiteWasCalled
 
         $config = null;
         try {
-            $config = $this->configRetriever->fromServices($providerName);
+            $config = $this->configRetriever->fromServices($providerName, $additionalConfigKeys);
             return $config->get();
         } catch (MissingConfigException $e) {
             $exceptionMessages[] = $e->getMessage();
