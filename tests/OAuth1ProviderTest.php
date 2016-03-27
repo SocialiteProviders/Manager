@@ -1,8 +1,11 @@
 <?php
 
-namespace SocialiteProviders\Manager;
+namespace SocialiteProviders\Manager\Test;
 
 use Mockery as m;
+use SocialiteProviders\Manager\Config;
+use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
+use SocialiteProviders\Manager\SocialiteWasCalled;
 
 class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -36,19 +39,11 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $config = new Config(
-            $this->config()['client_id'],
-            $this->config()['client_secret'],
-            $this->config()['redirect']
-        );
-
         $app = $this->appMock();
         $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
-        $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andReturn($config);
         $app->shouldReceive('offsetGet')->with('request')->andReturn($this->buildRequest());
-        $app->shouldReceive('offsetGet')->with('config')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app);
+        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations($this->oauth1ProviderStubName()));
         $s->extendSocialite($providerName, $this->oauth1ProviderStubName(), $this->oauth1ServerStubName());
     }
 
@@ -67,9 +62,8 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
 
         $app = $this->appMock();
         $app->shouldReceive('make')->andReturn($socialite);
-        $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app);
+        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations($this->oauth1ProviderStubName(), $providerName));
         $s->extendSocialite($providerName, $this->invalidClass(), $this->oauth1ServerStubName());
     }
 
@@ -83,14 +77,11 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
         $providerName = 'bar';
 
         $socialite = $this->socialiteMock();
-        $socialite->shouldReceive('formatConfig')->with($this->config())
-            ->andReturn($this->oauth1FormattedConfig($this->config()));
 
         $app = $this->appMock();
         $app->shouldReceive('make')->andReturn($socialite);
-        $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app);
+        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations($this->oauth1ProviderStubName(), $providerName));
         $s->extendSocialite($providerName, $this->oauth1ProviderStubName(), $this->invalidClass());
     }
 }

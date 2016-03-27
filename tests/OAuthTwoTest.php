@@ -1,7 +1,10 @@
 <?php
 
+namespace SocialiteProviders\Manager\Test;
+
 use Mockery as m;
 use Illuminate\Http\Request;
+use PHPUnit_Framework_TestCase;
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
 use SocialiteProviders\Manager\OAuth2\User;
 
@@ -18,12 +21,12 @@ class OAuthTwoTest extends PHPUnit_Framework_TestCase
     public function redirectGeneratesTheProperSymfonyRedirectResponse()
     {
         $request = Request::create('foo');
-        $request->setSession($session = m::mock('Symfony\Component\HttpFoundation\Session\SessionInterface'));
+        $request->setSession($session = m::mock(\Symfony\Component\HttpFoundation\Session\SessionInterface::class));
         $session->shouldReceive('set')->once();
         $provider = new OAuthTwoTestProviderStub($request, 'client_id', 'client_secret', 'redirect');
         $response = $provider->redirect();
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\RedirectResponse', $response);
+        $this->assertInstanceOf(\Symfony\Component\HttpFoundation\RedirectResponse::class, $response);
         $this->assertEquals('http://auth.url', $response->getTargetUrl());
     }
 
@@ -43,7 +46,7 @@ class OAuthTwoTest extends PHPUnit_Framework_TestCase
     public function userReturnsAUserInstanceForTheAuthenticatedRequest()
     {
         $request = Request::create('foo', 'GET', ['state' => str_repeat('A', 40), 'code' => 'code']);
-        $request->setSession($session = m::mock('Symfony\Component\HttpFoundation\Session\SessionInterface'));
+        $request->setSession($session = m::mock(\Symfony\Component\HttpFoundation\Session\SessionInterface::class));
         $session->shouldReceive('pull')->once()->with('state')->andReturn(str_repeat('A', 40));
         $provider = new OAuthTwoTestProviderStub($request, 'client_id', 'client_secret', 'redirect_uri');
         $provider->http = m::mock('StdClass');
@@ -64,7 +67,7 @@ class OAuthTwoTest extends PHPUnit_Framework_TestCase
     {
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
         $request = Request::create('foo', 'GET', ['state' => str_repeat('A', 40), 'code' => 'code']);
-        $request->setSession($session = m::mock('Symfony\Component\HttpFoundation\Session\SessionInterface'));
+        $request->setSession($session = m::mock(\Symfony\Component\HttpFoundation\Session\SessionInterface::class));
         $session->shouldReceive('pull')->once()->with('state')->andReturn(str_repeat('A', 40));
         $provider = new OAuthTwoTestProviderStub($request, 'client_id', 'client_secret', 'redirect_uri');
         $provider->http = m::mock('StdClass');
@@ -86,7 +89,7 @@ class OAuthTwoTest extends PHPUnit_Framework_TestCase
     {
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
         $request = Request::create('foo', 'GET', ['state' => str_repeat('A', 40), 'code' => 'code']);
-        $request->setSession($session = m::mock('Symfony\Component\HttpFoundation\Session\SessionInterface'));
+        $request->setSession($session = m::mock(\Symfony\Component\HttpFoundation\Session\SessionInterface::class));
         $session->shouldReceive('pull')->once()->with('state')->andReturn(str_repeat('A', 40));
         $provider = new OAuthTwoTestProviderStub($request, 'client_id', 'client_secret', 'redirect_uri');
         $provider->http = m::mock('StdClass');
@@ -102,12 +105,12 @@ class OAuthTwoTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Laravel\Socialite\Two\InvalidStateException
+     * @expectedException \Laravel\Socialite\Two\InvalidStateException
      */
     public function exceptionIsThrownIfStateIsInvalid()
     {
         $request = Request::create('foo', 'GET', ['state' => str_repeat('B', 40), 'code' => 'code']);
-        $request->setSession($session = m::mock('Symfony\Component\HttpFoundation\Session\SessionInterface'));
+        $request->setSession($session = m::mock(\Symfony\Component\HttpFoundation\Session\SessionInterface::class));
         $session->shouldReceive('pull')->once()->with('state')->andReturn(str_repeat('A', 40));
         $provider = new OAuthTwoTestProviderStub($request, 'client_id', 'client_secret', 'redirect');
         $user = $provider->user();
@@ -115,12 +118,12 @@ class OAuthTwoTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Laravel\Socialite\Two\InvalidStateException
+     * @expectedException \Laravel\Socialite\Two\InvalidStateException
      */
     public function exceptionIsThrownIfStateIsNotSet()
     {
         $request = Request::create('foo', 'GET', ['state' => 'state', 'code' => 'code']);
-        $request->setSession($session = m::mock('Symfony\Component\HttpFoundation\Session\SessionInterface'));
+        $request->setSession($session = m::mock(\Symfony\Component\HttpFoundation\Session\SessionInterface::class));
         $session->shouldReceive('pull')->once()->with('state');
         $provider = new OAuthTwoTestProviderStub($request, 'client_id', 'client_secret', 'redirect');
         $user = $provider->user();

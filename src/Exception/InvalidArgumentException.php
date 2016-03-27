@@ -1,6 +1,6 @@
 <?php
 
-namespace SocialiteProviders\Manager;
+namespace SocialiteProviders\Manager\Exception;
 
 class InvalidArgumentException extends \InvalidArgumentException
 {

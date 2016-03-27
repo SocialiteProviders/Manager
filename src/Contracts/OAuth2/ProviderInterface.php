@@ -1,10 +1,10 @@
 <?php
 namespace SocialiteProviders\Manager\Contracts\OAuth2;
 
-use Laravel\Socialite\Two\ProviderInterface;
+use Laravel\Socialite\Two\ProviderInterface as SocialiteOauth2ProviderInterface;
 use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
 
-interface Provider extends ProviderInterface
+interface ProviderInterface extends SocialiteOauth2ProviderInterface
 {
     /**
      * @param Config $config

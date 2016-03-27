@@ -1,14 +1,49 @@
 <?php
 
-namespace SocialiteProviders\Manager;
+namespace SocialiteProviders\Manager\Test;
 
 use Mockery as m;
+use SocialiteProviders\Manager\Config;
+use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 
 trait ManagerTestTrait
 {
+    public static $functions;
+
+    public function setUp()
+    {
+        self::$functions = m::mock();
+    }
+
+    public function tearDown()
+    {
+        m::close();
+    }
+
+    /**
+     * @return m\MockInterface
+     */
+    protected function configRetrieverMock()
+    {
+        return m::mock(ConfigRetrieverInterface::class);
+    }
+    
     protected function expectManagerInvalidArgumentException()
     {
-        $this->setExpectedException($this->fullClassName('InvalidArgumentException'));
+        $this->setExpectedException(\SocialiteProviders\Manager\Exception\InvalidArgumentException::class);
+    }
+
+    protected function configObject()
+    {
+        return new Config('test', 'test', 'test');
+    }
+
+    protected function configRetrieverMockWithDefaultExpectations($providerClass)
+    {
+        $configRetriever = $this->configRetrieverMock();
+        $configRetriever->shouldReceive('fromEnv')->with($providerClass::IDENTIFIER, $providerClass::additionalConfigKeys())->andReturn($this->configObject());
+
+        return $configRetriever;
     }
 
     /**

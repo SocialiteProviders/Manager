@@ -4,6 +4,9 @@ namespace SocialiteProviders\Manager;
 
 use Illuminate\Contracts\Foundation\Application as LaravelApp;
 use Laravel\Socialite\SocialiteManager;
+use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
+use SocialiteProviders\Manager\Exception\InvalidArgumentException;
+use SocialiteProviders\Manager\Exception\MissingConfigException;
 
 class SocialiteWasCalled
 {
@@ -15,11 +18,18 @@ class SocialiteWasCalled
     protected $app;
 
     /**
-     * @param LaravelApp $app
+     * @var ConfigRetrieverInterface
      */
-    public function __construct(LaravelApp $app)
+    private $configRetriever;
+
+    /**
+     * @param LaravelApp               $app
+     * @param ConfigRetrieverInterface $configRetriever
+     */
+    public function __construct(LaravelApp $app, ConfigRetrieverInterface $configRetriever)
     {
         $this->app = $app;
+        $this->configRetriever = $configRetriever;
     }
 
     /**
@@ -54,11 +64,15 @@ class SocialiteWasCalled
      */
     protected function buildProvider(SocialiteManager $socialite, $providerName, $providerClass, $oauth1Server)
     {
-        $config = $this->getConfig($providerName);
+        $this->classExists($providerClass);
+
         if ($this->isOAuth1($oauth1Server)) {
+            $this->classExists($oauth1Server);
+            $config = $this->getConfig($providerClass, $providerName);
             return $this->buildOAuth1Provider($providerClass, $oauth1Server, $socialite->formatConfig($config));
         }
 
+        $config = $this->getConfig($providerClass, $providerName);
         return $this->buildOAuth2Provider($socialite, $providerClass, $config);
     }
 
@@ -98,13 +112,33 @@ class SocialiteWasCalled
     }
 
     /**
+     * @param string $providerClass
      * @param string $providerName
      *
      * @return array
+     * @throws MissingConfigException
      */
-    protected function getConfig($providerName)
+    protected function getConfig($providerClass, $providerName)
     {
-        return $this->app->offsetGet('config')['services.'.$providerName];
+        $config = null;
+        $additionalConfigKeys = $providerClass::additionalConfigKeys();
+        $exceptionMessages = [];
+        try {
+            $config = $this->configRetriever->fromEnv($providerClass::IDENTIFIER, $additionalConfigKeys);
+            return $config->get();
+        } catch (MissingConfigException $e) {
+            $exceptionMessages[] = $e->getMessage();
+        }
+
+        $config = null;
+        try {
+            $config = $this->configRetriever->fromServices($providerName, $additionalConfigKeys);
+            return $config->get();
+        } catch (MissingConfigException $e) {
+            $exceptionMessages[] = $e->getMessage();
+        }
+
+        throw new MissingConfigException(implode(PHP_EOL, $exceptionMessages));
     }
 
     /**
@@ -130,6 +164,13 @@ class SocialiteWasCalled
         if (false === is_subclass_of($class, $baseClass)) {
             $message = $class.' does not extend '.$baseClass;
             throw new InvalidArgumentException($message);
+        }
+    }
+
+    private function classExists($providerClass)
+    {
+        if (!class_exists($providerClass)) {
+            throw new InvalidArgumentException("$providerClass doesn't exist");
         }
     }
 }

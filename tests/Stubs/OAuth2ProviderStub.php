@@ -1,12 +1,13 @@
 <?php
 
-namespace SocialiteProviders\Manager\Stubs;
+namespace SocialiteProviders\Manager\Test\Stubs;
 
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
 
 class OAuth2ProviderStub extends AbstractProvider
 {
     protected $test = 'test';
+    const IDENTIFIER = 'TEST';
 
     /**
      * {@inheritdoc}

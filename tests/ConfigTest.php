@@ -1,6 +1,8 @@
 <?php
 
-namespace SocialiteProviders\Manager;
+namespace SocialiteProviders\Manager\Test;
+
+use SocialiteProviders\Manager\Config;
 
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
