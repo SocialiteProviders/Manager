@@ -19,7 +19,7 @@ class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
         self::$functions->shouldReceive('env')->with("{$providerIdentifier}_KEY")->once()->andReturn(null);
 
         $configRetriever = new ConfigRetriever();
-        $result = $configRetriever->fromEnv('TEST')->get();
+        $configRetriever->fromEnv('TEST')->get();
     }
 
     /**
@@ -31,6 +31,19 @@ class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
         $providerName = 'test';
 
         self::$functions->shouldReceive('config')->with("services.$providerName")->once()->andReturn(null);
+        $configRetriever = new ConfigRetriever();
+        $configRetriever->fromServices($providerName)->get();
+    }
+
+    /**
+     * @test
+     * @expectedException \SocialiteProviders\Manager\Exception\MissingConfigException
+     */
+    public function it_throws_if_there_are_missing_items_in_the_services_config()
+    {
+        $providerName = 'test';
+
+        self::$functions->shouldReceive('config')->with("services.$providerName")->once()->andReturn([]);
         $configRetriever = new ConfigRetriever();
         $configRetriever->fromServices($providerName)->get();
     }
