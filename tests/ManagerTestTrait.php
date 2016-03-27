@@ -6,6 +6,18 @@ use Mockery as m;
 
 trait ManagerTestTrait
 {
+    public static $functions;
+
+    public function setUp()
+    {
+        self::$functions = m::mock();
+    }
+
+    public function tearDown()
+    {
+        m::close();
+    }
+    
     protected function expectManagerInvalidArgumentException()
     {
         $this->setExpectedException($this->fullClassName('InvalidArgumentException'));

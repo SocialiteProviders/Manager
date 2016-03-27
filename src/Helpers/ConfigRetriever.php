@@ -5,7 +5,7 @@ use SocialiteProviders\Manager\Config;
 use SocialiteProviders\Manager\Contracts\ConfigInterface;
 use SocialiteProviders\Manager\Exception\MissingConfigException;
 
-class ConfigRetrieverInterface implements \SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface
+class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface
 {
 
     /**

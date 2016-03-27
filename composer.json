@@ -18,7 +18,10 @@
     },
     "autoload": {
         "psr-4": {
-            "SocialiteProviders\\Manager\\": "src/"
+            "SocialiteProviders\\Manager\\": [
+                "tests/",
+                "src/"
+            ]
         }
     },
     "minimum-stability": "stable"
