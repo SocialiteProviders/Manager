@@ -1,6 +1,6 @@
 <?php
 
-namespace SocialiteProviders\Manager\Stubs;
+namespace SocialiteProviders\Manager\Test\Stubs;
 
 use Laravel\Socialite\One\User;
 use League\OAuth1\Client\Credentials\TokenCredentials;
@@ -8,6 +8,8 @@ use League\OAuth1\Client\Server\Server;
 
 class OAuth1ServerStub extends Server
 {
+    const IDENTIFIER = 'TEST';
+    
     /**
      * Get the URL for retrieving temporary credentials.
      *

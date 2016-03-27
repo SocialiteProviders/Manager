@@ -1,8 +1,11 @@
 <?php
 
-namespace SocialiteProviders\Manager;
+namespace SocialiteProviders\Manager\Test;
 
 use Mockery as m;
+use SocialiteProviders\Manager\Config;
+use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
+use SocialiteProviders\Manager\SocialiteWasCalled;
 
 class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -48,7 +51,7 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
         $app->shouldReceive('offsetGet')->with('request')->andReturn($this->buildRequest());
         $app->shouldReceive('offsetGet')->with('config')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app);
+        $s = new SocialiteWasCalled($app, m::mock(ConfigRetrieverInterface::class));
         $s->extendSocialite($providerName, $this->oauth1ProviderStubName(), $this->oauth1ServerStubName());
     }
 
@@ -69,7 +72,7 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
         $app->shouldReceive('make')->andReturn($socialite);
         $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app);
+        $s = new SocialiteWasCalled($app, m::mock(ConfigRetrieverInterface::class));
         $s->extendSocialite($providerName, $this->invalidClass(), $this->oauth1ServerStubName());
     }
 
@@ -90,7 +93,7 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
         $app->shouldReceive('make')->andReturn($socialite);
         $app->shouldReceive('offsetGet')->andReturn($this->servicesArray($providerName));
 
-        $s = new SocialiteWasCalled($app);
+        $s = new SocialiteWasCalled($app, m::mock(ConfigRetrieverInterface::class));
         $s->extendSocialite($providerName, $this->oauth1ProviderStubName(), $this->invalidClass());
     }
 }

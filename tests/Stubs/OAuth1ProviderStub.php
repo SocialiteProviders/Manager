@@ -1,6 +1,6 @@
 <?php
 
-namespace SocialiteProviders\Manager\Stubs;
+namespace SocialiteProviders\Manager\Test\Stubs;
 
 use Laravel\Socialite\One\AbstractProvider;
 

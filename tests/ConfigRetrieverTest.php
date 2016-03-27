@@ -1,5 +1,5 @@
 <?php
-namespace SocialiteProviders\Manager;
+namespace SocialiteProviders\Manager\Test;
 
 use \Mockery as m;
 use SocialiteProviders\Manager\Helpers\ConfigRetriever;
@@ -27,7 +27,7 @@ class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
 
 namespace SocialiteProviders\Manager\Helpers;
 
-use SocialiteProviders\Manager\ConfigRetrieverTest;
+use SocialiteProviders\Manager\Test\ConfigRetrieverTest;
 
 function env($key)
 {

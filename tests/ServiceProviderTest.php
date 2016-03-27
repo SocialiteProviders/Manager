@@ -1,8 +1,9 @@
 <?php
 
-namespace SocialiteProviders\Manager;
+namespace SocialiteProviders\Manager\Test;
 
 use Mockery as m;
+use SocialiteProviders\Manager\ServiceProvider;
 
 class ServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,10 +17,10 @@ class ServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function it_fires_an_event()
     {
-        $app = m::mock('Illuminate\Contracts\Foundation\Application');
-        $socialiteWasCalled = m::mock('SocialiteProviders\Manager\SocialiteWasCalled');
+        $app = m::mock(\Illuminate\Contracts\Foundation\Application::class);
+        $socialiteWasCalled = m::mock(\SocialiteProviders\Manager\SocialiteWasCalled::class);
 
-        $event = m::mock('Illuminate\Contracts\Events\Dispatcher');
+        $event = m::mock(\Illuminate\Contracts\Events\Dispatcher::class);
         $event->shouldReceive('fire')->with($socialiteWasCalled);
 
         $sp = new ServiceProvider($app);

@@ -18,10 +18,8 @@
     },
     "autoload": {
         "psr-4": {
-            "SocialiteProviders\\Manager\\": [
-                "tests/",
-                "src/"
-            ]
+            "SocialiteProviders\\Manager\\": "src/",
+            "SocialiteProviders\\Manager\\Test\\": "tests/"
         }
     },
     "minimum-stability": "stable"
