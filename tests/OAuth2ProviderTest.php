@@ -105,7 +105,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \SocialiteProviders\Manager\InvalidArgumentException
+     * @expectedException \SocialiteProviders\Manager\Exception\InvalidArgumentException
      */
     public function it_throws_if_given_a_bad_provider_class_name()
     {
