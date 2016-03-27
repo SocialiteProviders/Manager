@@ -3,6 +3,7 @@
 namespace SocialiteProviders\Manager;
 
 use Mockery as m;
+use SocialiteProviders\Manager\Stubs\OAuth2ProviderStub;
 
 class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,34 +24,14 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \SocialiteProviders\Manager\InvalidArgumentException
      */
-    public function it_should_blow_up_if_the_config_passed_does_not_implement_config_contract()
+    public function it_allows_a_custom_config_to_be_passed_dynamically()
     {
-        $providerName = 'bar';
+        $provider = new OAuth2ProviderStub(\Mockery::mock(\Illuminate\Http\Request::class), 'client id', 'client secret', 'redirect url');
 
-        $socialite = $this->socialiteMock();
-        $socialite->shouldReceive('buildProvider')->withArgs([$this->oauth2ProviderStubName(), $this->config()])
-            ->andReturn($this->oauth2ProviderStub());
-        $socialite->shouldReceive('extend')->withArgs(
-            [
-                $providerName,
-                m::on(
-                    function ($closure) {
-                        $this->assertInstanceOf($this->oauth2ProviderStubName(), $closure());
+        $result = $provider->config(new Config('key', 'secret', 'callback uri'));
 
-                        return is_callable($closure);
-                    }
-                ),
-            ]
-        );
-
-        $app = $this->appMock();
-        $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
-        $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andReturn('foobar');
-
-        $s = new SocialiteWasCalled($app);
-        $s->extendSocialite($providerName, $this->oauth2ProviderStubName());
+        $this->assertEquals($provider, $result);
     }
 
     /**
@@ -78,40 +59,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
 
         $app = $this->appMock();
         $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
-        $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andThrow(new \ReflectionException());
         $app->shouldReceive('offsetGet')->with('config')->andReturn($this->servicesArray($providerName));
-
-        $s = new SocialiteWasCalled($app);
-        $s->extendSocialite($providerName, $this->oauth2ProviderStubName());
-    }
-
-    /**
-     * @test
-     */
-    public function it_returns_an_empty_config_if_no_config_is_present()
-    {
-        $providerName = 'bar';
-
-        $socialite = $this->socialiteMock();
-        $socialite->shouldReceive('buildProvider')->withArgs([$this->oauth2ProviderStubName(), (new Config('foobar', 'foobar', 'foobar'))->get()])
-            ->andReturn($this->oauth2ProviderStub());
-        $socialite->shouldReceive('extend')->withArgs(
-            [
-                $providerName,
-                m::on(
-                    function ($closure) {
-                        $this->assertInstanceOf($this->oauth2ProviderStubName(), $closure());
-
-                        return is_callable($closure);
-                    }
-                ),
-            ]
-        );
-
-        $app = $this->appMock();
-        $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
-        $app->shouldReceive('make')->with('SocialiteProviders.config.'.$providerName)->andThrow(new \ReflectionException());
-        $app->shouldReceive('offsetGet')->with('config')->andReturn(null);
 
         $s = new SocialiteWasCalled($app);
         $s->extendSocialite($providerName, $this->oauth2ProviderStubName());
