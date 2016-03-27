@@ -10,6 +10,33 @@ class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException \SocialiteProviders\Manager\Exception\MissingConfigException
+     */
+    public function it_throws_if_there_is_a_problem_with_the_env_config()
+    {
+        $providerIdentifier = 'TEST';
+
+        self::$functions->shouldReceive('env')->with("{$providerIdentifier}_KEY")->once()->andReturn(null);
+
+        $configRetriever = new ConfigRetriever();
+        $result = $configRetriever->fromEnv('TEST')->get();
+    }
+
+    /**
+     * @test
+     * @expectedException \SocialiteProviders\Manager\Exception\MissingConfigException
+     */
+    public function it_throws_if_there_is_a_problem_with_the_services_config()
+    {
+        $providerName = 'test';
+
+        self::$functions->shouldReceive('config')->with("services.$providerName")->once()->andReturn(null);
+        $configRetriever = new ConfigRetriever();
+        $configRetriever->fromServices($providerName)->get();
+    }
+
+    /**
+     * @test
      */
     public function it_retrieves_a_config_from_the_env()
     {
