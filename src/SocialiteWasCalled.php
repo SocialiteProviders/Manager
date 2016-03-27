@@ -66,12 +66,13 @@ class SocialiteWasCalled
     {
         $this->classExists($providerClass);
 
-        $config = $this->getConfig($providerClass, $providerName);
         if ($this->isOAuth1($oauth1Server)) {
             $this->classExists($oauth1Server);
+            $config = $this->getConfig($providerClass, $providerName);
             return $this->buildOAuth1Provider($providerClass, $oauth1Server, $socialite->formatConfig($config));
         }
 
+        $config = $this->getConfig($providerClass, $providerName);
         return $this->buildOAuth2Provider($socialite, $providerClass, $config);
     }
 
@@ -124,7 +125,6 @@ class SocialiteWasCalled
         $exceptionMessages = [];
         try {
             $config = $this->configRetriever->fromEnv($providerClass::IDENTIFIER, $additionalConfigKeys);
-
             return $config->get();
         } catch (MissingConfigException $e) {
             $exceptionMessages[] = $e->getMessage();
@@ -133,7 +133,6 @@ class SocialiteWasCalled
         $config = null;
         try {
             $config = $this->configRetriever->fromServices($providerName);
-
             return $config->get();
         } catch (MissingConfigException $e) {
             $exceptionMessages[] = $e->getMessage();
