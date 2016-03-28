@@ -1,7 +1,7 @@
 <?php
+
 namespace SocialiteProviders\Manager\Test;
 
-use \Mockery as m;
 use SocialiteProviders\Manager\Helpers\ConfigRetriever;
 
 class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
@@ -84,10 +84,10 @@ class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
         $additionalConfigItem = 'test';
 
         $config = [
-            'client_id'     => $key,
+            'client_id' => $key,
             'client_secret' => $secret,
-            'redirect'      => $uri,
-            'additional'    => $additionalConfigItem,
+            'redirect' => $uri,
+            'additional' => $additionalConfigItem,
         ];
 
         self::$functions->shouldReceive('config')->with("services.$providerName")->once()->andReturn($config);
@@ -100,7 +100,6 @@ class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($additionalConfigItem, $result['additional']);
     }
 }
-
 
 namespace SocialiteProviders\Manager\Helpers;
 
@@ -115,4 +114,3 @@ function config($key)
 {
     return ConfigRetrieverTest::$functions->config($key);
 }
-

@@ -1,4 +1,5 @@
 <?php
+
 namespace SocialiteProviders\Manager\Contracts\Helpers;
 
 use SocialiteProviders\Manager\Contracts\ConfigInterface;
@@ -11,6 +12,7 @@ interface ConfigRetrieverInterface
      * @param array  $additionalConfigKeys
      *
      * @return ConfigInterface
+     *
      * @throws MissingConfigException
      */
     public function fromEnv($providerIdentifier, array $additionalConfigKeys = []);
@@ -20,6 +22,7 @@ interface ConfigRetrieverInterface
      * @param array  $additionalConfigKeys
      *
      * @return ConfigInterface
+     *
      * @throws MissingConfigException
      */
     public function fromServices($providerName, array $additionalConfigKeys = []);
