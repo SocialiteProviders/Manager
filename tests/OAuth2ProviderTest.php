@@ -4,7 +4,6 @@ namespace SocialiteProviders\Manager\Test;
 
 use Mockery as m;
 use SocialiteProviders\Manager\Config;
-use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 use SocialiteProviders\Manager\Exception\MissingConfigException;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 use SocialiteProviders\Manager\Test\Stubs\OAuth2ProviderStub;
@@ -59,7 +58,6 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
         $configRetriever->shouldReceive('fromEnv')->andThrow(MissingConfigException::class);
         $configRetriever->shouldReceive('fromServices')->andThrow(MissingConfigException::class);
 
-
         $s = new SocialiteWasCalled($app, $configRetriever);
         $s->extendSocialite($providerName, $this->oauth2ProviderStubName());
     }
@@ -95,7 +93,6 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
         $configRetriever = $this->configRetrieverMock();
         $configRetriever->shouldReceive('fromEnv')->andThrow(MissingConfigException::class);
         $configRetriever->shouldReceive('fromServices')->with($providerName, $providerClass::additionalConfigKeys())->andReturn($this->configObject());
-
 
         $s = new SocialiteWasCalled($app, $configRetriever);
         $s->extendSocialite($providerName, $this->oauth2ProviderStubName());

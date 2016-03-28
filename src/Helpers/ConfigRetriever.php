@@ -1,4 +1,5 @@
 <?php
+
 namespace SocialiteProviders\Manager\Helpers;
 
 use SocialiteProviders\Manager\Config;
@@ -7,7 +8,6 @@ use SocialiteProviders\Manager\Exception\MissingConfigException;
 
 class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface
 {
-
     /**
      * @var string
      */
@@ -28,6 +28,7 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
      * @param array  $additionalConfigKeys
      *
      * @return ConfigInterface
+     *
      * @throws MissingConfigException
      */
     public function fromEnv($providerIdentifier, array $additionalConfigKeys = [])
@@ -35,9 +36,9 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
         $this->providerIdentifier = $providerIdentifier;
 
         return new Config(
-            $this->getFromEnv("KEY"),
-            $this->getFromEnv("SECRET"),
-            $this->getFromEnv("REDIRECT_URI"),
+            $this->getFromEnv('KEY'),
+            $this->getFromEnv('SECRET'),
+            $this->getFromEnv('REDIRECT_URI'),
             $this->getConfigItems($additionalConfigKeys, function ($key) {
                 return $this->getFromEnv(strtoupper($key));
             }));
@@ -48,6 +49,7 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
      * @param array  $additionalConfigKeys
      *
      * @return ConfigInterface
+     *
      * @throws MissingConfigException
      */
     public function fromServices($providerName, array $additionalConfigKeys = [])
@@ -100,6 +102,7 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
      * @param string $key
      *
      * @return string
+     *
      * @throws MissingConfigException
      */
     private function getFromServices($key)
@@ -115,6 +118,7 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
      * @param string $key
      *
      * @return string
+     *
      * @throws MissingConfigException
      */
     private function getFromEnv($key)
@@ -133,6 +137,7 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
      * @param string $providerName
      *
      * @return array
+     *
      * @throws MissingConfigException
      */
     protected function getConfigFromServicesArray($providerName)

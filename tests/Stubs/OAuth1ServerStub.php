@@ -8,7 +8,6 @@ use League\OAuth1\Client\Server\Server;
 
 class OAuth1ServerStub extends Server
 {
-    
     /**
      * Get the URL for retrieving temporary credentials.
      *

@@ -39,10 +39,10 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $callbackUri = 'uri';
 
         $result = [
-            'client_id'     => $key,
+            'client_id' => $key,
             'client_secret' => $secret,
-            'redirect'      => $callbackUri,
-            'additional'    => true,
+            'redirect' => $callbackUri,
+            'additional' => true,
         ];
 
         $additional = ['additional' => true];
