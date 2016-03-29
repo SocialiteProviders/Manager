@@ -2,7 +2,7 @@
 
 namespace SocialiteProviders\Manager\Test\Stubs;
 
-use Laravel\Socialite\One\AbstractProvider;
+use SocialiteProviders\Manager\OAuth1\AbstractProvider;
 
 class OAuth1ProviderStub extends AbstractProvider
 {
