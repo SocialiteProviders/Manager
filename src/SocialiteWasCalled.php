@@ -2,7 +2,7 @@
 
 namespace SocialiteProviders\Manager;
 
-use Illuminate\Contracts\Foundation\Application as LaravelApp;
+use Illuminate\Container\Container as Application;
 use Laravel\Socialite\SocialiteManager;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 use SocialiteProviders\Manager\Exception\InvalidArgumentException;
@@ -26,7 +26,7 @@ class SocialiteWasCalled
      * @param LaravelApp               $app
      * @param ConfigRetrieverInterface $configRetriever
      */
-    public function __construct(LaravelApp $app, ConfigRetrieverInterface $configRetriever)
+    public function __construct(Application $app, ConfigRetrieverInterface $configRetriever)
     {
         $this->app = $app;
         $this->configRetriever = $configRetriever;
