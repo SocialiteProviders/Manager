@@ -1,19 +1,13 @@
 <?php
 
-namespace SocialiteProviders\Manager\Providers;
+namespace SocialiteProviders\Manager;
 
-use Illuminate\Contracts\Events\Dispatcher;
 use Laravel\Socialite\SocialiteServiceProvider;
-use SocialiteProviders\Manager\SocialiteWasCalled;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 use SocialiteProviders\Manager\Helpers\ConfigRetriever;
 
-class LumenServiceProvider extends SocialiteServiceProvider
+class ServiceProvider extends SocialiteServiceProvider
 {
-    /**
-     * @param Dispatcher         $event
-     * @param SocialiteWasCalled $socialiteWasCalled
-     */
     public function boot()
     {
         $socialiteWasCalled = app(SocialiteWasCalled::class);
@@ -24,6 +18,10 @@ class LumenServiceProvider extends SocialiteServiceProvider
     public function register()
     {
         parent::register();
+
+        if (class_exists('Laravel\Lumen\Application')) {
+            define('SOCIALITEPROVIDERS_STATELESS', true);
+        }
 
         $this->app->singleton(ConfigRetrieverInterface::class, function () {
             return new ConfigRetriever();

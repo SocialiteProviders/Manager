@@ -128,6 +128,10 @@ abstract class AbstractProvider extends \Laravel\Socialite\One\AbstractProvider
      */
     protected function isStateless()
     {
+        if (defined('SOCIALITEPROVIDERS_STATELESS')) {
+            return true;
+        }
+
         return $this->stateless;
     }
 
