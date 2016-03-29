@@ -77,7 +77,7 @@ trait ManagerTestTrait
      */
     protected function appMock()
     {
-        return m::mock(\Illuminate\Contracts\Foundation\Application::class);
+        return m::mock(\Illuminate\Container\Container::class);
     }
 
     /**
