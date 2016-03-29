@@ -22,11 +22,10 @@ class ServiceProviderTest extends \PHPUnit_Framework_TestCase
     {
         $socialiteWasCalledMock = m::mock(SocialiteWasCalled::class);
         self::$functions->shouldReceive('app')->with(SocialiteWasCalled::class)->once()->andReturn($socialiteWasCalledMock);
-        $socialiteWasCalledMock = m::mock(\SocialiteProviders\Manager\SocialiteWasCalled::class);
 
         self::$functions->shouldReceive('event')->with($socialiteWasCalledMock)->once();
 
-        $sp = new ServiceProvider(m::mock(\Illuminate\Container\Container::class));
+        $sp = new ServiceProvider($this->appMock());
         $sp->boot();
     }
 }
