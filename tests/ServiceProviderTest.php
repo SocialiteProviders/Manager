@@ -3,7 +3,7 @@
 namespace SocialiteProviders\Manager\Test;
 
 use Mockery as m;
-use SocialiteProviders\Manager\Providers\LaravelServiceProvider;
+use SocialiteProviders\Manager\ServiceProvider;
 
 class ServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,7 +23,7 @@ class ServiceProviderTest extends \PHPUnit_Framework_TestCase
         $event = m::mock(\Illuminate\Contracts\Events\Dispatcher::class);
         $event->shouldReceive('fire')->with($socialiteWasCalled);
 
-        $sp = new LaravelServiceProvider($app);
+        $sp = new ServiceProvider($app);
         $sp->boot($event, $socialiteWasCalled);
     }
 }
