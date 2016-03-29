@@ -2,7 +2,7 @@
 
 namespace SocialiteProviders\Manager;
 
-use Illuminate\Contracts\Foundation\Application as LaravelApp;
+use Illuminate\Container\Container as Application;
 use Laravel\Socialite\SocialiteManager;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 use SocialiteProviders\Manager\Exception\InvalidArgumentException;
@@ -26,7 +26,7 @@ class SocialiteWasCalled
      * @param LaravelApp               $app
      * @param ConfigRetrieverInterface $configRetriever
      */
-    public function __construct(LaravelApp $app, ConfigRetrieverInterface $configRetriever)
+    public function __construct(Application $app, ConfigRetrieverInterface $configRetriever)
     {
         $this->app = $app;
         $this->configRetriever = $configRetriever;
@@ -69,10 +69,12 @@ class SocialiteWasCalled
         if ($this->isOAuth1($oauth1Server)) {
             $this->classExists($oauth1Server);
             $config = $this->getConfig($providerClass, $providerName);
+
             return $this->buildOAuth1Provider($providerClass, $oauth1Server, $socialite->formatConfig($config));
         }
 
         $config = $this->getConfig($providerClass, $providerName);
+
         return $this->buildOAuth2Provider($socialite, $providerClass, $config);
     }
 
@@ -116,6 +118,7 @@ class SocialiteWasCalled
      * @param string $providerName
      *
      * @return array
+     *
      * @throws MissingConfigException
      */
     protected function getConfig($providerClass, $providerName)
@@ -125,6 +128,7 @@ class SocialiteWasCalled
         $exceptionMessages = [];
         try {
             $config = $this->configRetriever->fromEnv($providerClass::IDENTIFIER, $additionalConfigKeys);
+
             return $config->get();
         } catch (MissingConfigException $e) {
             $exceptionMessages[] = $e->getMessage();
@@ -133,6 +137,7 @@ class SocialiteWasCalled
         $config = null;
         try {
             $config = $this->configRetriever->fromServices($providerName, $additionalConfigKeys);
+
             return $config->get();
         } catch (MissingConfigException $e) {
             $exceptionMessages[] = $e->getMessage();

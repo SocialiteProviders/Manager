@@ -27,7 +27,7 @@ trait ManagerTestTrait
     {
         return m::mock(ConfigRetrieverInterface::class);
     }
-    
+
     protected function expectManagerInvalidArgumentException()
     {
         $this->setExpectedException(\SocialiteProviders\Manager\Exception\InvalidArgumentException::class);
