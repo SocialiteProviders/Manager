@@ -27,6 +27,8 @@ class ServiceProviderTest extends \PHPUnit_Framework_TestCase
 
         $sp = new ServiceProvider($this->appMock());
         $sp->boot();
+
+        $this->assertTrue(true);
     }
 }
 
