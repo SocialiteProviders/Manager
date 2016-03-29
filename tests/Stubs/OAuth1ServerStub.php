@@ -2,9 +2,9 @@
 
 namespace SocialiteProviders\Manager\Test\Stubs;
 
-use Laravel\Socialite\One\User;
+use SocialiteProviders\Manager\OAuth1\User;
 use League\OAuth1\Client\Credentials\TokenCredentials;
-use League\OAuth1\Client\Server\Server;
+use SocialiteProviders\Manager\OAuth1\Server;
 
 class OAuth1ServerStub extends Server
 {
