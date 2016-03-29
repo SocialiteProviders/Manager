@@ -2,6 +2,7 @@
 
 namespace SocialiteProviders\Manager\OAuth1;
 
+use SocialiteProviders\Manager\Config;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
