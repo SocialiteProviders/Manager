@@ -144,12 +144,13 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
     {
         /** @var array $configArray */
         $configArray = config('services.'.$providerName);
-        $this->servicesArray = $configArray;
-
-        if (empty($this->servicesArray)) {
+        
+        if (empty($configArray)) {
             throw new MissingConfigException("There is no services entry for $providerName");
         }
-
+        
+        $this->servicesArray = $configArray;
+        
         return $this->servicesArray;
     }
 }
