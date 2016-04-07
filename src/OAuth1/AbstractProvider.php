@@ -140,4 +140,30 @@ abstract class AbstractProvider extends \Laravel\Socialite\One\AbstractProvider
     {
         return [];
     }
+
+    /**
+     * Set the scopes of the requested access.
+     *
+     * @param  array  $scopes
+     * @return $this
+     */
+    public function scopes(array $scopes)
+    {
+        $this->server = $this->server->scopes($scopes);
+
+        return $this;
+    }
+
+    /**
+     * Set the custom parameters of the request.
+     *
+     * @param  array  $parameters
+     * @return $this
+     */
+    public function with(array $parameters)
+    {
+        $this->server = $this->server->with($parameters);
+
+        return $this;
+    }
 }
