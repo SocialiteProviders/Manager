@@ -8,6 +8,11 @@ class OAuth1ProviderStub extends AbstractProvider
 {
     const IDENTIFIER = 'TEST';
 
+    protected function mapUserToObject(array $user)
+    {
+        return [];
+    }
+
     public static function additionalConfigKeys()
     {
         return [];
