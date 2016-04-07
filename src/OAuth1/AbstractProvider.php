@@ -142,6 +142,14 @@ abstract class AbstractProvider extends \Laravel\Socialite\One\AbstractProvider
     }
 
     /**
+     * Map the raw user array to a Socialite User instance.
+     *
+     * @param  array  $user
+     * @return \Laravel\Socialite\Two\User
+     */
+    abstract protected function mapUserToObject(array $user);
+
+    /**
      * Set the scopes of the requested access.
      *
      * @param  array  $scopes
