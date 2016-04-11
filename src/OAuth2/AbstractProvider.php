@@ -6,10 +6,12 @@ use GuzzleHttp\ClientInterface;
 use Laravel\Socialite\Two\InvalidStateException;
 use SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface;
 use SocialiteProviders\Manager\SocialiteWasCalled;
-use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
+use SocialiteProviders\Manager\ConfigTrait;
 
 abstract class AbstractProvider extends \Laravel\Socialite\Two\AbstractProvider implements ProviderInterface
 {
+    use ConfigTrait;
+
     /**
      * @var array
      */
@@ -18,26 +20,6 @@ abstract class AbstractProvider extends \Laravel\Socialite\Two\AbstractProvider 
     public static function serviceContainerKey($providerName)
     {
         return SocialiteWasCalled::SERVICE_CONTAINER_PREFIX.$providerName;
-    }
-
-    public static function additionalConfigKeys()
-    {
-        return [];
-    }
-
-    /**
-     * @param Config $config
-     *
-     * @return $this
-     */
-    public function config(Config $config)
-    {
-        $config = $config->get();
-        $this->clientId = $config['client_id'];
-        $this->redirectUrl = $config['redirect'];
-        $this->clientSecret = $config['client_secret'];
-
-        return $this;
     }
 
     /**
@@ -75,7 +57,7 @@ abstract class AbstractProvider extends \Laravel\Socialite\Two\AbstractProvider 
 
         $response = $this->getHttpClient()->post($this->getTokenUrl(), [
             'headers' => ['Accept' => 'application/json'],
-            $postKey => $this->getTokenFields($code),
+            $postKey  => $this->getTokenFields($code),
         ]);
 
         $this->credentialsResponseBody = json_decode($response->getBody(), true);

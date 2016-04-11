@@ -68,14 +68,11 @@ class SocialiteWasCalled
 
         if ($this->isOAuth1($oauth1Server)) {
             $this->classExists($oauth1Server);
-            $config = $this->getConfig($providerClass, $providerName);
 
-            return $this->buildOAuth1Provider($providerClass, $oauth1Server, $socialite->formatConfig($config));
+            return $this->buildOAuth1Provider($socialite, $providerClass, $providerName, $oauth1Server);
         }
 
-        $config = $this->getConfig($providerClass, $providerName);
-
-        return $this->buildOAuth2Provider($socialite, $providerClass, $config);
+        return $this->buildOAuth2Provider($socialite, $providerClass, $providerName);
     }
 
     /**
@@ -87,14 +84,22 @@ class SocialiteWasCalled
      *
      * @return \Laravel\Socialite\One\AbstractProvider
      */
-    protected function buildOAuth1Provider($providerClass, $oauth1Server, array $config)
+    protected function buildOAuth1Provider(SocialiteManager $socialite, $providerClass, $providerName, $oauth1Server)
     {
         $this->classExtends($providerClass, \Laravel\Socialite\One\AbstractProvider::class);
         $this->classExtends($oauth1Server, \League\OAuth1\Client\Server\Server::class);
 
-        return new $providerClass(
-            $this->app->offsetGet('request'), new $oauth1Server($config)
+        $config = $this->getConfig($providerClass, $providerName);
+
+        $configServer = $socialite->formatConfig($config->get());
+
+        $provider = new $providerClass(
+            $this->app->offsetGet('request'), new $oauth1Server($configServer)
         );
+
+        $provider->setConfig($config);
+
+        return $provider;
     }
 
     /**
@@ -106,20 +111,26 @@ class SocialiteWasCalled
      *
      * @return \Laravel\Socialite\Two\AbstractProvider
      */
-    protected function buildOAuth2Provider(SocialiteManager $socialite, $providerClass, array $config)
+    protected function buildOAuth2Provider(SocialiteManager $socialite, $providerClass, $providerName)
     {
         $this->classExtends($providerClass, \Laravel\Socialite\Two\AbstractProvider::class);
 
-        return $socialite->buildProvider($providerClass, $config);
+        $config = $this->getConfig($providerClass, $providerName);
+
+        $provider = $socialite->buildProvider($providerClass, $config->get());
+
+        $provider->setConfig($config);
+
+        return $provider;
     }
 
     /**
      * @param string $providerClass
      * @param string $providerName
      *
+     * @throws MissingConfigException
      * @return array
      *
-     * @throws MissingConfigException
      */
     protected function getConfig($providerClass, $providerName)
     {
@@ -129,7 +140,7 @@ class SocialiteWasCalled
         try {
             $config = $this->configRetriever->fromEnv($providerClass::IDENTIFIER, $additionalConfigKeys);
 
-            return $config->get();
+            return $config;
         } catch (MissingConfigException $e) {
             $exceptionMessages[] = $e->getMessage();
         }
@@ -138,7 +149,7 @@ class SocialiteWasCalled
         try {
             $config = $this->configRetriever->fromServices($providerName, $additionalConfigKeys);
 
-            return $config->get();
+            return $config;
         } catch (MissingConfigException $e) {
             $exceptionMessages[] = $e->getMessage();
         }

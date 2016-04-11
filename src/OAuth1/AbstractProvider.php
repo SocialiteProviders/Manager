@@ -2,12 +2,14 @@
 
 namespace SocialiteProviders\Manager\OAuth1;
 
-use SocialiteProviders\Manager\Config;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use SocialiteProviders\Manager\ConfigTrait;
 
 abstract class AbstractProvider extends \Laravel\Socialite\One\AbstractProvider
 {
+    use ConfigTrait;
+
     /**
      * Indicates if the session state should be utilized.
      *
@@ -23,21 +25,6 @@ abstract class AbstractProvider extends \Laravel\Socialite\One\AbstractProvider
     public static function serviceContainerKey($providerName)
     {
         return SocialiteWasCalled::SERVICE_CONTAINER_PREFIX.$providerName;
-    }
-
-    /**
-     * @param Config $config
-     *
-     * @return $this
-     */
-    public function config(Config $config)
-    {
-        $config = $config->get();
-        $this->clientId = $config['client_id'];
-        $this->redirectUrl = $config['redirect'];
-        $this->clientSecret = $config['client_secret'];
-
-        return $this;
     }
 
     /**
@@ -136,23 +123,11 @@ abstract class AbstractProvider extends \Laravel\Socialite\One\AbstractProvider
         return $this->stateless;
     }
 
-    public static function additionalConfigKeys()
-    {
-        return [];
-    }
-
-    /**
-     * Map the raw user array to a Socialite User instance.
-     *
-     * @param  array  $user
-     * @return \Laravel\Socialite\Two\User
-     */
-    abstract protected function mapUserToObject(array $user);
-
     /**
      * Set the scopes of the requested access.
      *
-     * @param  array  $scopes
+     * @param array $scopes
+     *
      * @return $this
      */
     public function scopes(array $scopes)
@@ -165,7 +140,8 @@ abstract class AbstractProvider extends \Laravel\Socialite\One\AbstractProvider
     /**
      * Set the custom parameters of the request.
      *
-     * @param  array  $parameters
+     * @param array $parameters
+     *
      * @return $this
      */
     public function with(array $parameters)

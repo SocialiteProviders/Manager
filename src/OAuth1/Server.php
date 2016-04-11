@@ -50,7 +50,7 @@ abstract class Server extends \League\OAuth1\Client\Server\Server
         }
 
         $uri = $this->urlTokenCredentials();
-        $bodyParameters = array('oauth_verifier' => $verifier);
+        $bodyParameters = ['oauth_verifier' => $verifier];
 
         $client = $this->createHttpClient();
 
@@ -63,7 +63,7 @@ abstract class Server extends \League\OAuth1\Client\Server\Server
         }
 
         return [
-            'tokenCredentials' => $this->createTokenCredentials($response->getBody()),
+            'tokenCredentials'        => $this->createTokenCredentials($response->getBody()),
             'credentialsResponseBody' => $response->getBody(),
         ];
     }
@@ -71,7 +71,8 @@ abstract class Server extends \League\OAuth1\Client\Server\Server
     /**
      * Set the scopes of the requested access.
      *
-     * @param  array  $scopes
+     * @param array $scopes
+     *
      * @return $this
      */
     public function scopes(array $scopes)
@@ -84,7 +85,8 @@ abstract class Server extends \League\OAuth1\Client\Server\Server
     /**
      * Set the custom parameters of the request.
      *
-     * @param  array  $parameters
+     * @param array $parameters
+     *
      * @return $this
      */
     public function with(array $parameters)
@@ -93,12 +95,13 @@ abstract class Server extends \League\OAuth1\Client\Server\Server
 
         return $this;
     }
-    
+
     /**
      * Format the given scopes.
      *
-     * @param  array  $scopes
-     * @param  string  $scopeSeparator
+     * @param array  $scopes
+     * @param string $scopeSeparator
+     *
      * @return string
      */
     protected function formatScopes(array $scopes, $scopeSeparator)

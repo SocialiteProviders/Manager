@@ -11,5 +11,5 @@ interface ProviderInterface
      *
      * @return $this
      */
-    public function config(Config $config);
+    public function setConfig(Config $config);
 }
