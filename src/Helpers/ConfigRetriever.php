@@ -5,8 +5,9 @@ namespace SocialiteProviders\Manager\Helpers;
 use SocialiteProviders\Manager\Config;
 use SocialiteProviders\Manager\Contracts\ConfigInterface;
 use SocialiteProviders\Manager\Exception\MissingConfigException;
+use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 
-class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface
+class ConfigRetriever implements ConfigRetrieverInterface
 {
     /**
      * @var string

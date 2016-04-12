@@ -2,11 +2,13 @@
 
 namespace SocialiteProviders\Manager\OAuth1;
 
+use Laravel\Socialite\One\AbstractProvider as BaseProvider;
 use SocialiteProviders\Manager\SocialiteWasCalled;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use SocialiteProviders\Manager\ConfigTrait;
+use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
-abstract class AbstractProvider extends \Laravel\Socialite\One\AbstractProvider
+abstract class AbstractProvider extends BaseProvider
 {
     use ConfigTrait;
 
@@ -147,6 +149,18 @@ abstract class AbstractProvider extends \Laravel\Socialite\One\AbstractProvider
     public function with(array $parameters)
     {
         $this->server = $this->server->with($parameters);
+
+        return $this;
+    }
+
+    /**
+     * @param Config $config
+     *
+     * @return $this
+     */
+    public function setConfig(Config $config)
+    {
+        $this->config = $this->server->setConfig($config);
 
         return $this;
     }
