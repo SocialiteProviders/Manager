@@ -2,7 +2,9 @@
 
 namespace SocialiteProviders\Manager\OAuth1;
 
-class User extends \Laravel\Socialite\One\User
+use Laravel\Socialite\One\User as BaseUser;
+
+class User extends BaseUser
 {
     /**
      * The User Credentials.

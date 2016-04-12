@@ -5,9 +5,13 @@ namespace SocialiteProviders\Manager\OAuth1;
 use GuzzleHttp\Exception\BadResponseException;
 use League\OAuth1\Client\Credentials\TemporaryCredentials;
 use League\OAuth1\Client\Credentials\TokenCredentials;
+use SocialiteProviders\Manager\ConfigTrait;
+use League\OAuth1\Client\Server\Server as BaseServer;
 
-abstract class Server extends \League\OAuth1\Client\Server\Server
+abstract class Server extends BaseServer
 {
+    use ConfigTrait;
+
     /**
      * The custom parameters to be sent with the request.
      *

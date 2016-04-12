@@ -7,8 +7,9 @@ use Laravel\Socialite\Two\InvalidStateException;
 use SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 use SocialiteProviders\Manager\ConfigTrait;
+use Laravel\Socialite\Two\AbstractProvider as BaseProvider;
 
-abstract class AbstractProvider extends \Laravel\Socialite\Two\AbstractProvider implements ProviderInterface
+abstract class AbstractProvider extends BaseProvider implements ProviderInterface
 {
     use ConfigTrait;
 
