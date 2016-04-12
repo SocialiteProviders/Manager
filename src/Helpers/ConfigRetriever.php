@@ -27,9 +27,9 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
      * @param string $providerIdentifier
      * @param array  $additionalConfigKeys
      *
+     * @throws MissingConfigException
      * @return ConfigInterface
      *
-     * @throws MissingConfigException
      */
     public function fromEnv($providerIdentifier, array $additionalConfigKeys = [])
     {
@@ -48,9 +48,9 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
      * @param string $providerName
      * @param array  $additionalConfigKeys
      *
+     * @throws MissingConfigException
      * @return ConfigInterface
      *
-     * @throws MissingConfigException
      */
     public function fromServices($providerName, array $additionalConfigKeys = [])
     {
@@ -101,9 +101,9 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
     /**
      * @param string $key
      *
+     * @throws MissingConfigException
      * @return string
      *
-     * @throws MissingConfigException
      */
     private function getFromServices($key)
     {
@@ -117,9 +117,9 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
     /**
      * @param string $key
      *
+     * @throws MissingConfigException
      * @return string
      *
-     * @throws MissingConfigException
      */
     private function getFromEnv($key)
     {
@@ -136,21 +136,21 @@ class ConfigRetriever implements \SocialiteProviders\Manager\Contracts\Helpers\C
     /**
      * @param string $providerName
      *
+     * @throws MissingConfigException
      * @return array
      *
-     * @throws MissingConfigException
      */
     protected function getConfigFromServicesArray($providerName)
     {
         /** @var array $configArray */
         $configArray = config('services.'.$providerName);
-        
+
         if (empty($configArray)) {
             throw new MissingConfigException("There is no services entry for $providerName");
         }
-        
+
         $this->servicesArray = $configArray;
-        
+
         return $this->servicesArray;
     }
 }
