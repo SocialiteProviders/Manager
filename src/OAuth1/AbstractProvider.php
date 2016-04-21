@@ -13,7 +13,7 @@ abstract class AbstractProvider extends \Laravel\Socialite\One\AbstractProvider
      *
      * @var bool
      */
-    protected $stateless = true;
+    protected $stateless = false;
 
     /**
      * @var array
