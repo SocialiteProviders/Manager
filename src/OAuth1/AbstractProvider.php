@@ -104,9 +104,9 @@ abstract class AbstractProvider extends BaseProvider
      *
      * @return $this
      */
-    public function stateless()
+    public function stateless($stateless = true)
     {
-        $this->stateless = true;
+        $this->stateless = $stateless;
 
         return $this;
     }
