@@ -31,7 +31,7 @@ A package for Laravel Socialite that allows you to easily add new providers or o
 
 * [Laravel docs about events](http://laravel.com/docs/5.0/events)
 * [Laracasts video on events in Laravel 5](https://laracasts.com/lessons/laravel-5-events)
-* [Laravel Socialite Docs](http://laravel.com/docs/5.0/authentication#social-authentication)  
+* [Laravel Socialite Docs](https://github.com/laravel/socialite)  
 * [Laracasts Socialite video](https://laracasts.com/series/whats-new-in-laravel-5/episodes/9)
 
 
