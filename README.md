@@ -20,6 +20,10 @@ A package for Laravel Socialite that allows you to easily add new providers or o
 * Instantiation is deferred until Socialite is called
 * You can override current providers
 * You can create new providers
+* Lumen usage is easy
+* `stateless()` can be set to `true` or `false`
+* You can override a config dynamically
+* It retrieves environment variables directly from the `.env` file instead of also having to configure the services array.
 
 ## Available Providers
 
@@ -72,13 +76,22 @@ You can easily override a built-in `laravel/socialite` provider by creating a ne
 ## Dynamically Passing a Config
 
 You can dynamically pass a config by using:
-```
-$key = 'SocialiteProviders.config.<provider_name>';
-$config = new \SocialiteProviders\Manager\Config('key', 'secret', 'callbackUri');
-$this->app->instance($key, $config)
+
+```php
+$clientId = "secret";
+$clientSecret = "secret";
+$redirectUrl = "http://yourdomain.com/api/redirect";
+$additionalProviderConfig = ['site' => 'meta.stackoverflow.com'];
+$config = new \SocialiteProviders\Manager\Config($clientId, $clientSecret, $redirectUrl, $additionalProviderConfig);
+return Socialite::with('provider-name')->setConfig($config)->redirect();
 ```
 
 **You must call this before you run any Socialite methods.**
+
+
+## Creating an OAuth1 Server Class
+
+Take a look at the other [OAuth1 providers](http://socialiteproviders.github.io/) for inspiration. 
 
 ## Getting the Access Token Response Body
 
@@ -86,9 +99,7 @@ Laravel Socialite by default only allows access to the `access_token`.  Which ca
 via the `\Laravel\Socialite\User->token` public property.  Sometimes you need access to the whole response body which
 may contain items such as a `refresh_token`.  
 
-To make this possible, the OAuth2 provider class needs to extend `\SocialiteProviders\Manager\OAuth2\AbstractProvider`.
+To make this possible, the OAuth2 provider class needs to extend `\SocialiteProviders\Manager\OAuth2\AbstractProvider` and 
+OAuth1 providers need to utilize the `\SocialiteProviders\Manager\OAuth1\AbstractProvider` and `\SocialiteProviders\Manager\OAuth1\Server`.
 
-Currently, not all providers in the Socialite Providers have this implemented.  If you need this, submit an issue for 
-the specific provider.
-
-For the repositories that do support this, you can access it from the user object like so: `$user->accessTokenResponseBody`
+You can access it from the user object like so: `$user->accessTokenResponseBody`
