@@ -129,8 +129,8 @@ class SocialiteWasCalled
      * @param string $providerName
      *
      * @throws MissingConfigException
-     * @return array
      *
+     * @return array
      */
     protected function getConfig($providerClass, $providerName)
     {

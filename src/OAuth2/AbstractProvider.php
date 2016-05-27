@@ -58,7 +58,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
 
         $response = $this->getHttpClient()->post($this->getTokenUrl(), [
             'headers' => ['Accept' => 'application/json'],
-            $postKey  => $this->getTokenFields($code),
+            $postKey => $this->getTokenFields($code),
         ]);
 
         $this->credentialsResponseBody = json_decode($response->getBody(), true);
