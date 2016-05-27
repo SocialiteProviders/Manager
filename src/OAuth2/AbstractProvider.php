@@ -65,4 +65,15 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
 
         return $this->parseAccessToken($response->getBody());
     }
+
+    /**
+     * Get the access token from the token response body.
+     *
+     * @param  string  $body
+     * @return string
+     */
+    protected function parseAccessToken($body)
+    {
+        return json_decode($body, true)['access_token'];
+    }
 }
