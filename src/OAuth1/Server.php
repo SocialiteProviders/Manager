@@ -67,7 +67,7 @@ abstract class Server extends BaseServer
         }
 
         return [
-            'tokenCredentials'        => $this->createTokenCredentials($response->getBody()),
+            'tokenCredentials' => $this->createTokenCredentials($response->getBody()),
             'credentialsResponseBody' => $response->getBody(),
         ];
     }

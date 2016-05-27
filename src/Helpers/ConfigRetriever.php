@@ -29,8 +29,8 @@ class ConfigRetriever implements ConfigRetrieverInterface
      * @param array  $additionalConfigKeys
      *
      * @throws MissingConfigException
-     * @return ConfigInterface
      *
+     * @return ConfigInterface
      */
     public function fromEnv($providerIdentifier, array $additionalConfigKeys = [])
     {
@@ -50,8 +50,8 @@ class ConfigRetriever implements ConfigRetrieverInterface
      * @param array  $additionalConfigKeys
      *
      * @throws MissingConfigException
-     * @return ConfigInterface
      *
+     * @return ConfigInterface
      */
     public function fromServices($providerName, array $additionalConfigKeys = [])
     {
@@ -103,8 +103,8 @@ class ConfigRetriever implements ConfigRetrieverInterface
      * @param string $key
      *
      * @throws MissingConfigException
-     * @return string
      *
+     * @return string
      */
     private function getFromServices($key)
     {
@@ -119,8 +119,8 @@ class ConfigRetriever implements ConfigRetrieverInterface
      * @param string $key
      *
      * @throws MissingConfigException
-     * @return string
      *
+     * @return string
      */
     private function getFromEnv($key)
     {
@@ -138,8 +138,8 @@ class ConfigRetriever implements ConfigRetrieverInterface
      * @param string $providerName
      *
      * @throws MissingConfigException
-     * @return array
      *
+     * @return array
      */
     protected function getConfigFromServicesArray($providerName)
     {

@@ -12,8 +12,8 @@ interface ConfigRetrieverInterface
      * @param array  $additionalConfigKeys
      *
      * @throws MissingConfigException
-     * @return ConfigInterface
      *
+     * @return ConfigInterface
      */
     public function fromEnv($providerIdentifier, array $additionalConfigKeys = []);
 
@@ -22,8 +22,8 @@ interface ConfigRetrieverInterface
      * @param array  $additionalConfigKeys
      *
      * @throws MissingConfigException
-     * @return ConfigInterface
      *
+     * @return ConfigInterface
      */
     public function fromServices($providerName, array $additionalConfigKeys = []);
 }
