@@ -76,4 +76,20 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     {
         return json_decode($body, true)['access_token'];
     }
+    
+    $this->getAccessTokenResponse($this->getCode())
+    
+    /**
+     * Get the access token response for the given code.
+     *
+     * @todo Remove this method once all Providers have
+     *       been updated to use the new getAccessTokenResponse.
+     * 
+     * @param  string  $code
+     * @return array
+     */
+    public function getAccessToken($code)
+    {
+        return $this->getAccessTokenResponse($code);
+    }
 }
