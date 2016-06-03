@@ -69,7 +69,8 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Get the access token from the token response body.
      *
-     * @param  string  $body
+     * @param string $body
+     *
      * @return string
      */
     protected function parseAccessToken($body)
