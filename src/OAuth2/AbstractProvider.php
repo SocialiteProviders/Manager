@@ -3,7 +3,6 @@
 namespace SocialiteProviders\Manager\OAuth2;
 
 use Illuminate\Support\Arr;
-use GuzzleHttp\ClientInterface;
 use Laravel\Socialite\Two\InvalidStateException;
 use SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface;
 use SocialiteProviders\Manager\SocialiteWasCalled;
