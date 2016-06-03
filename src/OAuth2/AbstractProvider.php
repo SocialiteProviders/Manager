@@ -45,8 +45,8 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
         }
 
         return $user->setToken($token)
-                    ->setRefreshToken(Arr::get($response, 'refresh_token'))
-                    ->setExpiresIn(Arr::get($response, 'expires_in'));
+                    ->setRefreshToken($this->parseRefreshToken($response))
+                    ->setExpiresIn($this->parseExpiresIn($response));
     }
 
     /**
@@ -59,5 +59,29 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     protected function parseAccessToken($body)
     {
         return Arr::get($body, 'access_token');
+    }
+
+    /**
+     * Get the refresh token from the token response body.
+     *
+     * @param string $body
+     *
+     * @return string
+     */
+    protected function parseRefreshToken($body)
+    {
+        return Arr::get($body, 'refresh_token');
+    }
+
+    /**
+     * Get the expires in from the token response body.
+     *
+     * @param string $body
+     *
+     * @return string
+     */
+    protected function parseExpiresIn($body)
+    {
+        return Arr::get($body, 'expires_in');
     }
 }
