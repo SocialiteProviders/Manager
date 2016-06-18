@@ -2,13 +2,13 @@
 
 namespace SocialiteProviders\Manager;
 
-use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
+use SocialiteProviders\Manager\Contracts\ConfigInterface;
 
 trait ConfigTrait
 {
     protected $config;
 
-    public function setConfig(Config $config)
+    public function setConfig(ConfigInterface $config)
     {
         $config = $config->get();
 
