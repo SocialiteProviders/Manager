@@ -71,7 +71,7 @@ abstract class AbstractProvider extends BaseProvider
             );
         } else {
             $temp = $this->server->getTemporaryCredentials();
-            setcookie('oauth_temp', serialize($temp));
+            $this->request->session()->set('oauth_temp', serialize($temp));
         }
 
         return new RedirectResponse($this->server->getAuthorizationUrl($temp));
@@ -91,7 +91,7 @@ abstract class AbstractProvider extends BaseProvider
                 $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
             );
         } else {
-            $temp = unserialize($_COOKIE['oauth_temp']);
+            $temp = unserialize($this->request->session()->get('oauth_temp'));
 
             return $this->server->getTokenCredentials(
                 $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
