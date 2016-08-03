@@ -22,6 +22,12 @@ trait ConfigTrait
 
     protected function getConfig($key = null, $default = null)
     {
+        // check manually if a key is given and if it exists in the config
+        // this has to be done to check for spoofed additional config keys so that null isn't returned
+        if(!empty($key) && empty($this->config[$key])) {
+            return $default;
+        }
+
         return $key ? array_get($this->config, $key, $default) : $this->config;
     }
 
