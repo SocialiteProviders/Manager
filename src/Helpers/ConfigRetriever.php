@@ -109,7 +109,10 @@ class ConfigRetriever implements ConfigRetrieverInterface
     private function getFromServices($key)
     {
         if (!array_key_exists($key, $this->servicesArray)) {
-            throw new MissingConfigException("Missing services entry for {$this->providerName}.$key");
+            $this->servicesArray[$key] = null;
+
+            // ignore these for now so additional config keys can be empty
+            // throw new MissingConfigException("Missing services entry for {$this->providerName}.$key");
         }
 
         return $this->servicesArray[$key];
@@ -128,7 +131,10 @@ class ConfigRetriever implements ConfigRetrieverInterface
         $item = env($providerKey);
 
         if (empty($item)) {
-            throw new MissingConfigException("Configuration for $providerKey is missing.");
+            env($providerKey, null);
+
+            // ignore these for now so additional config keys can be empty
+            // throw new MissingConfigException("Configuration for $providerKey is missing.");
         }
 
         return $item;
