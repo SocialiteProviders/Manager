@@ -25,6 +25,11 @@ class ConfigRetriever implements ConfigRetrieverInterface
     private $servicesArray;
 
     /**
+     * @var array
+     */
+    private $additionalConfigKeys;
+
+    /**
      * @param string $providerIdentifier
      * @param array  $additionalConfigKeys
      *
@@ -35,6 +40,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
     public function fromEnv($providerIdentifier, array $additionalConfigKeys = [])
     {
         $this->providerIdentifier = $providerIdentifier;
+        $this->additionalConfigKeys = $additionalConfigKeys;
 
         return new Config(
             $this->getFromEnv('KEY'),
@@ -57,6 +63,8 @@ class ConfigRetriever implements ConfigRetrieverInterface
     {
         $this->providerName = $providerName;
         $this->getConfigFromServicesArray($providerName);
+
+        $this->additionalConfigKeys = $additionalConfigKeys;
 
         return new Config(
             $this->getFromServices('client_id'),
@@ -108,11 +116,16 @@ class ConfigRetriever implements ConfigRetrieverInterface
      */
     private function getFromServices($key)
     {
-        if (!array_key_exists($key, $this->servicesArray)) {
-            $this->servicesArray[$key] = null;
+        $keyExists = array_key_exists($key, $this->servicesArray);
 
-            // ignore these for now so additional config keys can be empty
-            // throw new MissingConfigException("Missing services entry for {$this->providerName}.$key");
+        // ADDITIONAL value is empty
+        if (!$keyExists && $this->isAdditionalConfig($key)) {
+            return;
+        }
+
+        // REQUIRED value is empty
+        if (!$keyExists) {
+            throw new MissingConfigException("Missing services entry for {$this->providerName}.$key");
         }
 
         return $this->servicesArray[$key];
@@ -130,11 +143,14 @@ class ConfigRetriever implements ConfigRetrieverInterface
         $providerKey = "{$this->providerIdentifier}_{$key}";
         $item = env($providerKey);
 
-        if (empty($item)) {
-            env($providerKey, null);
+        // ADDITIONAL value is empty
+        if (empty($item) && $this->isAdditionalConfig($key)) {
+            return;
+        }
 
-            // ignore these for now so additional config keys can be empty
-            // throw new MissingConfigException("Configuration for $providerKey is missing.");
+        // REQUIRED value is empty
+        if (empty($item)) {
+            throw new MissingConfigException("Configuration for $providerKey is missing.");
         }
 
         return $item;
@@ -159,5 +175,15 @@ class ConfigRetriever implements ConfigRetrieverInterface
         $this->servicesArray = $configArray;
 
         return $this->servicesArray;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return bool
+     */
+    private function isAdditionalConfig($key)
+    {
+        return in_array(strtolower($key), $this->additionalConfigKeys);
     }
 }
