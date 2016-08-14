@@ -52,6 +52,7 @@ class SocialiteWasCalled
                 if (defined('SOCIALITEPROVIDERS_STATELESS') && SOCIALITEPROVIDERS_STATELESS) {
                     return $provider->stateless();
                 }
+                
                 return $provider;
             }
         );
