@@ -49,6 +49,10 @@ class SocialiteWasCalled
         $socialite->extend(
             $providerName,
             function () use ($provider) {
+                if (defined('SOCIALITEPROVIDERS_STATELESS') && SOCIALITEPROVIDERS_STATELESS) {
+                    return $provider->stateless();
+                }
+
                 return $provider;
             }
         );
