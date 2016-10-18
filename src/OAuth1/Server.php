@@ -61,7 +61,14 @@ abstract class Server extends BaseServer
         $headers = $this->getHeaders($temporaryCredentials, 'POST', $uri, $bodyParameters);
 
         try {
-            $response = $client->post($uri, $headers, $bodyParameters)->send();
+            if (get_class($client) == 'GuzzleHttp\\Client') {
+                $response = $client->post($uri, [
+                    'headers' => $headers,
+                    'form_params' => $bodyParameters,
+                ]);
+            } else {
+                $response = $client->post($uri, $headers, $bodyParameters)->send();
+            }
         } catch (BadResponseException $e) {
             return $this->handleTokenCredentialsBadResponse($e);
         }
