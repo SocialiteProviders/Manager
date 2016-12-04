@@ -23,6 +23,11 @@ class SocialiteWasCalled
     private $configRetriever;
 
     /**
+     * @var bool
+     */
+    public static $spoofedConfig = false;
+
+    /**
      * @param LaravelApp               $app
      * @param ConfigRetrieverInterface $configRetriever
      */
@@ -144,7 +149,12 @@ class SocialiteWasCalled
         try {
             $config = $this->configRetriever->fromEnv($providerClass::IDENTIFIER, $additionalConfigKeys);
 
-            return $config;
+            // We will use the $spoofedConfig variable for now as a way to find out if there was no
+            // configuration in the .env file which means we should not return anything and jump
+            // to the service config check to check if something can be found there.
+            if (!static::$spoofedConfig) {
+                return $config;
+            }
         } catch (MissingConfigException $e) {
             $exceptionMessages[] = $e->getMessage();
         }
@@ -153,6 +163,9 @@ class SocialiteWasCalled
         try {
             $config = $this->configRetriever->fromServices($providerName, $additionalConfigKeys);
 
+            // Here we don't need to check for the $spoofedConfig variable because this will be
+            // the end of checking for config and should contain either the proper data or an
+            // array containing spoofed values.
             return $config;
         } catch (MissingConfigException $e) {
             $exceptionMessages[] = $e->getMessage();
