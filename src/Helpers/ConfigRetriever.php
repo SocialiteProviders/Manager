@@ -156,9 +156,9 @@ class ConfigRetriever implements ConfigRetrieverInterface
                 $item = $providerKey;
 
                 SocialiteWasCalled::$spoofedConfig = true;
+            } else {
+                throw new MissingConfigException("Configuration for $providerKey is missing.");
             }
-
-            throw new MissingConfigException("Configuration for $providerKey is missing.");
         }
 
         return $item;
@@ -186,9 +186,10 @@ class ConfigRetriever implements ConfigRetrieverInterface
                 ];
 
                 SocialiteWasCalled::$spoofedConfig = true;
+            } else {
+                throw new MissingConfigException("There is no services entry for $providerName");
             }
 
-            throw new MissingConfigException("There is no services entry for $providerName");
         }
 
         $this->servicesArray = $configArray;
