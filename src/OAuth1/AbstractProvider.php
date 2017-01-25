@@ -66,12 +66,12 @@ abstract class AbstractProvider extends BaseProvider
     public function redirect()
     {
         if (!$this->isStateless()) {
-            $this->request->getSession()->set(
+            $this->request->getSession()->put(
                 'oauth.temp', $temp = $this->server->getTemporaryCredentials()
             );
         } else {
             $temp = $this->server->getTemporaryCredentials();
-            $this->request->session()->set('oauth_temp', serialize($temp));
+            $this->request->session()->put('oauth_temp', serialize($temp));
         }
 
         return new RedirectResponse($this->server->getAuthorizationUrl($temp));
