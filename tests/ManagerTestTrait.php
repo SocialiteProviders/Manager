@@ -93,7 +93,7 @@ trait ManagerTestTrait
         static $provider = null;
 
         if (is_null($provider)) {
-            $provider = $this->mockStub('OAuth2ProviderStub');
+            $provider = $this->mockStub('OAuth2ProviderStub')->shouldDeferMissing();
         }
 
         return $provider;
