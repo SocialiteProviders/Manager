@@ -105,7 +105,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
     {
         $provider = new OAuth2ProviderStub(\Mockery::mock(\Illuminate\Http\Request::class), 'client id', 'client secret', 'redirect url');
 
-        $result = $provider->config(new Config('key', 'secret', 'callback uri'));
+        $result = $provider->setConfig(new Config('key', 'secret', 'callback uri'));
 
         $this->assertEquals($provider, $result);
     }

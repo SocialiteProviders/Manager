@@ -114,3 +114,16 @@ function config($key)
 {
     return ConfigRetrieverTest::$functions->config($key);
 }
+
+function app()
+{
+    return new applicationStub;
+}
+
+class applicationStub {
+
+    public function runningInConsole()
+    {
+        return false;
+    }
+}
