@@ -57,6 +57,23 @@ abstract class AbstractProvider extends BaseProvider
 
         return $user;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function userFromTokenAndSecret($token, $secret)
+    {
+        $tokenCredentials = new TokenCredentials();
+
+        $tokenCredentials->setIdentifier($token);
+        $tokenCredentials->setSecret($secret);
+
+        $user = $this->mapUserToObject((array)$this->server->getUserDetails($tokenCredentials));
+
+        $user->setToken($tokenCredentials->getIdentifier(), $tokenCredentials->getSecret());
+
+        return $user;
+    }
 
     /**
      * Redirect the user to the authentication page for the provider.
