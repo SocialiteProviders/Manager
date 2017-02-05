@@ -13,22 +13,22 @@ class ConfigRetriever implements ConfigRetrieverInterface
     /**
      * @var string
      */
-    private $providerName;
+    protected $providerName;
 
     /**
      * @var string
      */
-    private $providerIdentifier;
+    protected $providerIdentifier;
 
     /**
      * @var array
      */
-    private $servicesArray;
+    protected $servicesArray;
 
     /**
      * @var array
      */
-    private $additionalConfigKeys;
+    protected $additionalConfigKeys;
 
     /**
      * @param string $providerIdentifier
