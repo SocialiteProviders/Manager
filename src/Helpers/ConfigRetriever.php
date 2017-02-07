@@ -82,7 +82,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
      *
      * @return array
      */
-    private function getConfigItems(array $configKeys, \Closure $keyRetrievalClosure)
+    protected function getConfigItems(array $configKeys, \Closure $keyRetrievalClosure)
     {
         if (count($configKeys) < 1) {
             return [];
@@ -97,7 +97,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
      *
      * @return array
      */
-    private function retrieveItemsFromConfig(array $keys, \Closure $keyRetrievalClosure)
+    protected function retrieveItemsFromConfig(array $keys, \Closure $keyRetrievalClosure)
     {
         $out = [];
 
@@ -115,7 +115,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
      *
      * @return string
      */
-    private function getFromServices($key)
+    protected function getFromServices($key)
     {
         $keyExists = array_key_exists($key, $this->servicesArray);
 
@@ -139,7 +139,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
      *
      * @return string
      */
-    private function getFromEnv($key)
+    protected function getFromEnv($key)
     {
         $providerKey = "{$this->providerIdentifier}_{$key}";
         $item = env($providerKey);
@@ -202,7 +202,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
      *
      * @return bool
      */
-    private function isAdditionalConfig($key)
+    protected function isAdditionalConfig($key)
     {
         return in_array(strtolower($key), $this->additionalConfigKeys);
     }
