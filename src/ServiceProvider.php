@@ -8,6 +8,9 @@ use SocialiteProviders\Manager\Helpers\ConfigRetriever;
 
 class ServiceProvider extends SocialiteServiceProvider
 {
+    /**
+     * @return void
+     */
     public function boot()
     {
         $socialiteWasCalled = app(SocialiteWasCalled::class);
@@ -15,6 +18,9 @@ class ServiceProvider extends SocialiteServiceProvider
         event($socialiteWasCalled);
     }
 
+    /**
+     * @return void
+     */
     public function register()
     {
         parent::register();
