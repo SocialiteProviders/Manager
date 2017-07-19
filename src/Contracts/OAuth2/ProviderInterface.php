@@ -1,5 +1,6 @@
 <?php
 
+
 namespace SocialiteProviders\Manager\Contracts\OAuth2;
 
 use Laravel\Socialite\Two\ProviderInterface as SocialiteOauth2ProviderInterface;

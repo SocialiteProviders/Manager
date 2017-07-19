@@ -1,5 +1,6 @@
 <?php
 
+
 namespace SocialiteProviders\Manager;
 
 class Config implements Contracts\ConfigInterface

@@ -1,5 +1,6 @@
 <?php
 
+
 namespace SocialiteProviders\Manager\Test;
 
 use SocialiteProviders\Manager\Helpers\ConfigRetriever;

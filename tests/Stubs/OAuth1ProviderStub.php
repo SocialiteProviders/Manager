@@ -1,5 +1,6 @@
 <?php
 
+
 namespace SocialiteProviders\Manager\Test\Stubs;
 
 use SocialiteProviders\Manager\OAuth1\AbstractProvider;
