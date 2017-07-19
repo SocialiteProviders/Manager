@@ -9,7 +9,6 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
 {
     use ManagerTestTrait;
 
-
     /**
      * @test
      */
