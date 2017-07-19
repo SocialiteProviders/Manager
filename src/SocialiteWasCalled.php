@@ -28,7 +28,7 @@ class SocialiteWasCalled
     public static $spoofedConfig = false;
 
     /**
-     * @param LaravelApp               $app
+     * @param Container $app
      * @param ConfigRetrieverInterface $configRetriever
      */
     public function __construct(Application $app, ConfigRetrieverInterface $configRetriever)
@@ -87,9 +87,10 @@ class SocialiteWasCalled
     /**
      * Build an OAuth 1 provider instance.
      *
+     * @param SocialiteManager $socialite
      * @param string $providerClass must extend Laravel\Socialite\One\AbstractProvider
      * @param string $oauth1Server  must extend League\OAuth1\Client\Server\Server
-     * @param array  $config
+     * @param string  $providerName
      *
      * @return \Laravel\Socialite\One\AbstractProvider
      */
@@ -116,7 +117,7 @@ class SocialiteWasCalled
      *
      * @param SocialiteManager $socialite
      * @param string           $providerClass must extend Laravel\Socialite\Two\AbstractProvider
-     * @param array            $config
+     * @param string            $providerName
      *
      * @return \Laravel\Socialite\Two\AbstractProvider
      */
@@ -200,6 +201,11 @@ class SocialiteWasCalled
         }
     }
 
+    /**
+     * @param string $providerClass
+     * @return void
+     * @throws InvalidArgumentException
+     */
     private function classExists($providerClass)
     {
         if (!class_exists($providerClass)) {

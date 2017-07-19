@@ -118,6 +118,7 @@ abstract class AbstractProvider extends BaseProvider
     /**
      * Indicates that the provider should operate as stateless.
      *
+     * @param bool $stateless
      * @return $this
      */
     public function stateless($stateless = true)
