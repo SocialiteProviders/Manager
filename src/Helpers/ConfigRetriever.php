@@ -152,13 +152,12 @@ class ConfigRetriever implements ConfigRetrieverInterface
         // REQUIRED value is empty
         if (empty($item)) {
             // If we are running in console we should spoof values to make Socialite happy...
-            if (app()->runningInConsole()) {
-                $item = $providerKey;
-
-                SocialiteWasCalled::$spoofedConfig = true;
-            } else {
+            if (!app()->runningInConsole()) {
                 throw new MissingConfigException("Configuration for $providerKey is missing.");
             }
+            $item = $providerKey;
+
+            SocialiteWasCalled::$spoofedConfig = true;
         }
 
         return $item;
