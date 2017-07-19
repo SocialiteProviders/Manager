@@ -1,5 +1,6 @@
 <?php
 
+
 namespace SocialiteProviders\Manager\OAuth1;
 
 use Laravel\Socialite\One\User as BaseUser;

@@ -1,5 +1,6 @@
 <?php
 
+
 namespace SocialiteProviders\Manager;
 
 use Illuminate\Container\Container as Application;

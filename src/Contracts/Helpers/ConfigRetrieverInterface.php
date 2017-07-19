@@ -1,5 +1,6 @@
 <?php
 
+
 namespace SocialiteProviders\Manager\Contracts\Helpers;
 
 use SocialiteProviders\Manager\Contracts\ConfigInterface;

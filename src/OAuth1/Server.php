@@ -1,5 +1,6 @@
 <?php
 
+
 namespace SocialiteProviders\Manager\OAuth1;
 
 use GuzzleHttp\Exception\BadResponseException;

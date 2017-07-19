@@ -1,5 +1,6 @@
 <?php
 
+
 namespace SocialiteProviders\Manager\Contracts\OAuth1;
 
 use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
