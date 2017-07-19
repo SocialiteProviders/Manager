@@ -107,13 +107,12 @@ abstract class AbstractProvider extends BaseProvider
             return $this->server->getTokenCredentials(
                 $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
             );
-        } else {
-            $temp = unserialize($this->request->session()->get('oauth_temp'));
+        }
+        $temp = unserialize($this->request->session()->get('oauth_temp'));
 
             return $this->server->getTokenCredentials(
                 $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
             );
-        }
     }
 
     /**
