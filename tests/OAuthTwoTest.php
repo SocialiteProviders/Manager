@@ -10,8 +10,6 @@ use SocialiteProviders\Manager\OAuth2\User;
 
 class OAuthTwoTest extends PHPUnit_Framework_TestCase
 {
-
-
     /**
      * @test
      */
