@@ -10,10 +10,6 @@ class ServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
     use ManagerTestTrait;
 
-    public function tearDown()
-    {
-        \Mockery::close();
-    }
 
     /**
      * @test
