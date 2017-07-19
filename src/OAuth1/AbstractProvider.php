@@ -57,7 +57,7 @@ abstract class AbstractProvider extends BaseProvider
 
         return $user;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -68,7 +68,7 @@ abstract class AbstractProvider extends BaseProvider
         $tokenCredentials->setIdentifier($token);
         $tokenCredentials->setSecret($secret);
 
-        $user = $this->mapUserToObject((array)$this->server->getUserDetails($tokenCredentials));
+        $user = $this->mapUserToObject((array) $this->server->getUserDetails($tokenCredentials));
 
         $user->setToken($tokenCredentials->getIdentifier(), $tokenCredentials->getSecret());
 
@@ -110,7 +110,7 @@ abstract class AbstractProvider extends BaseProvider
         }
         $temp = unserialize($this->request->session()->get('oauth_temp'));
 
-            return $this->server->getTokenCredentials(
+        return $this->server->getTokenCredentials(
                 $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
             );
     }

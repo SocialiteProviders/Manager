@@ -188,7 +188,6 @@ class ConfigRetriever implements ConfigRetrieverInterface
             } else {
                 throw new MissingConfigException("There is no services entry for $providerName");
             }
-
         }
 
         $this->servicesArray = $configArray;
