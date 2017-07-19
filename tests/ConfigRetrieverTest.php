@@ -117,11 +117,11 @@ function config($key)
 
 function app()
 {
-    return new applicationStub;
+    return new applicationStub();
 }
 
-class applicationStub {
-
+class applicationStub
+{
     public function runningInConsole()
     {
         return false;

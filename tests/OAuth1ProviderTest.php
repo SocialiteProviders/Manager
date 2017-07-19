@@ -3,7 +3,6 @@
 namespace SocialiteProviders\Manager\Test;
 
 use Mockery as m;
-use SocialiteProviders\Manager\Config;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
 class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
