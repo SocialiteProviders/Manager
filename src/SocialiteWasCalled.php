@@ -2,11 +2,11 @@
 
 namespace SocialiteProviders\Manager;
 
-use Illuminate\Container\Container as Application;
 use Laravel\Socialite\SocialiteManager;
-use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
-use SocialiteProviders\Manager\Exception\InvalidArgumentException;
+use Illuminate\Container\Container as Application;
 use SocialiteProviders\Manager\Exception\MissingConfigException;
+use SocialiteProviders\Manager\Exception\InvalidArgumentException;
+use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 
 class SocialiteWasCalled
 {
@@ -154,7 +154,7 @@ class SocialiteWasCalled
             // We will use the $spoofedConfig variable for now as a way to find out if there was no
             // configuration in the .env file which means we should not return anything and jump
             // to the service config check to check if something can be found there.
-            if (!static::$spoofedConfig) {
+            if (! static::$spoofedConfig) {
                 return $config;
             }
         } catch (MissingConfigException $e) {
@@ -185,7 +185,7 @@ class SocialiteWasCalled
      */
     private function isOAuth1($oauth1Server)
     {
-        return !empty($oauth1Server);
+        return ! empty($oauth1Server);
     }
 
     /**
@@ -204,7 +204,7 @@ class SocialiteWasCalled
 
     private function classExists($providerClass)
     {
-        if (!class_exists($providerClass)) {
+        if (! class_exists($providerClass)) {
             throw new InvalidArgumentException("$providerClass doesn't exist");
         }
     }

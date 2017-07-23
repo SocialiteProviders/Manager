@@ -2,11 +2,11 @@
 
 namespace SocialiteProviders\Manager\OAuth1;
 
-use Laravel\Socialite\One\AbstractProvider as BaseProvider;
-use SocialiteProviders\Manager\SocialiteWasCalled;
 use SocialiteProviders\Manager\ConfigTrait;
-use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
+use SocialiteProviders\Manager\SocialiteWasCalled;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Laravel\Socialite\One\AbstractProvider as BaseProvider;
+use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
 
 abstract class AbstractProvider extends BaseProvider
 {
@@ -34,7 +34,7 @@ abstract class AbstractProvider extends BaseProvider
      */
     public function user()
     {
-        if (!$this->hasNecessaryVerifier()) {
+        if (! $this->hasNecessaryVerifier()) {
             throw new \InvalidArgumentException('Invalid request. Missing OAuth verifier.');
         }
 
@@ -48,7 +48,7 @@ abstract class AbstractProvider extends BaseProvider
         if ($user instanceof User) {
             parse_str($token['credentialsResponseBody'], $credentialsResponseBody);
 
-            if (!$credentialsResponseBody || !is_array($credentialsResponseBody)) {
+            if (! $credentialsResponseBody || ! is_array($credentialsResponseBody)) {
                 throw new CredentialsException('Unable to parse token credentials response.');
             }
 
@@ -82,7 +82,7 @@ abstract class AbstractProvider extends BaseProvider
      */
     public function redirect()
     {
-        if (!$this->isStateless()) {
+        if (! $this->isStateless()) {
             $this->request->getSession()->put(
                 'oauth.temp', $temp = $this->server->getTemporaryCredentials()
             );
@@ -101,7 +101,7 @@ abstract class AbstractProvider extends BaseProvider
      */
     protected function getToken()
     {
-        if (!$this->isStateless()) {
+        if (! $this->isStateless()) {
             $temp = $this->request->getSession()->get('oauth.temp');
 
             return $this->server->getTokenCredentials(
