@@ -3,8 +3,8 @@
 namespace SocialiteProviders\Manager\Test\Stubs;
 
 use SocialiteProviders\Manager\OAuth1\User;
-use League\OAuth1\Client\Credentials\TokenCredentials;
 use SocialiteProviders\Manager\OAuth1\Server;
+use League\OAuth1\Client\Credentials\TokenCredentials;
 
 class OAuth1ServerStub extends Server
 {
