@@ -1,1 +1,3 @@
-preset: symfony
+preset: laravel
+
+linting: true
