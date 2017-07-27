@@ -7,6 +7,7 @@ use SocialiteProviders\Manager\SocialiteWasCalled;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Laravel\Socialite\One\AbstractProvider as BaseProvider;
 use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
+use League\OAuth1\Client\Credentials\TokenCredentials;
 
 abstract class AbstractProvider extends BaseProvider
 {
