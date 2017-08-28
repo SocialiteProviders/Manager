@@ -20,5 +20,12 @@
             "SocialiteProviders\\Manager\\Test\\": "tests/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SocialiteProviders\\Manager\\ServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "stable"
 }
