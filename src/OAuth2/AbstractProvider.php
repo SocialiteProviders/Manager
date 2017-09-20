@@ -32,7 +32,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
             throw new InvalidStateException();
         }
 
-        $response = $this->getAccessTokenResponse($this->getCode());
+        $response = $this->getAccessToken($this->getCode());
 
         $user = $this->mapUserToObject($this->getUserByToken(
             $token = $this->parseAccessToken($response)
