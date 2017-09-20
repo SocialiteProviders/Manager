@@ -1,18 +1,17 @@
 language: php
+dist: trusty
+sudo: false
 
 php:
   - 5.6
-  - 7.0
-  - hhvm
+  - 7.1
+  - 7.2
 
-sudo: false
-
-before_script:
-  - travis_retry composer self-update
-  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+install:
+  - travis_retry composer install --no-interaction
 
 script:
-  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+  - vendor/bin/phpunit --coverage-clover clover.xml
 
 after_script:
-  - if [[ $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != '7.0' ]]; then php vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover; fi
+  - bash <(curl -s https://codecov.io/bash)
