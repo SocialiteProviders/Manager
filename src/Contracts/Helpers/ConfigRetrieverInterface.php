@@ -2,9 +2,6 @@
 
 namespace SocialiteProviders\Manager\Contracts\Helpers;
 
-use SocialiteProviders\Manager\Contracts\ConfigInterface;
-use SocialiteProviders\Manager\Exception\MissingConfigException;
-
 interface ConfigRetrieverInterface
 {
     /**
