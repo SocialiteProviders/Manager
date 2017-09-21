@@ -8,6 +8,9 @@ use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 
 class ServiceProvider extends SocialiteServiceProvider
 {
+    /**
+     * Bootstrap the provider services.
+     */
     public function boot()
     {
         $socialiteWasCalled = app(SocialiteWasCalled::class);
@@ -15,6 +18,9 @@ class ServiceProvider extends SocialiteServiceProvider
         event($socialiteWasCalled);
     }
 
+    /**
+     * Register the provider services.
+     */
     public function register()
     {
         parent::register();

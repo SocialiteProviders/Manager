@@ -7,7 +7,7 @@ use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
 interface ProviderInterface
 {
     /**
-     * @param Config $config
+     * @param \SocialiteProviders\Manager\Contracts\ConfigInterface $config
      *
      * @return $this
      */

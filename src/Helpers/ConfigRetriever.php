@@ -34,9 +34,9 @@ class ConfigRetriever implements ConfigRetrieverInterface
      * @param string $providerIdentifier
      * @param array  $additionalConfigKeys
      *
-     * @throws MissingConfigException
+     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      *
-     * @return ConfigInterface
+     * @return \SocialiteProviders\Manager\Contracts\ConfigInterface
      */
     public function fromEnv($providerIdentifier, array $additionalConfigKeys = [])
     {
@@ -56,9 +56,9 @@ class ConfigRetriever implements ConfigRetrieverInterface
      * @param string $providerName
      * @param array  $additionalConfigKeys
      *
-     * @throws MissingConfigException
+     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      *
-     * @return ConfigInterface
+     * @return \SocialiteProviders\Manager\Contracts\ConfigInterface
      */
     public function fromServices($providerName, array $additionalConfigKeys = [])
     {
@@ -111,7 +111,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
     /**
      * @param string $key
      *
-     * @throws MissingConfigException
+     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      *
      * @return string
      */
@@ -135,7 +135,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
     /**
      * @param string $key
      *
-     * @throws MissingConfigException
+     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      *
      * @return string
      */
@@ -166,7 +166,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
     /**
      * @param string $providerName
      *
-     * @throws MissingConfigException
+     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      *
      * @return array
      */

@@ -18,6 +18,11 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      */
     protected $credentialsResponseBody;
 
+    /**
+     * @param  string $providerName
+     *
+     * @return string
+     */
     public static function serviceContainerKey($providerName)
     {
         return SocialiteWasCalled::SERVICE_CONTAINER_PREFIX.$providerName;

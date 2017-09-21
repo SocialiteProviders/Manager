@@ -8,7 +8,7 @@ use Laravel\Socialite\Two\ProviderInterface as SocialiteOauth2ProviderInterface;
 interface ProviderInterface extends SocialiteOauth2ProviderInterface
 {
     /**
-     * @param Config $config
+     * @param \SocialiteProviders\Manager\Contracts\ConfigInterface $config
      *
      * @return $this
      */

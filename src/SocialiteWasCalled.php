@@ -13,12 +13,12 @@ class SocialiteWasCalled
     const SERVICE_CONTAINER_PREFIX = 'SocialiteProviders.config.';
 
     /**
-     * @var LaravelApp
+     * @var \Illuminate\Container\Container
      */
     protected $app;
 
     /**
-     * @var ConfigRetrieverInterface
+     * @var \SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface
      */
     private $configRetriever;
 
@@ -32,8 +32,8 @@ class SocialiteWasCalled
     ];
 
     /**
-     * @param LaravelApp               $app
-     * @param ConfigRetrieverInterface $configRetriever
+     * @param \Illuminate\Container\Container $app
+     * @param \SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface $configRetriever
      */
     public function __construct(Application $app, ConfigRetrieverInterface $configRetriever)
     {
@@ -48,7 +48,7 @@ class SocialiteWasCalled
      *                              Laravel\Socialite\One\AbstractProvider
      * @param string $oauth1Server  'Your\Name\Space\ClassNameServer' must extend League\OAuth1\Client\Server\Server
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function extendSocialite($providerName, $providerClass, $oauth1Server = null)
     {
@@ -75,7 +75,7 @@ class SocialiteWasCalled
     }
 
     /**
-     * @param SocialiteManager $socialite
+     * @param \Laravel\Socialite\SocialiteManager $socialite
      * @param                  $providerName
      * @param string           $providerClass
      * @param null|string      $oauth1Server
@@ -143,7 +143,7 @@ class SocialiteWasCalled
      * @param string $providerClass
      * @param string $providerName
      *
-     * @throws MissingConfigException
+     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      *
      * @return array
      */
@@ -198,7 +198,7 @@ class SocialiteWasCalled
      * @param string $class
      * @param string $baseClass
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     private function classExtends($class, $baseClass)
     {
@@ -208,6 +208,10 @@ class SocialiteWasCalled
         }
     }
 
+    /**
+     * @param  string $providerClass
+     * @throws \InvalidArgumentException
+     */
     private function classExists($providerClass)
     {
         if (! class_exists($providerClass)) {

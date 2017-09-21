@@ -4,6 +4,9 @@ namespace SocialiteProviders\Manager;
 
 class Config implements Contracts\ConfigInterface
 {
+    /**
+     * @var array
+     */
     protected $config;
 
     /**
