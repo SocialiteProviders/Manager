@@ -21,7 +21,6 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @test
      * @expectedException \SocialiteProviders\Manager\Exception\MissingConfigException
      */
     public function it_throws_if_there_is_no_config_in_services_or_env()
