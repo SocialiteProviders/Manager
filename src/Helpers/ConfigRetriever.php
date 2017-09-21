@@ -4,7 +4,6 @@ namespace SocialiteProviders\Manager\Helpers;
 
 use SocialiteProviders\Manager\Config;
 use SocialiteProviders\Manager\SocialiteWasCalled;
-use SocialiteProviders\Manager\Contracts\ConfigInterface;
 use SocialiteProviders\Manager\Exception\MissingConfigException;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 
