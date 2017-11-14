@@ -14,14 +14,13 @@ trait ConfigTrait
     /**
      * @param \SocialiteProviders\Manager\Contracts\OAuth1\ProviderInterface|\SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface $config
      */
-    public function setConfig(ConfigInterface $config)
+    public function setConfig($socialite, ConfigInterface $config)
     {
         $config = $config->get();
 
-        $this->config = $config;
+        $this->config = $socialite->formatConfig($config);
         $this->clientId = $config['client_id'];
         $this->clientSecret = $config['client_secret'];
-        $this->redirectUrl = $config['redirect'];
 
         return $this;
     }

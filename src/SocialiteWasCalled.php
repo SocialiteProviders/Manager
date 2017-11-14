@@ -112,7 +112,7 @@ class SocialiteWasCalled
             $this->app->offsetGet('request'), new $oauth1Server($configServer)
         );
 
-        $provider->setConfig($config);
+        $provider->setConfig($socialite, $config);
 
         return $provider;
     }
@@ -134,7 +134,7 @@ class SocialiteWasCalled
 
         $provider = $socialite->buildProvider($providerClass, $config->get());
 
-        $provider->setConfig($config);
+        $provider->setConfig($socialite, $config);
 
         return $provider;
     }
