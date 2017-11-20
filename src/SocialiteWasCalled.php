@@ -25,7 +25,7 @@ class SocialiteWasCalled
     /**
      * @var bool
      */
-    public static $spoofedConfig = [
+    private $spoofedConfig = [
         'client_id' => 'spoofed_client_id',
         'client_secret' => 'spoofed_client_secret',
         'redirect' => 'spoofed_redirect',
