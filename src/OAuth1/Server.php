@@ -2,11 +2,11 @@
 
 namespace SocialiteProviders\Manager\OAuth1;
 
-use SocialiteProviders\Manager\ConfigTrait;
 use GuzzleHttp\Exception\BadResponseException;
-use League\OAuth1\Client\Server\Server as BaseServer;
-use League\OAuth1\Client\Credentials\TokenCredentials;
 use League\OAuth1\Client\Credentials\TemporaryCredentials;
+use League\OAuth1\Client\Credentials\TokenCredentials;
+use League\OAuth1\Client\Server\Server as BaseServer;
+use SocialiteProviders\Manager\ConfigTrait;
 
 abstract class Server extends BaseServer
 {
@@ -39,8 +39,8 @@ abstract class Server extends BaseServer
      * and finally the verifier code.
      *
      * @param \League\OAuth1\Client\Credentials\TemporaryCredentials $temporaryCredentials
-     * @param string               $temporaryIdentifier
-     * @param string               $verifier
+     * @param string                                                 $temporaryIdentifier
+     * @param string                                                 $verifier
      *
      * @return \League\OAuth1\Client\Credentials\TokenCredentials
      */
@@ -53,7 +53,7 @@ abstract class Server extends BaseServer
             );
         }
 
-        $uri = $this->urlTokenCredentials();
+        $uri            = $this->urlTokenCredentials();
         $bodyParameters = ['oauth_verifier' => $verifier];
 
         $client = $this->createHttpClient();
@@ -61,9 +61,9 @@ abstract class Server extends BaseServer
         $headers = $this->getHeaders($temporaryCredentials, 'POST', $uri, $bodyParameters);
 
         try {
-            if (get_class($client) == 'GuzzleHttp\\Client') {
+            if ('GuzzleHttp\\Client' === get_class($client)) {
                 $response = $client->post($uri, [
-                    'headers' => $headers,
+                    'headers'     => $headers,
                     'form_params' => $bodyParameters,
                 ]);
             } else {
@@ -74,7 +74,7 @@ abstract class Server extends BaseServer
         }
 
         return [
-            'tokenCredentials' => $this->createTokenCredentials($response->getBody()),
+            'tokenCredentials'        => $this->createTokenCredentials($response->getBody()),
             'credentialsResponseBody' => $response->getBody(),
         ];
     }

@@ -38,14 +38,6 @@ trait ManagerTestTrait
         return new Config('test', 'test', 'test');
     }
 
-    protected function configRetrieverMockWithDefaultExpectations($providerClass)
-    {
-        $configRetriever = $this->configRetrieverMock();
-        $configRetriever->shouldReceive('fromEnv')->with($providerClass::IDENTIFIER, $providerClass::additionalConfigKeys())->andReturn($this->configObject());
-
-        return $configRetriever;
-    }
-
     /**
      * @return array
      */

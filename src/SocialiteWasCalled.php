@@ -2,11 +2,11 @@
 
 namespace SocialiteProviders\Manager;
 
-use Laravel\Socialite\SocialiteManager;
 use Illuminate\Container\Container as Application;
-use SocialiteProviders\Manager\Exception\MissingConfigException;
-use SocialiteProviders\Manager\Exception\InvalidArgumentException;
+use Laravel\Socialite\SocialiteManager;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
+use SocialiteProviders\Manager\Exception\InvalidArgumentException;
+use SocialiteProviders\Manager\Exception\MissingConfigException;
 
 class SocialiteWasCalled
 {
@@ -26,19 +26,17 @@ class SocialiteWasCalled
      * @var bool
      */
     private $spoofedConfig = [
-        'client_id' => 'spoofed_client_id',
+        'client_id'     => 'spoofed_client_id',
         'client_secret' => 'spoofed_client_secret',
-        'redirect' => 'spoofed_redirect',
+        'redirect'      => 'spoofed_redirect',
     ];
 
     /**
      * @param \Illuminate\Container\Container $app
-     * @param \SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface $configRetriever
      */
-    public function __construct(Application $app, ConfigRetrieverInterface $configRetriever)
+    public function __construct(Application $app)
     {
         $this->app = $app;
-        $this->configRetriever = $configRetriever;
     }
 
     /**
@@ -76,9 +74,9 @@ class SocialiteWasCalled
 
     /**
      * @param \Laravel\Socialite\SocialiteManager $socialite
-     * @param                  $providerName
-     * @param string           $providerClass
-     * @param null|string      $oauth1Server
+     * @param                                     $providerName
+     * @param string                              $providerClass
+     * @param null|string                         $oauth1Server
      *
      * @return \Laravel\Socialite\One\AbstractProvider|\Laravel\Socialite\Two\AbstractProvider
      */
@@ -97,6 +95,7 @@ class SocialiteWasCalled
      * @param string $providerClass must extend Laravel\Socialite\One\AbstractProvider
      * @param string $oauth1Server  must extend League\OAuth1\Client\Server\Server
      * @param array  $config
+     * @param mixed  $providerName
      *
      * @return \Laravel\Socialite\One\AbstractProvider
      */
@@ -123,6 +122,7 @@ class SocialiteWasCalled
      * @param SocialiteManager $socialite
      * @param string           $providerClass must extend Laravel\Socialite\Two\AbstractProvider
      * @param array            $config
+     * @param mixed            $providerName
      *
      * @return \Laravel\Socialite\Two\AbstractProvider
      */
@@ -149,37 +149,19 @@ class SocialiteWasCalled
      */
     protected function getConfig($providerClass, $providerName)
     {
-        $additionalConfigKeys = $providerClass::additionalConfigKeys();
-        $exceptionMessages = [];
-
-        // Environment Configuration
-        $config = null;
         try {
-            $config = $this->configRetriever->fromEnv($providerClass::IDENTIFIER, $additionalConfigKeys);
-
-            return $config;
+            return resolve(ConfigRetrieverInterface::class)->fromServices(
+                $providerName, $providerClass::additionalConfigKeys()
+            );
         } catch (MissingConfigException $e) {
-            $exceptionMessages[] = $e->getMessage();
+            throw new MissingConfigException($e->getMessage());
         }
 
-        // Services Configuration
-        $config = null;
-        try {
-            $config = $this->configRetriever->fromServices($providerName, $additionalConfigKeys);
-
-            return $config;
-        } catch (MissingConfigException $e) {
-            $exceptionMessages[] = $e->getMessage();
-        }
-
-        // Spoofed Configuration
         return new Config(
             $this->spoofedConfig['client_id'],
             $this->spoofedConfig['client_secret'],
             $this->spoofedConfig['redirect']
         );
-
-        // throw new MissingConfigException(implode(PHP_EOL, $exceptionMessages));
     }
 
     /**
@@ -191,7 +173,7 @@ class SocialiteWasCalled
      */
     private function isOAuth1($oauth1Server)
     {
-        return ! empty($oauth1Server);
+        return !empty($oauth1Server);
     }
 
     /**
@@ -203,19 +185,19 @@ class SocialiteWasCalled
     private function classExtends($class, $baseClass)
     {
         if (false === is_subclass_of($class, $baseClass)) {
-            $message = $class.' does not extend '.$baseClass;
-            throw new InvalidArgumentException($message);
+            throw new InvalidArgumentException("{$class} does not extend {$baseClass}");
         }
     }
 
     /**
-     * @param  string $providerClass
+     * @param string $providerClass
+     *
      * @throws \InvalidArgumentException
      */
     private function classExists($providerClass)
     {
-        if (! class_exists($providerClass)) {
-            throw new InvalidArgumentException("$providerClass doesn't exist");
+        if (!class_exists($providerClass)) {
+            throw new InvalidArgumentException("{$providerClass} doesn't exist");
         }
     }
 }

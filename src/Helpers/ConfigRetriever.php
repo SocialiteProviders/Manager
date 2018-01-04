@@ -3,8 +3,8 @@
 namespace SocialiteProviders\Manager\Helpers;
 
 use SocialiteProviders\Manager\Config;
-use SocialiteProviders\Manager\Exception\MissingConfigException;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
+use SocialiteProviders\Manager\Exception\MissingConfigException;
 
 class ConfigRetriever implements ConfigRetrieverInterface
 {
@@ -29,28 +29,6 @@ class ConfigRetriever implements ConfigRetrieverInterface
     protected $additionalConfigKeys;
 
     /**
-     * @param string $providerIdentifier
-     * @param array  $additionalConfigKeys
-     *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
-     *
-     * @return \SocialiteProviders\Manager\Contracts\ConfigInterface
-     */
-    public function fromEnv($providerIdentifier, array $additionalConfigKeys = [])
-    {
-        $this->providerIdentifier = $providerIdentifier;
-        $this->additionalConfigKeys = $additionalConfigKeys;
-
-        return new Config(
-            $this->getFromEnv('KEY'),
-            $this->getFromEnv('SECRET'),
-            $this->getFromEnv('REDIRECT_URI'),
-            $this->getConfigItems($additionalConfigKeys, function ($key) {
-                return $this->getFromEnv(strtoupper($key));
-            }));
-    }
-
-    /**
      * @param string $providerName
      * @param array  $additionalConfigKeys
      *
@@ -71,7 +49,8 @@ class ConfigRetriever implements ConfigRetrieverInterface
             $this->getFromServices('redirect'),
             $this->getConfigItems($additionalConfigKeys, function ($key) {
                 return $this->getFromServices(strtolower($key));
-            }));
+            })
+        );
     }
 
     /**
@@ -118,45 +97,16 @@ class ConfigRetriever implements ConfigRetrieverInterface
         $keyExists = array_key_exists($key, $this->servicesArray);
 
         // ADDITIONAL value is empty
-        if (! $keyExists && $this->isAdditionalConfig($key)) {
+        if (!$keyExists && $this->isAdditionalConfig($key)) {
             return;
         }
 
         // REQUIRED value is empty
-        if (! $keyExists) {
+        if (!$keyExists) {
             throw new MissingConfigException("Missing services entry for {$this->providerName}.$key");
         }
 
         return $this->servicesArray[$key];
-    }
-
-    /**
-     * @param string $key
-     *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
-     *
-     * @return string
-     */
-    protected function getFromEnv($key)
-    {
-        $providerKey = "{$this->providerIdentifier}_{$key}";
-        $item = env($providerKey);
-
-        // ADDITIONAL value is empty
-        if (empty($item) && $this->isAdditionalConfig($key)) {
-            return;
-        }
-
-        // REQUIRED value is empty
-        if (empty($item)) {
-            // If we are running in console we should spoof values to make Socialite happy...
-            if (! app()->runningInConsole()) {
-                throw new MissingConfigException("Configuration for $providerKey is missing.");
-            }
-            $item = $providerKey;
-        }
-
-        return $item;
     }
 
     /**
@@ -175,18 +125,16 @@ class ConfigRetriever implements ConfigRetrieverInterface
             // If we are running in console we should spoof values to make Socialite happy...
             if (app()->runningInConsole()) {
                 $configArray = [
-                    'client_id' => "{$this->providerIdentifier}_KEY",
+                    'client_id'     => "{$this->providerIdentifier}_KEY",
                     'client_secret' => "{$this->providerIdentifier}_SECRET",
-                    'redirect' => "{$this->providerIdentifier}_REDIRECT_URI",
+                    'redirect'      => "{$this->providerIdentifier}_REDIRECT_URI",
                 ];
             } else {
                 throw new MissingConfigException("There is no services entry for $providerName");
             }
         }
 
-        $this->servicesArray = $configArray;
-
-        return $this->servicesArray;
+        return $this->servicesArray = $configArray;
     }
 
     /**
@@ -196,6 +144,6 @@ class ConfigRetriever implements ConfigRetrieverInterface
      */
     protected function isAdditionalConfig($key)
     {
-        return in_array(strtolower($key), $this->additionalConfigKeys);
+        return in_array(strtolower($key), $this->additionalConfigKeys, true);
     }
 }

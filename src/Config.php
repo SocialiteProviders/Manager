@@ -20,9 +20,9 @@ class Config implements Contracts\ConfigInterface
     public function __construct($key, $secret, $callbackUri, array $additionalProviderConfig = [])
     {
         $this->config = array_merge([
-            'client_id' => $key,
+            'client_id'     => $key,
             'client_secret' => $secret,
-            'redirect' => $callbackUri,
+            'redirect'      => $callbackUri,
         ], $additionalProviderConfig);
     }
 

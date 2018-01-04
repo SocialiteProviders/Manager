@@ -3,11 +3,11 @@
 namespace SocialiteProviders\Manager\OAuth2;
 
 use Illuminate\Support\Arr;
-use SocialiteProviders\Manager\ConfigTrait;
-use Laravel\Socialite\Two\InvalidStateException;
-use SocialiteProviders\Manager\SocialiteWasCalled;
 use Laravel\Socialite\Two\AbstractProvider as BaseProvider;
+use Laravel\Socialite\Two\InvalidStateException;
+use SocialiteProviders\Manager\ConfigTrait;
 use SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface;
+use SocialiteProviders\Manager\SocialiteWasCalled;
 
 abstract class AbstractProvider extends BaseProvider implements ProviderInterface
 {
@@ -19,7 +19,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     protected $credentialsResponseBody;
 
     /**
-     * @param  string $providerName
+     * @param string $providerName
      *
      * @return string
      */

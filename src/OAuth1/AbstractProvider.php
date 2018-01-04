@@ -2,12 +2,12 @@
 
 namespace SocialiteProviders\Manager\OAuth1;
 
-use SocialiteProviders\Manager\ConfigTrait;
-use SocialiteProviders\Manager\SocialiteWasCalled;
-use League\OAuth1\Client\Credentials\TokenCredentials;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Laravel\Socialite\One\AbstractProvider as BaseProvider;
+use League\OAuth1\Client\Credentials\TokenCredentials;
+use SocialiteProviders\Manager\ConfigTrait;
 use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
+use SocialiteProviders\Manager\SocialiteWasCalled;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 abstract class AbstractProvider extends BaseProvider
 {
@@ -26,7 +26,7 @@ abstract class AbstractProvider extends BaseProvider
     protected $credentialsResponseBody;
 
     /**
-     * @param  string $providerName
+     * @param string $providerName
      *
      * @return string
      */
@@ -40,11 +40,11 @@ abstract class AbstractProvider extends BaseProvider
      */
     public function user()
     {
-        if (! $this->hasNecessaryVerifier()) {
+        if (!$this->hasNecessaryVerifier()) {
             throw new \InvalidArgumentException('Invalid request. Missing OAuth verifier.');
         }
 
-        $token = $this->getToken();
+        $token            = $this->getToken();
         $tokenCredentials = $token['tokenCredentials'];
 
         $user = $this->mapUserToObject((array) $this->server->getUserDetails($tokenCredentials));
@@ -54,7 +54,7 @@ abstract class AbstractProvider extends BaseProvider
         if ($user instanceof User) {
             parse_str($token['credentialsResponseBody'], $credentialsResponseBody);
 
-            if (! $credentialsResponseBody || ! is_array($credentialsResponseBody)) {
+            if (!$credentialsResponseBody || !is_array($credentialsResponseBody)) {
                 throw new CredentialsException('Unable to parse token credentials response.');
             }
 
@@ -88,7 +88,7 @@ abstract class AbstractProvider extends BaseProvider
      */
     public function redirect()
     {
-        if (! $this->isStateless()) {
+        if (!$this->isStateless()) {
             $this->request->getSession()->put(
                 'oauth.temp', $temp = $this->server->getTemporaryCredentials()
             );
@@ -101,28 +101,9 @@ abstract class AbstractProvider extends BaseProvider
     }
 
     /**
-     * Get the token credentials for the request.
-     *
-     * @return \League\OAuth1\Client\Credentials\TokenCredentials
-     */
-    protected function getToken()
-    {
-        if (! $this->isStateless()) {
-            $temp = $this->request->getSession()->get('oauth.temp');
-
-            return $this->server->getTokenCredentials(
-                $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
-            );
-        }
-        $temp = unserialize($this->request->session()->get('oauth_temp'));
-
-        return $this->server->getTokenCredentials(
-                $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
-            );
-    }
-
-    /**
      * Indicates that the provider should operate as stateless.
+     *
+     * @param mixed $stateless
      *
      * @return $this
      */
@@ -131,20 +112,6 @@ abstract class AbstractProvider extends BaseProvider
         $this->stateless = $stateless;
 
         return $this;
-    }
-
-    /**
-     * Determine if the provider is operating as stateless.
-     *
-     * @return bool
-     */
-    protected function isStateless()
-    {
-        if (defined('SOCIALITEPROVIDERS_STATELESS')) {
-            return true;
-        }
-
-        return $this->stateless;
     }
 
     /**
@@ -185,5 +152,40 @@ abstract class AbstractProvider extends BaseProvider
         $this->config = $this->server->setConfig($config);
 
         return $this;
+    }
+
+    /**
+     * Get the token credentials for the request.
+     *
+     * @return \League\OAuth1\Client\Credentials\TokenCredentials
+     */
+    protected function getToken()
+    {
+        if (!$this->isStateless()) {
+            $temp = $this->request->getSession()->get('oauth.temp');
+
+            return $this->server->getTokenCredentials(
+                $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
+            );
+        }
+        $temp = unserialize($this->request->session()->get('oauth_temp'));
+
+        return $this->server->getTokenCredentials(
+                $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
+            );
+    }
+
+    /**
+     * Determine if the provider is operating as stateless.
+     *
+     * @return bool
+     */
+    protected function isStateless()
+    {
+        if (defined('SOCIALITEPROVIDERS_STATELESS')) {
+            return true;
+        }
+
+        return $this->stateless;
     }
 }

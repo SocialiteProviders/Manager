@@ -49,7 +49,6 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
         $providerClass = $this->oauth2ProviderStubName();
 
         $configRetriever = $this->configRetrieverMock();
-        $configRetriever->shouldReceive('fromEnv')->andThrow(MissingConfigException::class);
         $configRetriever->shouldReceive('fromServices')->andThrow(MissingConfigException::class);
 
         $s = new SocialiteWasCalled($app, $configRetriever);
@@ -85,8 +84,7 @@ class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
         $providerClass = $this->oauth2ProviderStubName();
 
         $configRetriever = $this->configRetrieverMock();
-        $configRetriever->shouldReceive('fromEnv')->andThrow(MissingConfigException::class);
-        $configRetriever->shouldReceive('fromServices')->with($providerName, $providerClass::additionalConfigKeys())->andReturn($this->configObject());
+        $configRetriever->shouldReceive('fromServices')->andThrow(MissingConfigException::class);
 
         $s = new SocialiteWasCalled($app, $configRetriever);
         $s->extendSocialite($providerName, $this->oauth2ProviderStubName());
