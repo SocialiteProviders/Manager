@@ -19,7 +19,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     protected $credentialsResponseBody;
 
     /**
-     * @param  string $providerName
+     * @param string $providerName
      *
      * @return string
      */

@@ -27,8 +27,16 @@ trait ConfigTrait
     }
 
     /**
-     * @param  string $key
-     * @param  mixed $default
+     * @return array
+     */
+    public static function additionalConfigKeys()
+    {
+        return [];
+    }
+
+    /**
+     * @param string $key
+     * @param mixed  $default
      *
      * @return mixed|array
      */
@@ -41,13 +49,5 @@ trait ConfigTrait
         }
 
         return $key ? array_get($this->config, $key, $default) : $this->config;
-    }
-
-    /**
-     * @return array
-     */
-    public static function additionalConfigKeys()
-    {
-        return [];
     }
 }

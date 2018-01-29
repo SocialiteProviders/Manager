@@ -39,8 +39,8 @@ abstract class Server extends BaseServer
      * and finally the verifier code.
      *
      * @param \League\OAuth1\Client\Credentials\TemporaryCredentials $temporaryCredentials
-     * @param string               $temporaryIdentifier
-     * @param string               $verifier
+     * @param string                                                 $temporaryIdentifier
+     * @param string                                                 $verifier
      *
      * @return \League\OAuth1\Client\Credentials\TokenCredentials
      */
@@ -61,9 +61,9 @@ abstract class Server extends BaseServer
         $headers = $this->getHeaders($temporaryCredentials, 'POST', $uri, $bodyParameters);
 
         try {
-            if (get_class($client) == 'GuzzleHttp\\Client') {
+            if ('GuzzleHttp\\Client' === get_class($client)) {
                 $response = $client->post($uri, [
-                    'headers' => $headers,
+                    'headers'     => $headers,
                     'form_params' => $bodyParameters,
                 ]);
             } else {
@@ -74,7 +74,7 @@ abstract class Server extends BaseServer
         }
 
         return [
-            'tokenCredentials' => $this->createTokenCredentials($response->getBody()),
+            'tokenCredentials'        => $this->createTokenCredentials($response->getBody()),
             'credentialsResponseBody' => $response->getBody(),
         ];
     }
