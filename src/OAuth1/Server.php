@@ -2,11 +2,11 @@
 
 namespace SocialiteProviders\Manager\OAuth1;
 
-use SocialiteProviders\Manager\ConfigTrait;
 use GuzzleHttp\Exception\BadResponseException;
-use League\OAuth1\Client\Server\Server as BaseServer;
-use League\OAuth1\Client\Credentials\TokenCredentials;
 use League\OAuth1\Client\Credentials\TemporaryCredentials;
+use League\OAuth1\Client\Credentials\TokenCredentials;
+use League\OAuth1\Client\Server\Server as BaseServer;
+use SocialiteProviders\Manager\ConfigTrait;
 
 abstract class Server extends BaseServer
 {

@@ -46,10 +46,10 @@ class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
         $additionalConfigItem = 'test';
 
         $config = [
-            'client_id' => $key,
+            'client_id'     => $key,
             'client_secret' => $secret,
-            'redirect' => $uri,
-            'additional' => $additionalConfigItem,
+            'redirect'      => $uri,
+            'additional'    => $additionalConfigItem,
         ];
 
         self::$functions->shouldReceive('config')->with("services.$providerName")->once()->andReturn($config);

@@ -44,7 +44,7 @@ trait ConfigTrait
     {
         // check manually if a key is given and if it exists in the config
         // this has to be done to check for spoofed additional config keys so that null isn't returned
-        if (! empty($key) && empty($this->config[$key])) {
+        if (!empty($key) && empty($this->config[$key])) {
             return $default;
         }
 
