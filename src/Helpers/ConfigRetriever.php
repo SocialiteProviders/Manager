@@ -3,8 +3,8 @@
 namespace SocialiteProviders\Manager\Helpers;
 
 use SocialiteProviders\Manager\Config;
-use SocialiteProviders\Manager\Exception\MissingConfigException;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
+use SocialiteProviders\Manager\Exception\MissingConfigException;
 
 class ConfigRetriever implements ConfigRetrieverInterface
 {
@@ -97,12 +97,12 @@ class ConfigRetriever implements ConfigRetrieverInterface
         $keyExists = array_key_exists($key, $this->servicesArray);
 
         // ADDITIONAL value is empty
-        if (! $keyExists && $this->isAdditionalConfig($key)) {
+        if (!$keyExists && $this->isAdditionalConfig($key)) {
             return;
         }
 
         // REQUIRED value is empty
-        if (! $keyExists) {
+        if (!$keyExists) {
             throw new MissingConfigException("Missing services entry for {$this->providerName}.$key");
         }
 

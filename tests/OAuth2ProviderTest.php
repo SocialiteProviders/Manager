@@ -4,9 +4,9 @@ namespace SocialiteProviders\Manager\Test;
 
 use Mockery as m;
 use SocialiteProviders\Manager\Config;
+use SocialiteProviders\Manager\Exception\MissingConfigException;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 use SocialiteProviders\Manager\Test\Stubs\OAuth2ProviderStub;
-use SocialiteProviders\Manager\Exception\MissingConfigException;
 
 class OAuth2ProviderTest extends \PHPUnit_Framework_TestCase
 {

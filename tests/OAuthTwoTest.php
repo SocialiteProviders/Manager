@@ -2,11 +2,11 @@
 
 namespace SocialiteProviders\Manager\Test;
 
-use Mockery as m;
 use Illuminate\Http\Request;
+use Mockery as m;
 use PHPUnit_Framework_TestCase;
-use SocialiteProviders\Manager\OAuth2\User;
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
+use SocialiteProviders\Manager\OAuth2\User;
 
 class OAuthTwoTest extends PHPUnit_Framework_TestCase
 {

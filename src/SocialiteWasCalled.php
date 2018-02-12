@@ -2,11 +2,11 @@
 
 namespace SocialiteProviders\Manager;
 
-use Laravel\Socialite\SocialiteManager;
 use Illuminate\Container\Container as Application;
-use SocialiteProviders\Manager\Exception\MissingConfigException;
-use SocialiteProviders\Manager\Exception\InvalidArgumentException;
+use Laravel\Socialite\SocialiteManager;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
+use SocialiteProviders\Manager\Exception\InvalidArgumentException;
+use SocialiteProviders\Manager\Exception\MissingConfigException;
 
 class SocialiteWasCalled
 {
@@ -173,7 +173,7 @@ class SocialiteWasCalled
      */
     private function isOAuth1($oauth1Server)
     {
-        return ! empty($oauth1Server);
+        return !empty($oauth1Server);
     }
 
     /**
@@ -196,7 +196,7 @@ class SocialiteWasCalled
      */
     private function classExists($providerClass)
     {
-        if (! class_exists($providerClass)) {
+        if (!class_exists($providerClass)) {
             throw new InvalidArgumentException("{$providerClass} doesn't exist");
         }
     }
