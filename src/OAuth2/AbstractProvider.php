@@ -34,7 +34,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     public function user()
     {
         if ($this->hasInvalidState()) {
-            throw new InvalidStateException();
+            abort(500, 'socialiteTip');
         }
 
         $response = $this->getAccessTokenResponse($this->getCode());
