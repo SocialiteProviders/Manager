@@ -3,11 +3,11 @@
 namespace SocialiteProviders\Manager\OAuth1;
 
 use Laravel\Socialite\One\AbstractProvider as BaseProvider;
+use Illuminate\Http\RedirectResponse;
 use League\OAuth1\Client\Credentials\TokenCredentials;
 use SocialiteProviders\Manager\ConfigTrait;
 use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
 use SocialiteProviders\Manager\SocialiteWasCalled;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 abstract class AbstractProvider extends BaseProvider
 {
