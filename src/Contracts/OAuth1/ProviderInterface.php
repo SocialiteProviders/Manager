@@ -7,9 +7,10 @@ use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
 interface ProviderInterface
 {
     /**
+     * @param Laravel\Socialite\SocialiteManager $socialite
      * @param \SocialiteProviders\Manager\Contracts\ConfigInterface $config
      *
      * @return $this
      */
-    public function setConfig(Config $config);
+    public function setConfig($socialite, Config $config);
 }
