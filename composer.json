@@ -16,7 +16,11 @@
     },
     "autoload": {
         "psr-4": {
-            "SocialiteProviders\\Manager\\": "src/",
+            "SocialiteProviders\\Manager\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "SocialiteProviders\\Manager\\Test\\": "tests/"
         }
     },
