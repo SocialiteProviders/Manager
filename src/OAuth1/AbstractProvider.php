@@ -7,9 +7,10 @@ use Laravel\Socialite\One\AbstractProvider as BaseProvider;
 use League\OAuth1\Client\Credentials\TokenCredentials;
 use SocialiteProviders\Manager\ConfigTrait;
 use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
+use SocialiteProviders\Manager\Contracts\OAuth1\ProviderInterface;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
-abstract class AbstractProvider extends BaseProvider
+abstract class AbstractProvider extends BaseProvider implements ProviderInterface
 {
     use ConfigTrait;
 
