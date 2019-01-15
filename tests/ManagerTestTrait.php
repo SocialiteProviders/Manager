@@ -2,6 +2,9 @@
 
 namespace SocialiteProviders\Manager\Test;
 
+use Illuminate\Contracts\Container\Container as ContainerContract;
+use Illuminate\Http\Request as HttpRequest;
+use Laravel\Socialite\SocialiteManager;
 use Mockery as m;
 use SocialiteProviders\Manager\Config;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
@@ -21,21 +24,51 @@ trait ManagerTestTrait
     }
 
     /**
-     * @return m\MockInterface
+     * @return \Mockery\MockInterface|\SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface
      */
     protected function configRetrieverMock()
     {
         return m::mock(ConfigRetrieverInterface::class);
     }
 
-    protected function expectManagerInvalidArgumentException()
+    /**
+     * @return \Mockery\MockInterface|\Illuminate\Contracts\Container\Container
+     */
+    protected function appMock()
     {
-        $this->setExpectedException(\SocialiteProviders\Manager\Exception\InvalidArgumentException::class);
+        return m::mock(ContainerContract::class);
+    }
+
+    /**
+     * @return \Mockery\MockInterface|\Laravel\Socialite\SocialiteManager
+     */
+    protected function socialiteMock()
+    {
+        return m::mock(SocialiteManager::class);
+    }
+
+    /**
+     * @return \Mockery\MockInterface|\Illuminate\Http\Request
+     */
+    protected function buildRequest()
+    {
+        return m::mock(HttpRequest::class);
     }
 
     protected function configObject()
     {
         return new Config('test', 'test', 'test');
+    }
+
+    protected function configRetrieverMockWithDefaultExpectations($providerName, $providerClass)
+    {
+        $configRetriever = $this->configRetrieverMock();
+        $configRetriever
+            ->shouldReceive('fromServices')
+            ->with($providerName, $providerClass::additionalConfigKeys())
+            ->andReturn($this->configObject());
+
+        return $configRetriever;
     }
 
     /**
@@ -44,9 +77,9 @@ trait ManagerTestTrait
     protected function config()
     {
         return [
-            'client_id'     => 'test',
+            'client_id' => 'test',
             'client_secret' => 'test',
-            'redirect'      => 'test',
+            'redirect' => 'test',
         ];
     }
 
@@ -58,26 +91,10 @@ trait ManagerTestTrait
     protected function oauth1FormattedConfig(array $config)
     {
         return [
-            'identifier'   => $config['client_id'],
-            'secret'       => $config['client_secret'],
+            'identifier' => $config['client_id'],
+            'secret' => $config['client_secret'],
             'callback_uri' => $config['redirect'],
         ];
-    }
-
-    /**
-     * @return \Mockery\MockInterface
-     */
-    protected function appMock()
-    {
-        return m::mock(\Illuminate\Container\Container::class);
-    }
-
-    /**
-     * @return \Mockery\MockInterface
-     */
-    protected function socialiteMock()
-    {
-        return m::mock(\Laravel\Socialite\SocialiteManager::class);
     }
 
     protected function oauth2ProviderStub()
@@ -102,17 +119,17 @@ trait ManagerTestTrait
         return $provider;
     }
 
-    protected function oauth1ProviderStubName()
+    protected function oauth1ProviderStubClass()
     {
         return $this->fullStubClassName('OAuth1ProviderStub');
     }
 
-    protected function oauth1ServerStubName()
+    protected function oauth1ServerStubClass()
     {
         return $this->fullStubClassName('OAuth1ServerStub');
     }
 
-    protected function oauth2ProviderStubName()
+    protected function oauth2ProviderStubClass()
     {
         return $this->fullStubClassName('OAuth2ProviderStub');
     }
@@ -120,7 +137,7 @@ trait ManagerTestTrait
     /**
      * @param string $stub
      *
-     * @return m\MockInterface
+     * @return \Mockery\MockInterface
      */
     protected function mockStub($stub)
     {
@@ -135,44 +152,6 @@ trait ManagerTestTrait
     protected function fullStubClassName($stub)
     {
         return __NAMESPACE__.'\Stubs\\'.$stub;
-    }
-
-    /**
-     * @param string $class
-     *
-     * @return string
-     */
-    protected function fullClassName($class)
-    {
-        return __NAMESPACE__.'\\'.$class;
-    }
-
-    /**
-     * @param string $providerName
-     *
-     * @return array
-     */
-    protected function servicesArray($providerName)
-    {
-        return [$this->providerConfigKey($providerName) => $this->config()];
-    }
-
-    /**
-     * @param string $providerName
-     *
-     * @return string
-     */
-    protected function providerConfigKey($providerName)
-    {
-        return 'services.'.$providerName;
-    }
-
-    /**
-     * @return m\MockInterface
-     */
-    protected function buildRequest()
-    {
-        return m::mock(\Illuminate\Http\Request::class);
     }
 
     /**

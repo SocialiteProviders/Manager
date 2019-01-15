@@ -12,11 +12,10 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $key = 'key';
         $secret = 'secret';
         $callbackUri = 'uri';
-
         $result = [
-            'client_id'     => $key,
+            'client_id' => $key,
             'client_secret' => $secret,
-            'redirect'      => $callbackUri,
+            'redirect' => $callbackUri,
         ];
 
         $config = new Config($key, $secret, $callbackUri);
@@ -32,14 +31,12 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $key = 'key';
         $secret = 'secret';
         $callbackUri = 'uri';
-
         $result = [
-            'client_id'     => $key,
+            'client_id' => $key,
             'client_secret' => $secret,
-            'redirect'      => $callbackUri,
-            'additional'    => true,
+            'redirect' => $callbackUri,
+            'additional' => true,
         ];
-
         $additional = ['additional' => true];
 
         $config = new Config($key, $secret, $callbackUri, $additional);

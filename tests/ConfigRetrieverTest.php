@@ -2,6 +2,8 @@
 
 namespace SocialiteProviders\Manager\Test;
 
+use Mockery as m;
+use SocialiteProviders\Manager\Exception\MissingConfigException;
 use SocialiteProviders\Manager\Helpers\ConfigRetriever;
 
 class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
@@ -10,27 +12,37 @@ class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \SocialiteProviders\Manager\Exception\MissingConfigException
      */
     public function it_throws_if_there_is_a_problem_with_the_services_config()
     {
-        $providerName = 'test';
+        $this->expectException(MissingConfigException::class);
 
-        self::$functions->shouldReceive('config')->with("services.$providerName")->once()->andReturn(null);
+        $providerName = 'test';
+        self::$functions
+            ->shouldReceive('config')
+            ->with("services.{$providerName}")
+            ->once()
+            ->andReturn(null);
         $configRetriever = new ConfigRetriever();
+
         $configRetriever->fromServices($providerName)->get();
     }
 
     /**
      * @test
-     * @expectedException \SocialiteProviders\Manager\Exception\MissingConfigException
      */
     public function it_throws_if_there_are_missing_items_in_the_services_config()
     {
-        $providerName = 'test';
+        $this->expectException(MissingConfigException::class);
 
-        self::$functions->shouldReceive('config')->with("services.$providerName")->once()->andReturn([]);
+        $providerName = 'test';
+        self::$functions
+            ->shouldReceive('config')
+            ->with("services.{$providerName}")
+            ->once()
+            ->andReturn([]);
         $configRetriever = new ConfigRetriever();
+
         $configRetriever->fromServices($providerName)->get();
     }
 
@@ -44,22 +56,25 @@ class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
         $secret = 'secret';
         $uri = 'uri';
         $additionalConfigItem = 'test';
-
         $config = [
-            'client_id'     => $key,
+            'client_id' => $key,
             'client_secret' => $secret,
-            'redirect'      => $uri,
-            'additional'    => $additionalConfigItem,
+            'redirect' => $uri,
+            'additional' => $additionalConfigItem,
         ];
-
-        self::$functions->shouldReceive('config')->with("services.$providerName")->once()->andReturn($config);
+        self::$functions
+            ->shouldReceive('config')
+            ->with("services.{$providerName}")
+            ->once()
+            ->andReturn($config);
         $configRetriever = new ConfigRetriever();
+
         $result = $configRetriever->fromServices($providerName, ['additional'])->get();
 
-        $this->assertEquals($key, $result['client_id']);
-        $this->assertEquals($secret, $result['client_secret']);
-        $this->assertEquals($uri, $result['redirect']);
-        $this->assertEquals($additionalConfigItem, $result['additional']);
+        $this->assertSame($key, $result['client_id']);
+        $this->assertSame($secret, $result['client_secret']);
+        $this->assertSame($uri, $result['redirect']);
+        $this->assertSame($additionalConfigItem, $result['additional']);
     }
 }
 
