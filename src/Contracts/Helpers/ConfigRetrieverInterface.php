@@ -8,9 +8,9 @@ interface ConfigRetrieverInterface
      * @param string $providerName
      * @param array  $additionalConfigKeys
      *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
-     *
      * @return \SocialiteProviders\Manager\Contracts\ConfigInterface
+     *
+     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      */
     public function fromServices($providerName, array $additionalConfigKeys = []);
 }

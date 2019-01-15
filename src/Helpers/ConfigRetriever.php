@@ -2,6 +2,7 @@
 
 namespace SocialiteProviders\Manager\Helpers;
 
+use Closure;
 use SocialiteProviders\Manager\Config;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 use SocialiteProviders\Manager\Exception\MissingConfigException;
@@ -32,9 +33,9 @@ class ConfigRetriever implements ConfigRetrieverInterface
      * @param string $providerName
      * @param array  $additionalConfigKeys
      *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
-     *
      * @return \SocialiteProviders\Manager\Contracts\ConfigInterface
+     *
+     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      */
     public function fromServices($providerName, array $additionalConfigKeys = [])
     {
@@ -59,7 +60,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
      *
      * @return array
      */
-    protected function getConfigItems(array $configKeys, \Closure $keyRetrievalClosure)
+    protected function getConfigItems(array $configKeys, Closure $keyRetrievalClosure)
     {
         if (count($configKeys) < 1) {
             return [];
@@ -74,7 +75,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
      *
      * @return array
      */
-    protected function retrieveItemsFromConfig(array $keys, \Closure $keyRetrievalClosure)
+    protected function retrieveItemsFromConfig(array $keys, Closure $keyRetrievalClosure)
     {
         $out = [];
 
@@ -88,9 +89,9 @@ class ConfigRetriever implements ConfigRetrieverInterface
     /**
      * @param string $key
      *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
-     *
      * @return string
+     *
+     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      */
     protected function getFromServices($key)
     {
@@ -112,22 +113,21 @@ class ConfigRetriever implements ConfigRetrieverInterface
     /**
      * @param string $providerName
      *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
-     *
      * @return array
+     *
+     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      */
     protected function getConfigFromServicesArray($providerName)
     {
-        /** @var array $configArray */
-        $configArray = config("services.$providerName");
+        $configArray = config("services.{$providerName}");
 
         if (empty($configArray)) {
             // If we are running in console we should spoof values to make Socialite happy...
             if (app()->runningInConsole()) {
                 $configArray = [
-                    'client_id'     => "{$this->providerIdentifier}_KEY",
+                    'client_id' => "{$this->providerIdentifier}_KEY",
                     'client_secret' => "{$this->providerIdentifier}_SECRET",
-                    'redirect'      => "{$this->providerIdentifier}_REDIRECT_URI",
+                    'redirect' => "{$this->providerIdentifier}_REDIRECT_URI",
                 ];
             } else {
                 throw new MissingConfigException("There is no services entry for $providerName");
