@@ -16,12 +16,19 @@ class ServiceProviderTest extends \PHPUnit_Framework_TestCase
     public function it_fires_an_event()
     {
         $socialiteWasCalledMock = m::mock(SocialiteWasCalled::class);
-        self::$functions->shouldReceive('app')->with(SocialiteWasCalled::class)->once()->andReturn($socialiteWasCalledMock);
+        self::$functions
+            ->shouldReceive('app')
+            ->with(SocialiteWasCalled::class)
+            ->once()
+            ->andReturn($socialiteWasCalledMock);
 
-        self::$functions->shouldReceive('event')->with($socialiteWasCalledMock)->once();
+        self::$functions
+            ->shouldReceive('event')
+            ->with($socialiteWasCalledMock)
+            ->once();
 
-        $sp = new ServiceProvider($this->appMock());
-        $sp->boot();
+        $serviceProvider = new ServiceProvider($this->appMock());
+        $serviceProvider->boot();
 
         $this->assertTrue(true);
     }

@@ -2,7 +2,9 @@
 
 namespace SocialiteProviders\Manager\Test;
 
+use Laravel\Socialite\Contracts\Factory as SocialiteFactoryContract;
 use Mockery as m;
+use SocialiteProviders\Manager\Exception\InvalidArgumentException;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
 class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
@@ -15,29 +17,42 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
     public function it_should_build_a_provider_and_extend_socialite()
     {
         $providerName = 'bar';
-
+        $providerClass = $this->oauth1ProviderStubClass();
         $socialite = $this->socialiteMock();
-        $socialite->shouldReceive('formatConfig')->with($this->config())
+        $socialite
+            ->shouldReceive('formatConfig')
+            ->with($this->config())
             ->andReturn($this->oauth1FormattedConfig($this->config()));
-        $socialite->shouldReceive('extend')->withArgs(
-            [
+        $socialite
+            ->shouldReceive('extend')
+            ->withArgs([
                 $providerName,
-                m::on(
-                    function ($closure) {
-                        $this->assertInstanceOf($this->oauth1ProviderStubName(), $closure());
+                m::on(function ($closure) use ($providerClass) {
+                    $this->assertInstanceOf($providerClass, $closure());
 
-                        return is_callable($closure);
-                    }
-                ),
-            ]
-        );
-
+                    return is_callable($closure);
+                }),
+            ]);
         $app = $this->appMock();
-        $app->shouldReceive('make')->with(\Laravel\Socialite\Contracts\Factory::class)->andReturn($socialite);
-        $app->shouldReceive('offsetGet')->with('request')->andReturn($this->buildRequest());
+        $app
+            ->shouldReceive('make')
+            ->with(SocialiteFactoryContract::class)
+            ->andReturn($socialite);
+        $app
+            ->shouldReceive('offsetGet')
+            ->with('request')
+            ->andReturn($this->buildRequest());
+        $configRetriever = $this->configRetrieverMockWithDefaultExpectations(
+            $providerName,
+            $providerClass
+        );
+        $event = new SocialiteWasCalled($app, $configRetriever);
 
-        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations($this->oauth1ProviderStubName()));
-        $s->extendSocialite($providerName, $this->oauth1ProviderStubName(), $this->oauth1ServerStubName());
+        $event->extendSocialite(
+            $providerName,
+            $providerClass,
+            $this->oauth1ServerStubClass()
+        );
     }
 
     /**
@@ -45,19 +60,30 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function it_throws_if_given_an_invalid_oauth1_provider()
     {
-        $this->expectManagerInvalidArgumentException();
+        $this->expectException(InvalidArgumentException::class);
 
         $providerName = 'foo';
-
+        $providerClass = $this->oauth1ProviderStubClass();
         $socialite = $this->socialiteMock();
-        $socialite->shouldReceive('formatConfig')->with($this->config())
+        $socialite
+            ->shouldReceive('formatConfig')
+            ->with($this->config())
             ->andReturn($this->oauth1FormattedConfig($this->config()));
-
         $app = $this->appMock();
-        $app->shouldReceive('make')->andReturn($socialite);
+        $app
+            ->shouldReceive('make')
+            ->andReturn($socialite);
+        $configRetriever = $this->configRetrieverMockWithDefaultExpectations(
+            $providerName,
+            $providerClass
+        );
+        $event = new SocialiteWasCalled($app, $configRetriever);
 
-        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations($this->oauth1ProviderStubName(), $providerName));
-        $s->extendSocialite($providerName, $this->invalidClass(), $this->oauth1ServerStubName());
+        $event->extendSocialite(
+            $providerName,
+            $this->invalidClass(),
+            $this->oauth1ServerStubClass()
+        );
     }
 
     /**
@@ -65,16 +91,25 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function it_throws_if_given_an_invalid_oauth1_server()
     {
-        $this->expectManagerInvalidArgumentException();
+        $this->expectException(InvalidArgumentException::class);
 
         $providerName = 'bar';
-
+        $providerClass = $this->oauth1ProviderStubClass();
         $socialite = $this->socialiteMock();
-
         $app = $this->appMock();
-        $app->shouldReceive('make')->andReturn($socialite);
+        $app
+            ->shouldReceive('make')
+            ->andReturn($socialite);
+        $configRetriever = $this->configRetrieverMockWithDefaultExpectations(
+            $providerName,
+            $providerClass
+        );
+        $event = new SocialiteWasCalled($app, $configRetriever);
 
-        $s = new SocialiteWasCalled($app, $this->configRetrieverMockWithDefaultExpectations($this->oauth1ProviderStubName(), $providerName));
-        $s->extendSocialite($providerName, $this->oauth1ProviderStubName(), $this->invalidClass());
+        $event->extendSocialite(
+            $providerName,
+            $providerClass,
+            $this->invalidClass()
+        );
     }
 }
