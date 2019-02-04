@@ -164,12 +164,6 @@ class SocialiteWasCalled
         return $this->configRetriever->fromServices(
             $providerName, $providerClass::additionalConfigKeys()
         );
-
-        return new Config(
-            $this->spoofedConfig['client_id'],
-            $this->spoofedConfig['client_secret'],
-            $this->spoofedConfig['redirect']
-        );
     }
 
     /**
