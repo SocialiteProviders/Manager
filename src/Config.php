@@ -35,7 +35,7 @@ class Config implements Contracts\ConfigInterface
      * @param  string  $callbackUri
      * @return string
      */
-    protected function formatRedirectUri(string $callbackUri)
+    protected function formatRedirectUri($callbackUri)
     {
         return Str::startsWith($callbackUri, '/')
                     ? URL::to($callbackUri)
