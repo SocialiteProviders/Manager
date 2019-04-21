@@ -38,12 +38,11 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
         }
 
         $response = $this->getAccessTokenResponse($this->getCode());
+        $this->credentialsResponseBody = $response;
 
         $user = $this->mapUserToObject($this->getUserByToken(
             $token = $this->parseAccessToken($response)
         ));
-
-        $this->credentialsResponseBody = $response;
 
         if ($user instanceof User) {
             $user->setAccessTokenResponseBody($this->credentialsResponseBody);
