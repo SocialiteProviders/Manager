@@ -95,7 +95,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
 
         // ADDITIONAL value is empty
         if (!$keyExists && $this->isAdditionalConfig($key)) {
-            return;
+            return $key == 'guzzle' ? [] : null ;
         }
 
         // REQUIRED value is empty
