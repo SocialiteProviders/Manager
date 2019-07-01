@@ -29,8 +29,10 @@ class ServiceProvider extends SocialiteServiceProvider
             define('SOCIALITEPROVIDERS_STATELESS', true);
         }
 
-        $this->app->singleton(ConfigRetrieverInterface::class, function () {
-            return new ConfigRetriever();
-        });
+        if (!$this->app->bound(ConfigRetrieverInterface::class)) {
+            $this->app->singleton(ConfigRetrieverInterface::class, function () {
+                return new ConfigRetriever();
+            });
+        }
     }
 }
