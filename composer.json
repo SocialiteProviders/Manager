@@ -8,11 +8,14 @@
     }, {
         "name": "Anton Komarev",
         "email": "a.komarev@cybercog.su"
+    }, {
+        "name": "Miguel Piedrafita",
+        "email": "soy@miguelpiedrafita.com"
     }],
     "require": {
         "php": "^5.6 || ^7.0",
         "laravel/socialite": "~3.0|~4.0",
-        "illuminate/support": "~5.4|~5.7.0|~5.8.0"
+        "illuminate/support": "~5.4|~5.7.0|~5.8.0|^6.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.0",
