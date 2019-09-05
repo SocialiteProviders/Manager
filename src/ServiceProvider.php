@@ -13,9 +13,11 @@ class ServiceProvider extends SocialiteServiceProvider
      */
     public function boot()
     {
-        $socialiteWasCalled = app(SocialiteWasCalled::class);
+        $this->app->booted(function () {
+            $socialiteWasCalled = app(SocialiteWasCalled::class);
 
-        event($socialiteWasCalled);
+            event($socialiteWasCalled);
+        });
     }
 
     /**
