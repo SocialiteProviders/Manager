@@ -27,7 +27,7 @@ class ServiceProviderTest extends \PHPUnit_Framework_TestCase
             ->with($socialiteWasCalledMock)
             ->once();
 
-        $serviceProvider = new ServiceProvider($this->appMock());
+        $serviceProvider = new ServiceProvider($this->appMockWithBooted());
         $serviceProvider->boot();
 
         $this->assertTrue(true);
