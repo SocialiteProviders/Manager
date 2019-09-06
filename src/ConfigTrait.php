@@ -2,6 +2,7 @@
 
 namespace SocialiteProviders\Manager;
 
+use Illuminate\Support\Arr;
 use SocialiteProviders\Manager\Contracts\ConfigInterface;
 
 trait ConfigTrait
@@ -48,6 +49,6 @@ trait ConfigTrait
             return $default;
         }
 
-        return $key ? array_get($this->config, $key, $default) : $this->config;
+        return $key ? Arr::get($this->config, $key, $default) : $this->config;
     }
 }
