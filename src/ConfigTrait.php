@@ -7,7 +7,7 @@ use SocialiteProviders\Manager\Contracts\ConfigInterface;
 trait ConfigTrait
 {
     /**
-     * @var \SocialiteProviders\Manager\Contracts\OAuth1\ProviderInterface|\SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface
+     * @var array
      */
     protected $config;
 
