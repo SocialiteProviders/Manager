@@ -13,7 +13,7 @@ class ServiceProvider extends SocialiteServiceProvider
      */
     public function boot()
     {
-        if (app() instanceof \Illuminate\Foundation\Application) {
+        if ($this->app instanceof \Illuminate\Foundation\Application) {
             // Laravel
             $this->app->booted(function () {
                 $socialiteWasCalled = app(SocialiteWasCalled::class);
