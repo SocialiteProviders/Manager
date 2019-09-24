@@ -13,11 +13,19 @@ class ServiceProvider extends SocialiteServiceProvider
      */
     public function boot()
     {
-        $this->app->booted(function () {
+        if (app() instanceof \Illuminate\Foundation\Application) {
+            // Laravel
+            $this->app->booted(function () {
+                $socialiteWasCalled = app(SocialiteWasCalled::class);
+
+                event($socialiteWasCalled);
+            });
+        } else {
+            // Lumen
             $socialiteWasCalled = app(SocialiteWasCalled::class);
 
             event($socialiteWasCalled);
-        });
+        }
     }
 
     /**
