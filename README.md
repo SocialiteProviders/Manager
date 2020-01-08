@@ -7,7 +7,6 @@
 [![Total Downloads](https://poser.pugx.org/socialiteproviders/manager/downloads.svg)](https://packagist.org/packages/socialiteproviders/manager) 
 [![Latest Unstable Version](https://poser.pugx.org/socialiteproviders/manager/v/unstable.svg)](https://packagist.org/packages/socialiteproviders/manager) 
 [![License](https://poser.pugx.org/socialiteproviders/manager/license.svg)](https://packagist.org/packages/socialiteproviders/manager) 
-[![Stories in Ready](https://badge.waffle.io/SocialiteProviders/Manager.png?label=ready&title=Ready)](http://waffle.io/SocialiteProviders/Manager)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/ddb2f0df-6d85-431c-8e68-6164b08dd852/small.png)](https://insight.sensiolabs.com/projects/ddb2f0df-6d85-431c-8e68-6164b08dd852)
 
 ## About
