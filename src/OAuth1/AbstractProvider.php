@@ -102,6 +102,21 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     }
 
     /**
+     * Returns temporary credentials for stateless auth.
+     *
+     * @return array
+     */
+    public function getTemporaryCredentials()
+    {
+        $temp = $this->server->getTemporaryCredentials();
+
+        return [
+            'identifier' => $temp->getIdentifier(),
+            'secret' => $temp->getSecret(),
+        ];
+    }
+
+    /**
      * Indicates that the provider should operate as stateless.
      *
      * @param mixed $stateless
