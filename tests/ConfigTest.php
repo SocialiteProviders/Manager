@@ -2,7 +2,9 @@
 
 namespace SocialiteProviders\Manager;
 
-class ConfigTest extends \PHPUnit_Framework_TestCase
+use PHPUnit_Framework_TestCase;
+
+class ConfigTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @test

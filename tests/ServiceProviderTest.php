@@ -3,10 +3,11 @@
 namespace SocialiteProviders\Manager\Test;
 
 use Mockery as m;
+use PHPUnit_Framework_TestCase;
 use SocialiteProviders\Manager\ServiceProvider;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
-class ServiceProviderTest extends \PHPUnit_Framework_TestCase
+class ServiceProviderTest extends PHPUnit_Framework_TestCase
 {
     use ManagerTestTrait;
 
