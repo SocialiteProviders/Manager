@@ -2,7 +2,6 @@
 
 namespace SocialiteProviders\Manager\Test;
 
-use Mockery as m;
 use SocialiteProviders\Manager\Exception\MissingConfigException;
 use SocialiteProviders\Manager\Helpers\ConfigRetriever;
 
