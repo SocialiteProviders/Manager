@@ -4,7 +4,6 @@ namespace SocialiteProviders\Manager\OAuth1;
 
 use GuzzleHttp\Exception\BadResponseException;
 use League\OAuth1\Client\Credentials\TemporaryCredentials;
-use League\OAuth1\Client\Credentials\TokenCredentials;
 use League\OAuth1\Client\Server\Server as BaseServer;
 use SocialiteProviders\Manager\ConfigTrait;
 
