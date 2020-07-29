@@ -4,15 +4,17 @@ namespace SocialiteProviders\Manager\Test;
 
 use Illuminate\Contracts\Session\Session as SessionContract;
 use Illuminate\Http\Request;
+use Laravel\Socialite\Two\InvalidStateException;
 use Laravel\Socialite\Two\User as SocialiteOAuth2User;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_TestCase;
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
 use SocialiteProviders\Manager\OAuth2\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class OAuthTwoTest extends PHPUnit_Framework_TestCase
+class OAuthTwoTest extends TestCase
 {
     /**
      * @test
@@ -109,7 +111,8 @@ class OAuthTwoTest extends PHPUnit_Framework_TestCase
             ->with('http://token.url', [
                 'headers' => [
                     'Accept' => 'application/json',
-                ], 'form_params' => [
+                ],
+                'form_params' => [
                     'client_id' => 'client_id',
                     'client_secret' => 'client_secret',
                     'code' => 'code',
@@ -172,10 +175,11 @@ class OAuthTwoTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Laravel\Socialite\Two\InvalidStateException
      */
     public function exceptionIsThrownIfStateIsInvalid()
     {
+        $this->expectException(InvalidStateException::class);
+
         $session = m::mock(SessionInterface::class);
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('B', 40),
@@ -193,10 +197,11 @@ class OAuthTwoTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Laravel\Socialite\Two\InvalidStateException
      */
     public function exceptionIsThrownIfStateIsNotSet()
     {
+        $this->expectException(InvalidStateException::class);
+
         $session = m::mock(SessionInterface::class);
         $request = Request::create('foo', 'GET', [
             'state' => 'state',

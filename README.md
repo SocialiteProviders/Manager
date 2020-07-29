@@ -26,13 +26,13 @@ A package for Laravel Socialite that allows you to easily add new providers or o
 
 ## Available Providers
 
-* See the [SocialiteProviders](http://socialiteproviders.github.io/) list
+* See the [SocialiteProviders](https://socialiteproviders.netlify.app/) list
 * You can also make your own or modify someone else's
 
 
 ## Reference
 
-* [Laravel docs about events](https://laravel.com/docs/6.x/events)
+* [Laravel docs about events](https://laravel.com/docs/7.x/events)
 * [Laracasts video on events in Laravel 5](https://laracasts.com/lessons/laravel-5-events)
 * [Laravel Socialite Docs](https://github.com/laravel/socialite)  
 * [Laracasts Socialite video](https://laracasts.com/series/whats-new-in-laravel-5/episodes/9)
@@ -42,7 +42,7 @@ A package for Laravel Socialite that allows you to easily add new providers or o
 
 Below is an example handler.  You need to add this full class name to the `listen[]` in the `EventServiceProvider`.
 
-* [See also the Laravel docs about events](https://laravel.com/docs/6.x/events).
+* [See also the Laravel docs about events](https://laravel.com/docs/7.x/events).
 * `providername` is the name of the provider such as `meetup`.
 * You will need to change your the namespacing and class names of course.  
 
@@ -64,7 +64,7 @@ class ProviderNameExtendSocialite
 
 ## Creating a Provider
 
-* Look at the already created [providers](http://socialiteproviders.github.io/) for inspiration.
+* Look at the already created [providers](https://socialiteproviders.netlify.app/) for inspiration.
 * [See this article on Medium](https://medium.com/@morrislaptop/adding-auth-providers-to-laravel-socialite-ca0335929e42)
 
 ## Overriding a Built-in Provider
@@ -90,7 +90,7 @@ return Socialite::with('provider-name')->setConfig($config)->redirect();
 
 ## Creating an OAuth1 Server Class
 
-Take a look at the other [OAuth1 providers](http://socialiteproviders.github.io/) for inspiration. 
+Take a look at the other [OAuth1 providers](https://socialiteproviders.netlify.app/) for inspiration. 
 
 ## Getting the Access Token Response Body
 

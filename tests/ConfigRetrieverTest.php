@@ -2,10 +2,11 @@
 
 namespace SocialiteProviders\Manager\Test;
 
+use PHPUnit\Framework\TestCase;
 use SocialiteProviders\Manager\Exception\MissingConfigException;
 use SocialiteProviders\Manager\Helpers\ConfigRetriever;
 
-class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
+class ConfigRetrieverTest extends TestCase
 {
     use ManagerTestTrait;
 
