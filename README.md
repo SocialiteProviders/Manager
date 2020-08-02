@@ -26,7 +26,7 @@ A package for Laravel Socialite that allows you to easily add new providers or o
 
 ## Available Providers
 
-* See the [SocialiteProviders](https://socialiteproviders.netlify.app/) list
+* See the [SocialiteProviders](https://socialiteproviders.com/) list
 * You can also make your own or modify someone else's
 
 

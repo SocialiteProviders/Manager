@@ -1,6 +1,7 @@
 {
   "name": "socialiteproviders/manager",
   "description": "Easily add new or override built-in providers in Laravel Socialite.",
+  "homepage": "https://socialiteproviders.com/",
   "license": "MIT",
   "authors": [
     {
@@ -22,7 +23,7 @@
     }
   ],
   "require": {
-    "php": "^5.6 || ^7.0",
+    "php": "^7.2",
     "laravel/socialite": "~4.0",
     "illuminate/support": "^6.0 | ^7.0"
   },
