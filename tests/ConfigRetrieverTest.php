@@ -56,11 +56,15 @@ class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
         $secret = 'secret';
         $uri = 'uri';
         $additionalConfigItem = 'test';
+        $guzzle = [
+            'proxy' => 'test',
+        ];
         $config = [
             'client_id' => $key,
             'client_secret' => $secret,
             'redirect' => $uri,
             'additional' => $additionalConfigItem,
+            'guzzle' => $guzzle
         ];
         self::$functions
             ->shouldReceive('config')
@@ -75,6 +79,7 @@ class ConfigRetrieverTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($secret, $result['client_secret']);
         $this->assertSame($uri, $result['redirect']);
         $this->assertSame($additionalConfigItem, $result['additional']);
+        $this->assertSame($guzzle, $result['guzzle']);
     }
 }
 
