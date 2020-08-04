@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SocialiteProviders\Manager\OAuth2;
 
@@ -23,15 +24,12 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      *
      * @return string
      */
-    public static function serviceContainerKey($providerName)
+    public static function serviceContainerKey($providerName): string
     {
         return SocialiteWasCalled::SERVICE_CONTAINER_PREFIX.$providerName;
     }
 
-    /**
-     * @return \SocialiteProviders\Manager\OAuth2\User
-     */
-    public function user()
+    public function user(): User
     {
         if ($this->hasInvalidState()) {
             throw new InvalidStateException();
@@ -58,9 +56,9 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      *
      * @param array $body
      *
-     * @return string
+     * @return string|null
      */
-    protected function parseAccessToken($body)
+    protected function parseAccessToken($body): ?string
     {
         return Arr::get($body, 'access_token');
     }
@@ -70,9 +68,9 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      *
      * @param array $body
      *
-     * @return string
+     * @return string|null
      */
-    protected function parseRefreshToken($body)
+    protected function parseRefreshToken($body): ?string
     {
         return Arr::get($body, 'refresh_token');
     }
@@ -82,9 +80,9 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      *
      * @param array $body
      *
-     * @return string
+     * @return string|null
      */
-    protected function parseExpiresIn($body)
+    protected function parseExpiresIn($body): ?string
     {
         return Arr::get($body, 'expires_in');
     }

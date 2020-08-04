@@ -1,9 +1,10 @@
 <?php
-
+declare(strict_types=1);
 namespace SocialiteProviders\Manager\Helpers;
 
 use Closure;
 use SocialiteProviders\Manager\Config;
+use SocialiteProviders\Manager\Contracts\ConfigInterface;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 use SocialiteProviders\Manager\Exception\MissingConfigException;
 
@@ -33,11 +34,11 @@ class ConfigRetriever implements ConfigRetrieverInterface
      * @param string $providerName
      * @param array  $additionalConfigKeys
      *
-     * @return \SocialiteProviders\Manager\Contracts\ConfigInterface
+     * @return ConfigInterface
      *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
+     * @throws MissingConfigException
      */
-    public function fromServices($providerName, array $additionalConfigKeys = [])
+    public function fromServices($providerName, array $additionalConfigKeys = []): ConfigInterface
     {
         $this->providerName = $providerName;
         $this->getConfigFromServicesArray($providerName);
@@ -60,7 +61,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
      *
      * @return array
      */
-    protected function getConfigItems(array $configKeys, Closure $keyRetrievalClosure)
+    protected function getConfigItems(array $configKeys, Closure $keyRetrievalClosure): array
     {
         return $this->retrieveItemsFromConfig($configKeys, $keyRetrievalClosure);
     }
@@ -71,7 +72,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
      *
      * @return array
      */
-    protected function retrieveItemsFromConfig(array $keys, Closure $keyRetrievalClosure)
+    protected function retrieveItemsFromConfig(array $keys, Closure $keyRetrievalClosure): array
     {
         $out = [];
 
@@ -85,9 +86,9 @@ class ConfigRetriever implements ConfigRetrieverInterface
     /**
      * @param string $key
      *
-     * @return string
+     * @return string|array|null
      *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
+     * @throws MissingConfigException
      */
     protected function getFromServices($key)
     {
@@ -95,7 +96,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
 
         // ADDITIONAL value is empty
         if (!$keyExists && $this->isAdditionalConfig($key)) {
-            return $key == 'guzzle' ? [] : null ;
+            return $key === 'guzzle' ? [] : null;
         }
 
         // REQUIRED value is empty
@@ -111,9 +112,9 @@ class ConfigRetriever implements ConfigRetrieverInterface
      *
      * @return array
      *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
+     * @throws MissingConfigException
      */
-    protected function getConfigFromServicesArray($providerName)
+    protected function getConfigFromServicesArray($providerName): array
     {
         $configArray = config("services.{$providerName}");
 
@@ -138,7 +139,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
      *
      * @return bool
      */
-    protected function isAdditionalConfig($key)
+    protected function isAdditionalConfig($key): bool
     {
         return in_array(strtolower($key), $this->additionalConfigKeys, true);
     }

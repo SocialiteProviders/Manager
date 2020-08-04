@@ -114,7 +114,7 @@ abstract class Server extends BaseServer
      *
      * @return string
      */
-    protected function formatScopes(array $scopes, $scopeSeparator)
+    protected function formatScopes(array $scopes, $scopeSeparator): string
     {
         return implode($scopeSeparator, $scopes);
     }

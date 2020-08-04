@@ -1,9 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace SocialiteProviders\Manager\OAuth1;
 
 use Illuminate\Http\RedirectResponse;
 use Laravel\Socialite\One\AbstractProvider as BaseProvider;
+use League\OAuth1\Client\Credentials\CredentialsException;
 use League\OAuth1\Client\Credentials\TokenCredentials;
 use SocialiteProviders\Manager\ConfigTrait;
 use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
@@ -31,9 +33,9 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      *
      * @return string
      */
-    public static function serviceContainerKey($providerName)
+    public static function serviceContainerKey($providerName): string
     {
-        return SocialiteWasCalled::SERVICE_CONTAINER_PREFIX.$providerName;
+        return SocialiteWasCalled::SERVICE_CONTAINER_PREFIX . $providerName;
     }
 
     /**

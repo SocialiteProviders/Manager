@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SocialiteProviders\Manager\Contracts\OAuth2;
 
@@ -8,7 +9,7 @@ use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
 interface ProviderInterface extends SocialiteOauth2ProviderInterface
 {
     /**
-     * @param \SocialiteProviders\Manager\Contracts\ConfigInterface $config
+     * @param Config $config
      *
      * @return $this
      */

@@ -1,11 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace SocialiteProviders\Manager\Contracts;
 
 interface ConfigInterface
 {
-    /**
-     * @return array
-     */
-    public function get();
+    public function get(): array;
 }
