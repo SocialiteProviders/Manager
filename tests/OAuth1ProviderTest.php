@@ -4,10 +4,11 @@ namespace SocialiteProviders\Manager\Test;
 
 use Laravel\Socialite\Contracts\Factory as SocialiteFactoryContract;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use SocialiteProviders\Manager\Exception\InvalidArgumentException;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
-class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
+class OAuth1ProviderTest extends TestCase
 {
     use ManagerTestTrait;
 
