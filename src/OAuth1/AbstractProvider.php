@@ -3,6 +3,7 @@
 namespace SocialiteProviders\Manager\OAuth1;
 
 use Illuminate\Http\RedirectResponse;
+use InvalidArgumentException;
 use Laravel\Socialite\One\AbstractProvider as BaseProvider;
 use League\OAuth1\Client\Credentials\TokenCredentials;
 use SocialiteProviders\Manager\ConfigTrait;
@@ -42,7 +43,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     public function user()
     {
         if (!$this->hasNecessaryVerifier()) {
-            throw new \InvalidArgumentException('Invalid request. Missing OAuth verifier.');
+            throw new InvalidArgumentException('Invalid request. Missing OAuth verifier.');
         }
 
         $token = $this->getToken();
