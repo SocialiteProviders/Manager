@@ -26,15 +26,6 @@ class SocialiteWasCalled
     private $configRetriever;
 
     /**
-     * @var array
-     */
-    private $spoofedConfig = [
-        'client_id' => 'spoofed_client_id',
-        'client_secret' => 'spoofed_client_secret',
-        'redirect' => 'spoofed_redirect',
-    ];
-
-    /**
      * @param \Illuminate\Contracts\Container\Container $app
      * @param \SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface $configRetriever
      */
