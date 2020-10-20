@@ -150,7 +150,7 @@ class SocialiteWasCalled
      *
      * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      */
-    protected function getConfig($providerClass, $providerName)
+    protected function getConfig(string $providerClass, string $providerName)
     {
         return $this->configRetriever->fromServices(
             $providerName, $providerClass::additionalConfigKeys()
