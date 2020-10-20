@@ -5,6 +5,7 @@ namespace SocialiteProviders\Manager\OAuth1;
 use Illuminate\Http\RedirectResponse;
 use InvalidArgumentException;
 use Laravel\Socialite\One\AbstractProvider as BaseProvider;
+use League\OAuth1\Client\Credentials\CredentialsException;
 use League\OAuth1\Client\Credentials\TokenCredentials;
 use SocialiteProviders\Manager\ConfigTrait;
 use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
@@ -39,6 +40,8 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \League\OAuth1\Client\Credentials\CredentialsException
      */
     public function user()
     {
@@ -86,7 +89,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Redirect the user to the authentication page for the provider.
      *
-     * @return RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function redirect()
     {
