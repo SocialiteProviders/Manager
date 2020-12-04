@@ -28,4 +28,7 @@ jobs:
         run: composer validate --strict
 
       - name: Run Tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --coverage-clover clover.xml
+
+      - name: Upload code coverage
+        run: bash <(curl -s https://codecov.io/bash)
