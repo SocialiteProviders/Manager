@@ -2,20 +2,23 @@
 
 namespace SocialiteProviders\Manager\Test;
 
+use GuzzleHttp\Client;
 use Illuminate\Contracts\Session\Session as SessionContract;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Two\InvalidStateException;
 use Laravel\Socialite\Two\User as SocialiteOAuth2User;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_TestCase;
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
 use SocialiteProviders\Manager\OAuth2\User;
+use stdClass;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class OAuthTwoTest extends TestCase
 {
+    use ManagerTestTrait;
+
     /**
      * @test
      */
@@ -61,7 +64,7 @@ class OAuthTwoTest extends TestCase
             ->with('state')
             ->andReturn(str_repeat('A', 40));
         $provider = new OAuthTwoTestProviderStub($request, 'client_id', 'client_secret', 'redirect_uri');
-        $provider->http = m::mock('StdClass');
+        $provider->http = m::mock(stdClass::class);
         $provider->http
             ->shouldReceive('post')
             ->once()
@@ -76,7 +79,7 @@ class OAuthTwoTest extends TestCase
                     'redirect_uri' => 'redirect_uri',
                 ],
             ])
-            ->andReturn($response = m::mock('StdClass'));
+            ->andReturn($response = m::mock(stdClass::class));
         $response
             ->shouldReceive('getBody')
             ->andReturn('{"access_token": "access_token", "test": "test"}');
@@ -104,7 +107,7 @@ class OAuthTwoTest extends TestCase
             ->with('state')
             ->andReturn(str_repeat('A', 40));
         $provider = new OAuthTwoTestProviderStub($request, 'client_id', 'client_secret', 'redirect_uri');
-        $provider->http = m::mock('StdClass');
+        $provider->http = m::mock(stdClass::class);
         $provider->http
             ->shouldReceive('post')
             ->once()
@@ -119,7 +122,7 @@ class OAuthTwoTest extends TestCase
                     'redirect_uri' => 'redirect_uri',
                 ],
             ])
-            ->andReturn($response = m::mock('StdClass'));
+            ->andReturn($response = m::mock(stdClass::class));
         $response
             ->shouldReceive('getBody')
             ->andReturn($accessTokenResponseBody);
@@ -148,7 +151,8 @@ class OAuthTwoTest extends TestCase
             ->with('state')
             ->andReturn(str_repeat('A', 40));
         $provider = new OAuthTwoTestProviderStub($request, 'client_id', 'client_secret', 'redirect_uri');
-        $provider->http = m::mock('StdClass');
+
+        $provider->http = m::mock(stdClass::class);
         $provider->http
             ->shouldReceive('post')
             ->once()
@@ -163,7 +167,7 @@ class OAuthTwoTest extends TestCase
                     'redirect_uri' => 'redirect_uri',
                 ],
             ])
-            ->andReturn($response = m::mock('StdClass'));
+            ->andReturn($response = m::mock(stdClass::class));
         $response
             ->shouldReceive('getBody')
             ->andReturn($accessTokenResponseBody);
@@ -248,17 +252,12 @@ class OAuthTwoTestProviderStub extends AbstractProvider
         return (new User())->map(['id' => $user['id']]);
     }
 
-    /**
-     * Get a fresh instance of the Guzzle HTTP client.
-     *
-     * @return \GuzzleHttp\Client
-     */
     protected function getHttpClient()
     {
         if ($this->http) {
             return $this->http;
         }
 
-        return $this->http = m::mock('StdClass');
+        return $this->http = m::mock(stdClass::class);
     }
 }

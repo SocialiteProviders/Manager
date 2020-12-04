@@ -14,12 +14,12 @@ trait ManagerTestTrait
 {
     public static $functions;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         self::$functions = m::mock();
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         m::close();
     }

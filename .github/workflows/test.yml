@@ -1,0 +1,34 @@
+name: Test
+
+on: [pull_request, push]
+
+jobs:
+  run:
+    runs-on: ubuntu-20.04
+    strategy:
+      max-parallel: 15
+      fail-fast: false
+      matrix:
+        php-versions: [ '7.2', '7.3', '7.4', '8.0' ]
+    name: PHP ${{ matrix.php-versions }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extension-csv: mbstring, xdebug
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist --no-suggest
+
+      - name: Lint composer.json
+        run: composer validate --strict
+
+      - name: Run Tests
+        run: vendor/bin/phpunit --coverage-clover clover.xml
+
+      - name: Upload code coverage
+        run: bash <(curl -s https://codecov.io/bash)
