@@ -1,6 +1,6 @@
 name: Test
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   run:
@@ -9,7 +9,7 @@ jobs:
       max-parallel: 15
       fail-fast: false
       matrix:
-        php-versions: ['7.2', '7.3', '7.4']
+        php-versions: [ '7.2', '7.3', '7.4', '8.0' ]
     name: PHP ${{ matrix.php-versions }}
     steps:
       - name: Checkout
