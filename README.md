@@ -6,7 +6,8 @@
 [![Latest Stable Version](https://poser.pugx.org/socialiteproviders/manager/v/stable.svg)](https://packagist.org/packages/socialiteproviders/manager) 
 [![Total Downloads](https://poser.pugx.org/socialiteproviders/manager/downloads.svg)](https://packagist.org/packages/socialiteproviders/manager) 
 [![Latest Unstable Version](https://poser.pugx.org/socialiteproviders/manager/v/unstable.svg)](https://packagist.org/packages/socialiteproviders/manager) 
-[![License](https://poser.pugx.org/socialiteproviders/manager/license.svg)](https://packagist.org/packages/socialiteproviders/manager) 
+[![License](https://poser.pugx.org/socialiteproviders/manager/license.svg)](https://packagist.org/packages/socialiteproviders/manager)
+[![StyleCI](https://github.styleci.io/repos/30993504/shield?branch=master)](https://github.styleci.io/repos/30993504?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/ddb2f0df-6d85-431c-8e68-6164b08dd852/small.png)](https://insight.sensiolabs.com/projects/ddb2f0df-6d85-431c-8e68-6164b08dd852)
 
 ## About
