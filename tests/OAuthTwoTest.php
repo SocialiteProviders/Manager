@@ -2,7 +2,6 @@
 
 namespace SocialiteProviders\Manager\Test;
 
-use GuzzleHttp\Client;
 use Illuminate\Contracts\Session\Session as SessionContract;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Two\InvalidStateException;

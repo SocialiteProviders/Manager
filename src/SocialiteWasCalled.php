@@ -166,7 +166,7 @@ class SocialiteWasCalled
      */
     private function isOAuth1($oauth1Server)
     {
-        return !empty($oauth1Server);
+        return ! empty($oauth1Server);
     }
 
     /**
@@ -193,7 +193,7 @@ class SocialiteWasCalled
      */
     private function classExists($providerClass)
     {
-        if (!class_exists($providerClass)) {
+        if (! class_exists($providerClass)) {
             throw new InvalidArgumentException("{$providerClass} doesn't exist");
         }
     }

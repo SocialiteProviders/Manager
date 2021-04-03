@@ -43,10 +43,12 @@ trait ManagerTestTrait
     /**
      * @return \Mockery\MockInterface|\Illuminate\Contracts\Foundation\Application
      */
-    protected function appMockWithBooted() {
+    protected function appMockWithBooted()
+    {
         $app = m::mock(Application::class);
         $app->shouldReceive('booted')->with(m::on(function ($callback) {
             $callback();
+
             return true;
         }));
 

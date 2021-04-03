@@ -94,12 +94,12 @@ class ConfigRetriever implements ConfigRetrieverInterface
         $keyExists = array_key_exists($key, $this->servicesArray);
 
         // ADDITIONAL value is empty
-        if (!$keyExists && $this->isAdditionalConfig($key)) {
-            return $key == 'guzzle' ? [] : null ;
+        if (! $keyExists && $this->isAdditionalConfig($key)) {
+            return $key == 'guzzle' ? [] : null;
         }
 
         // REQUIRED value is empty
-        if (!$keyExists) {
+        if (! $keyExists) {
             throw new MissingConfigException("Missing services entry for {$this->providerName}.$key");
         }
 
