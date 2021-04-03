@@ -2,7 +2,6 @@
 
 namespace SocialiteProviders\Manager\Test;
 
-use GuzzleHttp\Client;
 use Illuminate\Contracts\Session\Session as SessionContract;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Two\InvalidStateException;
@@ -73,6 +72,7 @@ class OAuthTwoTest extends TestCase
                     'Accept' => 'application/json',
                 ],
                 'form_params' => [
+                    'grant_type' => 'authorization_code',
                     'client_id' => 'client_id',
                     'client_secret' => 'client_secret',
                     'code' => 'code',
@@ -116,6 +116,7 @@ class OAuthTwoTest extends TestCase
                     'Accept' => 'application/json',
                 ],
                 'form_params' => [
+                    'grant_type' => 'authorization_code',
                     'client_id' => 'client_id',
                     'client_secret' => 'client_secret',
                     'code' => 'code',
@@ -161,6 +162,7 @@ class OAuthTwoTest extends TestCase
                     'Accept' => 'application/json',
                 ],
                 'form_params' => [
+                    'grant_type' => 'authorization_code',
                     'client_id' => 'client_id',
                     'client_secret' => 'client_secret',
                     'code' => 'code',
