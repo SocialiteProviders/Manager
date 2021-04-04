@@ -30,6 +30,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
 
     /**
      * @return \SocialiteProviders\Manager\OAuth2\User
+     * @throws \Laravel\Socialite\Two\InvalidStateException
      */
     public function user()
     {

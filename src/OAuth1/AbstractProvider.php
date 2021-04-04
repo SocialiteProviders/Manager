@@ -40,8 +40,6 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
 
     /**
      * {@inheritdoc}
-     *
-     * @throws \League\OAuth1\Client\Credentials\CredentialsException
      */
     public function user()
     {

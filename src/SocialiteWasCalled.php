@@ -36,15 +36,13 @@ class SocialiteWasCalled
     }
 
     /**
-     * @param string $providerName  'meetup'
-     * @param string $providerClass 'Your\Name\Space\ClassNameProvider' must extend
+     * @param  string  $providerName  'meetup'
+     * @param  string  $providerClass  'Your\Name\Space\ClassNameProvider' must extend
      *                              either Laravel\Socialite\Two\AbstractProvider or
      *                              Laravel\Socialite\One\AbstractProvider
-     * @param string $oauth1Server  'Your\Name\Space\ClassNameServer' must extend League\OAuth1\Client\Server\Server
+     * @param  string  $oauth1Server  'Your\Name\Space\ClassNameServer' must extend League\OAuth1\Client\Server\Server
      *
      * @return void
-     *
-     * @throws \SocialiteProviders\Manager\Exception\InvalidArgumentException
      */
     public function extendSocialite($providerName, $providerClass, $oauth1Server = null)
     {
@@ -77,8 +75,6 @@ class SocialiteWasCalled
      * @param null|string                         $oauth1Server
      *
      * @return \Laravel\Socialite\One\AbstractProvider|\Laravel\Socialite\Two\AbstractProvider
-     *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      */
     protected function buildProvider(SocialiteManager $socialite, $providerName, $providerClass, $oauth1Server)
     {
@@ -98,8 +94,6 @@ class SocialiteWasCalled
      * @param string $oauth1Server  must extend League\OAuth1\Client\Server\Server
      *
      * @return \Laravel\Socialite\One\AbstractProvider
-     *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      */
     protected function buildOAuth1Provider(SocialiteManager $socialite, $providerClass, $providerName, $oauth1Server)
     {
@@ -126,8 +120,6 @@ class SocialiteWasCalled
      * @param string           $providerName
      *
      * @return \Laravel\Socialite\Two\AbstractProvider
-     *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      */
     protected function buildOAuth2Provider(SocialiteManager $socialite, $providerClass, $providerName)
     {
@@ -147,8 +139,6 @@ class SocialiteWasCalled
      * @param string $providerName
      *
      * @return \SocialiteProviders\Manager\Contracts\ConfigInterface
-     *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      */
     protected function getConfig(string $providerClass, string $providerName)
     {
