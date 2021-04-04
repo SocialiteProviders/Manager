@@ -1,15 +1,17 @@
 name: Test
 
-on: [pull_request, push]
+on: [ pull_request, push ]
 
 jobs:
   run:
     runs-on: ubuntu-20.04
+
     strategy:
       max-parallel: 15
       fail-fast: false
       matrix:
         php-versions: [ '7.2', '7.3', '7.4', '8.0' ]
+
     name: PHP ${{ matrix.php-versions }}
     steps:
       - name: Checkout
@@ -22,7 +24,7 @@ jobs:
           extension-csv: mbstring, xdebug
 
       - name: Install dependencies
-        run: composer install --no-interaction --prefer-dist --no-suggest
+        run: composer update --no-interaction --prefer-dist --no-suggest --prefer-stable
 
       - name: Lint composer.json
         run: composer validate --strict
