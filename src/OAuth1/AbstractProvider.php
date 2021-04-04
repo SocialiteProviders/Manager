@@ -174,7 +174,9 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
                 $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
             );
         }
-        $temp = unserialize($this->request->session()->get('oauth_temp'), TemporaryCredentials::class);
+        $temp = unserialize($this->request->session()->get('oauth_temp'), [
+            'allowed_classes' => [TemporaryCredentials::class],
+        ]);
 
         return $this->server->getTokenCredentials(
                 $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
