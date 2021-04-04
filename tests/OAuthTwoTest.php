@@ -8,8 +8,8 @@ use Laravel\Socialite\Two\InvalidStateException;
 use Laravel\Socialite\Two\User as SocialiteOAuth2User;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use SocialiteProviders\Manager\OAuth2\AbstractProvider;
 use SocialiteProviders\Manager\OAuth2\User;
+use SocialiteProviders\Manager\Test\Stubs\OAuthTwoTestProviderStub;
 use stdClass;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -220,46 +220,5 @@ class OAuthTwoTest extends TestCase
             ->with('state');
         $provider = new OAuthTwoTestProviderStub($request, 'client_id', 'client_secret', 'redirect');
         $provider->user();
-    }
-}
-
-class OAuthTwoTestProviderStub extends AbstractProvider
-{
-    const PROVIDER_NAME = 'test';
-
-    public $http;
-
-    public static function providerName()
-    {
-        return 'test';
-    }
-
-    protected function getAuthUrl($state)
-    {
-        return 'http://auth.url';
-    }
-
-    protected function getTokenUrl()
-    {
-        return 'http://token.url';
-    }
-
-    protected function getUserByToken($token)
-    {
-        return ['id' => 'foo'];
-    }
-
-    protected function mapUserToObject(array $user)
-    {
-        return (new User())->map(['id' => $user['id']]);
-    }
-
-    protected function getHttpClient()
-    {
-        if ($this->http) {
-            return $this->http;
-        }
-
-        return $this->http = m::mock(stdClass::class);
     }
 }
