@@ -45,7 +45,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      */
     public function user()
     {
-        if (!$this->hasNecessaryVerifier()) {
+        if (! $this->hasNecessaryVerifier()) {
             throw new InvalidArgumentException('Invalid request. Missing OAuth verifier.');
         }
 
@@ -59,7 +59,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
         if ($user instanceof User) {
             parse_str($token['credentialsResponseBody'], $credentialsResponseBody);
 
-            if (!$credentialsResponseBody || !is_array($credentialsResponseBody)) {
+            if (! $credentialsResponseBody || ! is_array($credentialsResponseBody)) {
                 throw new CredentialsException('Unable to parse token credentials response.');
             }
 
@@ -93,7 +93,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      */
     public function redirect()
     {
-        if (!$this->isStateless()) {
+        if (! $this->isStateless()) {
             $this->request->getSession()->put(
                 'oauth.temp', $temp = $this->server->getTemporaryCredentials()
             );
@@ -166,7 +166,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      */
     protected function getToken()
     {
-        if (!$this->isStateless()) {
+        if (! $this->isStateless()) {
             $temp = $this->request->getSession()->get('oauth.temp');
 
             return $this->server->getTokenCredentials(

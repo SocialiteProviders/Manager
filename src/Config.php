@@ -2,8 +2,8 @@
 
 namespace SocialiteProviders\Manager;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 class Config implements Contracts\ConfigInterface
 {

@@ -35,11 +35,11 @@ class ServiceProvider extends SocialiteServiceProvider
     {
         parent::register();
 
-        if (class_exists('Laravel\Lumen\Application') && !defined('SOCIALITEPROVIDERS_STATELESS')) {
+        if (class_exists('Laravel\Lumen\Application') && ! defined('SOCIALITEPROVIDERS_STATELESS')) {
             define('SOCIALITEPROVIDERS_STATELESS', true);
         }
 
-        if (!$this->app->bound(ConfigRetrieverInterface::class)) {
+        if (! $this->app->bound(ConfigRetrieverInterface::class)) {
             $this->app->singleton(ConfigRetrieverInterface::class, function () {
                 return new ConfigRetriever();
             });
