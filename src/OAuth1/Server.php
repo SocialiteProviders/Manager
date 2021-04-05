@@ -44,6 +44,7 @@ abstract class Server extends BaseServer
      * @param string                                                 $verifier
      *
      * @return \League\OAuth1\Client\Credentials\TokenCredentials
+     * @throws \InvalidArgumentException
      */
     public function getTokenCredentials(TemporaryCredentials $temporaryCredentials, $temporaryIdentifier, $verifier)
     {
