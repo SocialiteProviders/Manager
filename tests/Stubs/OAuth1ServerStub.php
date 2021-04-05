@@ -4,6 +4,7 @@ namespace SocialiteProviders\Manager\Test\Stubs;
 
 use League\OAuth1\Client\Credentials\TokenCredentials;
 use SocialiteProviders\Manager\OAuth1\Server;
+use SocialiteProviders\Manager\OAuth1\User;
 
 class OAuth1ServerStub extends Server
 {
@@ -58,7 +59,7 @@ class OAuth1ServerStub extends Server
      */
     public function userDetails($data, TokenCredentials $tokenCredentials)
     {
-        return 'test';
+        return new User;
     }
 
     /**

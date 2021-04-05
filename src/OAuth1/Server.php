@@ -43,7 +43,7 @@ abstract class Server extends BaseServer
      * @param string                                                 $temporaryIdentifier
      * @param string                                                 $verifier
      *
-     * @return \League\OAuth1\Client\Credentials\TokenCredentials
+     * @return array
      * @throws \InvalidArgumentException
      */
     public function getTokenCredentials(TemporaryCredentials $temporaryCredentials, $temporaryIdentifier, $verifier)
@@ -72,7 +72,7 @@ abstract class Server extends BaseServer
                 $response = $client->post($uri, $headers, $bodyParameters)->send();
             }
         } catch (BadResponseException $e) {
-            return $this->handleTokenCredentialsBadResponse($e);
+            $this->handleTokenCredentialsBadResponse($e);
         }
 
         return [

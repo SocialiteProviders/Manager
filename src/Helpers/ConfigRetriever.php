@@ -83,7 +83,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
     /**
      * @param string $key
      *
-     * @return string
+     * @return string|null
      *
      * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
      */
