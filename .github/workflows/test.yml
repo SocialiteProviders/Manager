@@ -25,7 +25,7 @@ jobs:
           extension-csv: mbstring, xdebug
 
       - name: Install dependencies
-        run: composer update --no-interaction --prefer-dist --no-suggest --${{ matrix.stability }}
+        run: composer update --no-interaction --prefer-dist --${{ matrix.stability }}
 
       - name: Lint composer.json
         run: composer validate --strict
