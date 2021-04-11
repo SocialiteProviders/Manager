@@ -13,7 +13,7 @@ jobs:
         php-versions: [ '7.2', '7.3', '7.4', '8.0' ]
         stability: [ prefer-lowest, prefer-stable ]
 
-    name: PHP ${{ matrix.php-versions }}
+    name: PHP ${{ matrix.php-versions }} ${{ matrix.stability }}
     steps:
       - name: Checkout
         uses: actions/checkout@master
