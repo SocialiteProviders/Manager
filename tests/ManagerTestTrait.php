@@ -16,11 +16,15 @@ trait ManagerTestTrait
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         self::$functions = m::mock();
     }
 
     protected function tearDown(): void
     {
+        parent::tearDown();
+
         m::close();
     }
 
