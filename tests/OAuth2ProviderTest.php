@@ -105,7 +105,7 @@ class OAuth2ProviderTest extends TestCase
 
         $result = $provider->setConfig(new Config('key', 'secret', 'callback uri'));
 
-        $this->assertEquals($provider, $result);
+        $this->assertSame($provider, $result);
     }
 
     /**
