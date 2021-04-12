@@ -61,7 +61,7 @@ class OAuth1ProviderTest extends TestCase
      */
     public function it_throws_if_given_an_invalid_oauth1_provider()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionObject(new InvalidArgumentException("FooBar doesn't exist"));
 
         $providerName = 'foo';
         $providerClass = $this->oauth1ProviderStubClass();
@@ -92,7 +92,7 @@ class OAuth1ProviderTest extends TestCase
      */
     public function it_throws_if_given_an_invalid_oauth1_server()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionObject(new InvalidArgumentException("FooBar doesn't exist"));
 
         $providerName = 'bar';
         $providerClass = $this->oauth1ProviderStubClass();

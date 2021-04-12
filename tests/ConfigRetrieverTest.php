@@ -15,7 +15,7 @@ class ConfigRetrieverTest extends TestCase
      */
     public function it_throws_if_there_is_a_problem_with_the_services_config()
     {
-        $this->expectException(MissingConfigException::class);
+        $this->expectExceptionObject(new MissingConfigException('There is no services entry for test'));
 
         $providerName = 'test';
         self::$functions
@@ -33,7 +33,7 @@ class ConfigRetrieverTest extends TestCase
      */
     public function it_throws_if_there_are_missing_items_in_the_services_config()
     {
-        $this->expectException(MissingConfigException::class);
+        $this->expectExceptionObject(new MissingConfigException('There is no services entry for test'));
 
         $providerName = 'test';
         self::$functions
