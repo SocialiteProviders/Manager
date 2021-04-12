@@ -9,7 +9,7 @@ class ConfigTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_a_config_array()
+    public function it_returns_a_config_array(): void
     {
         $key = 'key';
         $secret = 'secret';
@@ -28,7 +28,7 @@ class ConfigTest extends TestCase
     /**
      * @test
      */
-    public function it_allows_additional_config_items()
+    public function it_allows_additional_config_items(): void
     {
         $key = 'key';
         $secret = 'secret';
