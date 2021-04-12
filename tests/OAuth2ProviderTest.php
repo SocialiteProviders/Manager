@@ -258,7 +258,7 @@ class OAuth2ProviderTest extends TestCase
     public function it_throws_if_oauth1_server_is_passed_for_oauth2()
     {
         $this->expectExceptionObject(new InvalidArgumentException(
-            sprintf("%s does not extend %s", OAuth2ProviderStub::class, AbstractProvider::class)
+            sprintf('%s does not extend %s', OAuth2ProviderStub::class, AbstractProvider::class)
         ));
 
         $providerName = 'baz';
