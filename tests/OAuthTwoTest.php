@@ -184,7 +184,7 @@ class OAuthTwoTest extends TestCase
      */
     public function exceptionIsThrownIfStateIsInvalid(): void
     {
-        $this->expectException(InvalidStateException::class);
+        $this->expectExceptionObject(new InvalidStateException());
 
         $session = m::mock(SessionInterface::class);
         $request = Request::create('foo', 'GET', [
@@ -206,7 +206,7 @@ class OAuthTwoTest extends TestCase
      */
     public function exceptionIsThrownIfStateIsNotSet(): void
     {
-        $this->expectException(InvalidStateException::class);
+        $this->expectExceptionObject(new InvalidStateException());
 
         $session = m::mock(SessionInterface::class);
         $request = Request::create('foo', 'GET', [
