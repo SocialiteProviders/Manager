@@ -13,7 +13,7 @@ class OAuthTwoTestProviderStub extends AbstractProvider
 
     public $http;
 
-    public static function providerName()
+    public static function providerName(): string
     {
         return 'test';
     }

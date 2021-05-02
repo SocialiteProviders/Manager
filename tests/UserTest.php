@@ -12,7 +12,7 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function we_should_be_able_to_set_the_credentials_body()
+    public function we_should_be_able_to_set_the_credentials_body(): void
     {
         $credentialsBody = ['test'];
         $user = (new User())->setAccessTokenResponseBody($credentialsBody);

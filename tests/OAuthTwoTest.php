@@ -21,7 +21,7 @@ class OAuthTwoTest extends TestCase
     /**
      * @test
      */
-    public function redirectGeneratesTheProperSymfonyRedirectResponse()
+    public function redirectGeneratesTheProperSymfonyRedirectResponse(): void
     {
         $session = m::mock(SessionContract::class);
         $request = Request::create('foo');
@@ -39,7 +39,7 @@ class OAuthTwoTest extends TestCase
     /**
      * @test
      */
-    public function it_can_return_the_service_container_key()
+    public function it_can_return_the_service_container_key(): void
     {
         $result = OAuthTwoTestProviderStub::serviceContainerKey(OAuthTwoTestProviderStub::PROVIDER_NAME);
 
@@ -49,7 +49,7 @@ class OAuthTwoTest extends TestCase
     /**
      * @test
      */
-    public function userReturnsAUserInstanceForTheAuthenticatedRequest()
+    public function userReturnsAUserInstanceForTheAuthenticatedRequest(): void
     {
         $session = m::mock(SessionInterface::class);
         $request = Request::create('foo', 'GET', [
@@ -92,7 +92,7 @@ class OAuthTwoTest extends TestCase
     /**
      * @test
      */
-    public function access_token_response_body_is_accessible_from_user()
+    public function access_token_response_body_is_accessible_from_user(): void
     {
         $session = m::mock(SessionInterface::class);
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
@@ -137,7 +137,7 @@ class OAuthTwoTest extends TestCase
     /**
      * @test
      */
-    public function regular_laravel_socialite_class_works_as_well()
+    public function regular_laravel_socialite_class_works_as_well(): void
     {
         $session = m::mock(SessionInterface::class);
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
@@ -182,7 +182,7 @@ class OAuthTwoTest extends TestCase
     /**
      * @test
      */
-    public function exceptionIsThrownIfStateIsInvalid()
+    public function exceptionIsThrownIfStateIsInvalid(): void
     {
         $this->expectException(InvalidStateException::class);
 
@@ -204,7 +204,7 @@ class OAuthTwoTest extends TestCase
     /**
      * @test
      */
-    public function exceptionIsThrownIfStateIsNotSet()
+    public function exceptionIsThrownIfStateIsNotSet(): void
     {
         $this->expectException(InvalidStateException::class);
 

@@ -13,7 +13,7 @@ class ConfigRetrieverTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_if_there_is_a_problem_with_the_services_config()
+    public function it_throws_if_there_is_a_problem_with_the_services_config(): void
     {
         $this->expectException(MissingConfigException::class);
 
@@ -31,7 +31,7 @@ class ConfigRetrieverTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_if_there_are_missing_items_in_the_services_config()
+    public function it_throws_if_there_are_missing_items_in_the_services_config(): void
     {
         $this->expectException(MissingConfigException::class);
 
@@ -49,7 +49,7 @@ class ConfigRetrieverTest extends TestCase
     /**
      * @test
      */
-    public function it_retrieves_a_config_from_the_services()
+    public function it_retrieves_a_config_from_the_services(): void
     {
         $providerName = 'test';
         $key = 'key';
@@ -99,7 +99,7 @@ function app()
 
 class applicationStub
 {
-    public function runningInConsole()
+    public function runningInConsole(): bool
     {
         return false;
     }

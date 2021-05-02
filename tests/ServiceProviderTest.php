@@ -14,7 +14,7 @@ class ServiceProviderTest extends TestCase
     /**
      * @test
      */
-    public function it_fires_an_event()
+    public function it_fires_an_event(): void
     {
         $socialiteWasCalledMock = m::mock(SocialiteWasCalled::class);
         self::$functions

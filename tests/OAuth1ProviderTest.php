@@ -15,7 +15,7 @@ class OAuth1ProviderTest extends TestCase
     /**
      * @test
      */
-    public function it_should_build_a_provider_and_extend_socialite()
+    public function it_should_build_a_provider_and_extend_socialite(): void
     {
         $providerName = 'bar';
         $providerClass = $this->oauth1ProviderStubClass();
@@ -59,7 +59,7 @@ class OAuth1ProviderTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_if_given_an_invalid_oauth1_provider()
+    public function it_throws_if_given_an_invalid_oauth1_provider(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -90,7 +90,7 @@ class OAuth1ProviderTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_if_given_an_invalid_oauth1_server()
+    public function it_throws_if_given_an_invalid_oauth1_server(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
