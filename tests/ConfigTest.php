@@ -45,4 +45,28 @@ class ConfigTest extends TestCase
 
         $this->assertSame($result, $config->get());
     }
+
+    /**
+     * @test
+     */
+    public function it_allows_closure_config_redirect()
+    {
+        $key = 'key';
+        $secret = 'secret';
+        $callbackUri = 'uri';
+        $callbackFunc = function () use ($callbackUri) {
+            return $callbackUri;
+        };
+        $result = [
+            'client_id' => $key,
+            'client_secret' => $secret,
+            'redirect' => $callbackUri,
+            'additional' => true,
+        ];
+        $additional = ['additional' => true];
+
+        $config = new Config($key, $secret, $callbackFunc, $additional);
+
+        $this->assertSame($result, $config->get());
+    }
 }
