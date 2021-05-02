@@ -17,7 +17,7 @@ class Config implements Contracts\ConfigInterface
      *
      * @param string $key
      * @param string $secret
-     * @param string $callbackUri
+     * @param string|callable $callbackUri
      * @param array  $additionalProviderConfig
      */
     public function __construct($key, $secret, $callbackUri, array $additionalProviderConfig = [])
@@ -37,9 +37,11 @@ class Config implements Contracts\ConfigInterface
      */
     protected function formatRedirectUri($callbackUri)
     {
-        return Str::startsWith($callbackUri, '/')
-                    ? URL::to($callbackUri)
-                    : $callbackUri;
+        $redirect = value($callbackUri);
+
+        return Str::startsWith($redirect, '/')
+                    ? URL::to($redirect)
+                    : $redirect;
     }
 
     /**
