@@ -33,7 +33,7 @@ class OAuthTwoTest extends TestCase
         $response = $provider->redirect();
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
-        $this->assertEquals('http://auth.url', $response->getTargetUrl());
+        $this->assertSame('http://auth.url', $response->getTargetUrl());
     }
 
     /**
@@ -43,7 +43,7 @@ class OAuthTwoTest extends TestCase
     {
         $result = OAuthTwoTestProviderStub::serviceContainerKey(OAuthTwoTestProviderStub::PROVIDER_NAME);
 
-        $this->assertEquals('SocialiteProviders.config.test', $result);
+        $this->assertSame('SocialiteProviders.config.test', $result);
     }
 
     /**
@@ -86,7 +86,7 @@ class OAuthTwoTest extends TestCase
         $user = $provider->user();
 
         $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals('foo', $user->id);
+        $this->assertSame('foo', $user->id);
     }
 
     /**
@@ -130,8 +130,8 @@ class OAuthTwoTest extends TestCase
         $user = $provider->user();
 
         $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals('foo', $user->id);
-        $this->assertEquals($user->accessTokenResponseBody, json_decode($accessTokenResponseBody, true));
+        $this->assertSame('foo', $user->id);
+        $this->assertSame($user->accessTokenResponseBody, json_decode($accessTokenResponseBody, true));
     }
 
     /**
@@ -176,7 +176,7 @@ class OAuthTwoTest extends TestCase
         $user = $provider->user();
 
         $this->assertInstanceOf(SocialiteOAuth2User::class, $user);
-        $this->assertEquals('foo', $user->id);
+        $this->assertSame('foo', $user->id);
     }
 
     /**
