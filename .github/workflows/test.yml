@@ -13,9 +13,9 @@ jobs:
         coverage: [ 'none' ]
         php-versions: [ '7.2', '7.3', '7.4', '8.0' ]
         exclude:
-          - php: '8.0'
+          - php-versions: '8.0'
         include:
-          - php: '8.0'
+          - php-versions: '8.0'
             coverage: 'xdebug'
 
     name: PHP ${{ matrix.php-versions }}
