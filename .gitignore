@@ -1,4 +1,5 @@
-/vendor/
+/build
+/vendor
 composer.phar
 composer.lock
 coverage.clover
