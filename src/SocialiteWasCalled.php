@@ -13,7 +13,7 @@ use SocialiteProviders\Manager\Exception\InvalidArgumentException;
 
 class SocialiteWasCalled
 {
-    const SERVICE_CONTAINER_PREFIX = 'SocialiteProviders.config.';
+    public const SERVICE_CONTAINER_PREFIX = 'SocialiteProviders.config.';
 
     /**
      * @var \Illuminate\Contracts\Container\Container

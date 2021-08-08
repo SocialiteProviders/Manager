@@ -9,7 +9,7 @@ use stdClass;
 
 class OAuthTwoTestProviderStub extends AbstractProvider
 {
-    const PROVIDER_NAME = 'test';
+    public const PROVIDER_NAME = 'test';
 
     public $http;
 
