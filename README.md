@@ -1,7 +1,7 @@
 # Socialite Providers Manager
 
-[![Build Status](https://travis-ci.org/SocialiteProviders/Manager.svg)](https://travis-ci.org/SocialiteProviders/Manager) 
-[![Code Coverage](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/?branch=master) 
+[![Build Status](https://travis-ci.org/SocialiteProviders/Manager.svg)](https://travis-ci.org/SocialiteProviders/Manager)
+[![codecov](https://codecov.io/gh/SocialiteProviders/Manager/branch/master/graph/badge.svg)](https://codecov.io/gh/SocialiteProviders/Manager)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/?branch=master) 
 [![Latest Stable Version](https://poser.pugx.org/socialiteproviders/manager/v/stable.svg)](https://packagist.org/packages/socialiteproviders/manager) 
 [![Total Downloads](https://poser.pugx.org/socialiteproviders/manager/downloads.svg)](https://packagist.org/packages/socialiteproviders/manager) 
