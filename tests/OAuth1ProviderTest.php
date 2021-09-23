@@ -4,17 +4,18 @@ namespace SocialiteProviders\Manager\Test;
 
 use Laravel\Socialite\Contracts\Factory as SocialiteFactoryContract;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use SocialiteProviders\Manager\Exception\InvalidArgumentException;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
-class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
+class OAuth1ProviderTest extends TestCase
 {
     use ManagerTestTrait;
 
     /**
      * @test
      */
-    public function it_should_build_a_provider_and_extend_socialite()
+    public function it_should_build_a_provider_and_extend_socialite(): void
     {
         $providerName = 'bar';
         $providerClass = $this->oauth1ProviderStubClass();
@@ -58,9 +59,9 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_throws_if_given_an_invalid_oauth1_provider()
+    public function it_throws_if_given_an_invalid_oauth1_provider(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionObject(new InvalidArgumentException("FooBar doesn't exist"));
 
         $providerName = 'foo';
         $providerClass = $this->oauth1ProviderStubClass();
@@ -89,9 +90,9 @@ class OAuth1ProviderTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_throws_if_given_an_invalid_oauth1_server()
+    public function it_throws_if_given_an_invalid_oauth1_server(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionObject(new InvalidArgumentException("FooBar doesn't exist"));
 
         $providerName = 'bar';
         $providerClass = $this->oauth1ProviderStubClass();

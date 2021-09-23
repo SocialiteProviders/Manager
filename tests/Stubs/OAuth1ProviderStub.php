@@ -6,14 +6,14 @@ use SocialiteProviders\Manager\OAuth1\AbstractProvider;
 
 class OAuth1ProviderStub extends AbstractProvider
 {
-    const IDENTIFIER = 'TEST';
+    public const IDENTIFIER = 'TEST';
 
-    protected function mapUserToObject(array $user)
+    protected function mapUserToObject(array $user): array
     {
         return [];
     }
 
-    public static function additionalConfigKeys()
+    public static function additionalConfigKeys(): array
     {
         return [];
     }

@@ -59,7 +59,7 @@ class OAuth1ServerStub extends Server
      */
     public function userDetails($data, TokenCredentials $tokenCredentials)
     {
-        return 'test';
+        return new User;
     }
 
     /**

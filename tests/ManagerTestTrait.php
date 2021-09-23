@@ -7,6 +7,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request as HttpRequest;
 use Laravel\Socialite\SocialiteManager;
 use Mockery as m;
+use Mockery\MockInterface;
 use SocialiteProviders\Manager\Config;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 
@@ -14,12 +15,12 @@ trait ManagerTestTrait
 {
     public static $functions;
 
-    public function setUp()
+    protected function setUp(): void
     {
         self::$functions = m::mock();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         m::close();
     }
@@ -43,10 +44,12 @@ trait ManagerTestTrait
     /**
      * @return \Mockery\MockInterface|\Illuminate\Contracts\Foundation\Application
      */
-    protected function appMockWithBooted() {
+    protected function appMockWithBooted()
+    {
         $app = m::mock(Application::class);
         $app->shouldReceive('booted')->with(m::on(function ($callback) {
             $callback();
+
             return true;
         }));
 
@@ -69,7 +72,7 @@ trait ManagerTestTrait
         return m::mock(HttpRequest::class);
     }
 
-    protected function configObject()
+    protected function configObject(): Config
     {
         return new Config('test', 'test', 'test');
     }
@@ -88,7 +91,7 @@ trait ManagerTestTrait
     /**
      * @return array
      */
-    protected function config()
+    protected function config(): array
     {
         return [
             'client_id' => 'test',
@@ -102,7 +105,7 @@ trait ManagerTestTrait
      *
      * @return array
      */
-    protected function oauth1FormattedConfig(array $config)
+    protected function oauth1FormattedConfig(array $config): array
     {
         return [
             'identifier' => $config['client_id'],
@@ -111,7 +114,7 @@ trait ManagerTestTrait
         ];
     }
 
-    protected function oauth2ProviderStub()
+    protected function oauth2ProviderStub(): MockInterface
     {
         static $provider = null;
 
@@ -122,7 +125,7 @@ trait ManagerTestTrait
         return $provider;
     }
 
-    protected function oauth1ProviderStub()
+    protected function oauth1ProviderStub(): MockInterface
     {
         static $provider = null;
 
@@ -133,17 +136,17 @@ trait ManagerTestTrait
         return $provider;
     }
 
-    protected function oauth1ProviderStubClass()
+    protected function oauth1ProviderStubClass(): string
     {
         return $this->fullStubClassName('OAuth1ProviderStub');
     }
 
-    protected function oauth1ServerStubClass()
+    protected function oauth1ServerStubClass(): string
     {
         return $this->fullStubClassName('OAuth1ServerStub');
     }
 
-    protected function oauth2ProviderStubClass()
+    protected function oauth2ProviderStubClass(): string
     {
         return $this->fullStubClassName('OAuth2ProviderStub');
     }
@@ -153,7 +156,7 @@ trait ManagerTestTrait
      *
      * @return \Mockery\MockInterface
      */
-    protected function mockStub($stub)
+    protected function mockStub($stub): MockInterface
     {
         return m::mock($this->fullStubClassName($stub));
     }
@@ -163,7 +166,7 @@ trait ManagerTestTrait
      *
      * @return string
      */
-    protected function fullStubClassName($stub)
+    protected function fullStubClassName($stub): string
     {
         return __NAMESPACE__.'\Stubs\\'.$stub;
     }
@@ -171,7 +174,7 @@ trait ManagerTestTrait
     /**
      * @return string
      */
-    protected function invalidClass()
+    protected function invalidClass(): string
     {
         return 'FooBar';
     }

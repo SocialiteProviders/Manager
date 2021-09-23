@@ -3,7 +3,10 @@
 namespace SocialiteProviders\Manager\OAuth1;
 
 use Illuminate\Http\RedirectResponse;
+use InvalidArgumentException;
 use Laravel\Socialite\One\AbstractProvider as BaseProvider;
+use League\OAuth1\Client\Credentials\CredentialsException;
+use League\OAuth1\Client\Credentials\TemporaryCredentials;
 use League\OAuth1\Client\Credentials\TokenCredentials;
 use SocialiteProviders\Manager\ConfigTrait;
 use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
@@ -41,8 +44,8 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      */
     public function user()
     {
-        if (!$this->hasNecessaryVerifier()) {
-            throw new \InvalidArgumentException('Invalid request. Missing OAuth verifier.');
+        if (! $this->hasNecessaryVerifier()) {
+            throw new InvalidArgumentException('Invalid request. Missing OAuth verifier.');
         }
 
         $token = $this->getToken();
@@ -55,7 +58,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
         if ($user instanceof User) {
             parse_str($token['credentialsResponseBody'], $credentialsResponseBody);
 
-            if (!$credentialsResponseBody || !is_array($credentialsResponseBody)) {
+            if (! $credentialsResponseBody || ! is_array($credentialsResponseBody)) {
                 throw new CredentialsException('Unable to parse token credentials response.');
             }
 
@@ -85,11 +88,11 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Redirect the user to the authentication page for the provider.
      *
-     * @return RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function redirect()
     {
-        if (!$this->isStateless()) {
+        if (! $this->isStateless()) {
             $this->request->getSession()->put(
                 'oauth.temp', $temp = $this->server->getTemporaryCredentials()
             );
@@ -162,14 +165,16 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      */
     protected function getToken()
     {
-        if (!$this->isStateless()) {
+        if (! $this->isStateless()) {
             $temp = $this->request->getSession()->get('oauth.temp');
 
             return $this->server->getTokenCredentials(
                 $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
             );
         }
-        $temp = unserialize($this->request->session()->get('oauth_temp'));
+        $temp = unserialize($this->request->session()->get('oauth_temp'), [
+            'allowed_classes' => [TemporaryCredentials::class],
+        ]);
 
         return $this->server->getTokenCredentials(
                 $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')

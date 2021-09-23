@@ -2,12 +2,14 @@
 
 namespace SocialiteProviders\Manager;
 
-class ConfigTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ConfigTest extends TestCase
 {
     /**
      * @test
      */
-    public function it_returns_a_config_array()
+    public function it_returns_a_config_array(): void
     {
         $key = 'key';
         $secret = 'secret';
@@ -26,7 +28,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_allows_additional_config_items()
+    public function it_allows_additional_config_items(): void
     {
         $key = 'key';
         $secret = 'secret';
@@ -40,6 +42,30 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $additional = ['additional' => true];
 
         $config = new Config($key, $secret, $callbackUri, $additional);
+
+        $this->assertSame($result, $config->get());
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_closure_config_redirect()
+    {
+        $key = 'key';
+        $secret = 'secret';
+        $callbackUri = 'uri';
+        $callbackFunc = function () use ($callbackUri) {
+            return $callbackUri;
+        };
+        $result = [
+            'client_id' => $key,
+            'client_secret' => $secret,
+            'redirect' => $callbackUri,
+            'additional' => true,
+        ];
+        $additional = ['additional' => true];
+
+        $config = new Config($key, $secret, $callbackFunc, $additional);
 
         $this->assertSame($result, $config->get());
     }

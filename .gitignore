@@ -1,4 +1,7 @@
-/vendor/
+/build
+/vendor
 composer.phar
 composer.lock
 coverage.clover
+.phpunit.result.cache
+phpunit.xml
