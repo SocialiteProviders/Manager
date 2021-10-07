@@ -30,8 +30,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     protected $credentialsResponseBody;
 
     /**
-     * @param string $providerName
-     *
+     * @param  string  $providerName
      * @return string
      */
     public static function serviceContainerKey($providerName)
@@ -107,8 +106,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Indicates that the provider should operate as stateless.
      *
-     * @param mixed $stateless
-     *
+     * @param  mixed  $stateless
      * @return $this
      */
     public function stateless($stateless = true)
@@ -121,8 +119,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Set the scopes of the requested access.
      *
-     * @param array $scopes
-     *
+     * @param  array  $scopes
      * @return $this
      */
     public function scopes(array $scopes)
@@ -135,8 +132,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Set the custom parameters of the request.
      *
-     * @param array $parameters
-     *
+     * @param  array  $parameters
      * @return $this
      */
     public function with(array $parameters)
@@ -147,8 +143,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     }
 
     /**
-     * @param Config $config
-     *
+     * @param  Config  $config
      * @return $this
      */
     public function setConfig(Config $config)

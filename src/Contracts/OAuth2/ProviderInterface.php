@@ -8,8 +8,7 @@ use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
 interface ProviderInterface extends SocialiteOauth2ProviderInterface
 {
     /**
-     * @param \SocialiteProviders\Manager\Contracts\ConfigInterface $config
-     *
+     * @param  \SocialiteProviders\Manager\Contracts\ConfigInterface  $config
      * @return $this
      */
     public function setConfig(Config $config);

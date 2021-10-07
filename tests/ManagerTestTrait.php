@@ -101,8 +101,7 @@ trait ManagerTestTrait
     }
 
     /**
-     * @param array $config
-     *
+     * @param  array  $config
      * @return array
      */
     protected function oauth1FormattedConfig(array $config): array
@@ -152,8 +151,7 @@ trait ManagerTestTrait
     }
 
     /**
-     * @param string $stub
-     *
+     * @param  string  $stub
      * @return \Mockery\MockInterface
      */
     protected function mockStub($stub): MockInterface
@@ -162,8 +160,7 @@ trait ManagerTestTrait
     }
 
     /**
-     * @param string $stub
-     *
+     * @param  string  $stub
      * @return string
      */
     protected function fullStubClassName($stub): string

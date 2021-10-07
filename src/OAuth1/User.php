@@ -20,8 +20,7 @@ class User extends BaseUser
      *
      * Might include things such as the token and refresh token
      *
-     * @param array $accessTokenResponseBody
-     *
+     * @param  array  $accessTokenResponseBody
      * @return $this
      */
     public function setAccessTokenResponseBody(array $accessTokenResponseBody)

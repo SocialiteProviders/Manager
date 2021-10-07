@@ -15,10 +15,10 @@ class Config implements Contracts\ConfigInterface
     /**
      * Config constructor.
      *
-     * @param string $key
-     * @param string $secret
-     * @param string|callable $callbackUri
-     * @param array  $additionalProviderConfig
+     * @param  string  $key
+     * @param  string  $secret
+     * @param  string|callable  $callbackUri
+     * @param  array  $additionalProviderConfig
      */
     public function __construct($key, $secret, $callbackUri, array $additionalProviderConfig = [])
     {
