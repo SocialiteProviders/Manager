@@ -13,7 +13,7 @@ trait ConfigTrait
     protected $config;
 
     /**
-     * @param \SocialiteProviders\Manager\Contracts\OAuth1\ProviderInterface|\SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface $config
+     * @param  \SocialiteProviders\Manager\Contracts\OAuth1\ProviderInterface|\SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface  $config
      */
     public function setConfig(ConfigInterface $config)
     {
@@ -36,9 +36,8 @@ trait ConfigTrait
     }
 
     /**
-     * @param string $key
-     * @param mixed  $default
-     *
+     * @param  string  $key
+     * @param  mixed  $default
      * @return mixed|array
      */
     protected function getConfig($key = null, $default = null)

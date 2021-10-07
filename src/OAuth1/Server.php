@@ -39,11 +39,11 @@ abstract class Server extends BaseServer
      * the temporary credentials identifier as passed back by the server
      * and finally the verifier code.
      *
-     * @param \League\OAuth1\Client\Credentials\TemporaryCredentials $temporaryCredentials
-     * @param string                                                 $temporaryIdentifier
-     * @param string                                                 $verifier
-     *
+     * @param  \League\OAuth1\Client\Credentials\TemporaryCredentials  $temporaryCredentials
+     * @param  string  $temporaryIdentifier
+     * @param  string  $verifier
      * @return array
+     *
      * @throws \InvalidArgumentException
      */
     public function getTokenCredentials(TemporaryCredentials $temporaryCredentials, $temporaryIdentifier, $verifier)
@@ -84,8 +84,7 @@ abstract class Server extends BaseServer
     /**
      * Set the scopes of the requested access.
      *
-     * @param array $scopes
-     *
+     * @param  array  $scopes
      * @return $this
      */
     public function scopes(array $scopes)
@@ -98,8 +97,7 @@ abstract class Server extends BaseServer
     /**
      * Set the custom parameters of the request.
      *
-     * @param array $parameters
-     *
+     * @param  array  $parameters
      * @return $this
      */
     public function with(array $parameters)
@@ -112,9 +110,8 @@ abstract class Server extends BaseServer
     /**
      * Format the given scopes.
      *
-     * @param array  $scopes
-     * @param string $scopeSeparator
-     *
+     * @param  array  $scopes
+     * @param  string  $scopeSeparator
      * @return string
      */
     protected function formatScopes(array $scopes, $scopeSeparator)

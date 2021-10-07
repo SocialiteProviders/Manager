@@ -19,8 +19,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     protected $credentialsResponseBody;
 
     /**
-     * @param string $providerName
-     *
+     * @param  string  $providerName
      * @return string
      */
     public static function serviceContainerKey($providerName)
@@ -30,6 +29,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
 
     /**
      * @return \SocialiteProviders\Manager\OAuth2\User
+     *
      * @throws \Laravel\Socialite\Two\InvalidStateException
      */
     public function user()
@@ -57,8 +57,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Get the access token from the token response body.
      *
-     * @param array $body
-     *
+     * @param  array  $body
      * @return string
      */
     protected function parseAccessToken($body)
@@ -69,8 +68,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Get the refresh token from the token response body.
      *
-     * @param array $body
-     *
+     * @param  array  $body
      * @return string
      */
     protected function parseRefreshToken($body)
@@ -81,8 +79,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Get the expires in from the token response body.
      *
-     * @param array $body
-     *
+     * @param  array  $body
      * @return string
      */
     protected function parseExpiresIn($body)
