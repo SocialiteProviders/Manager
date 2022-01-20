@@ -221,4 +221,59 @@ class OAuthTwoTest extends TestCase
         $provider = new OAuthTwoTestProviderStub($request, 'client_id', 'client_secret', 'redirect');
         $provider->user();
     }
+
+    /**
+     * @test
+     */
+    public function userObjectShouldBeCachedOnFirstCall(): void
+    {
+        $session = m::mock(SessionInterface::class);
+        $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
+        $request = Request::create('foo', 'GET', [
+            'state' => str_repeat('A', 40),
+            'code' => 'code',
+        ]);
+        $request->setSession($session);
+        $session
+            ->shouldReceive('pull')
+            ->once()
+            ->with('state')
+            ->andReturn(str_repeat('A', 40));
+        $provider = new OAuthTwoTestProviderStub($request, 'client_id', 'client_secret', 'redirect_uri');
+
+        $provider->http = m::mock(stdClass::class);
+        $provider->http
+            ->shouldReceive('post')
+            ->once()
+            ->with('http://token.url', [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+                'form_params' => [
+                    'grant_type' => 'authorization_code',
+                    'client_id' => 'client_id',
+                    'client_secret' => 'client_secret',
+                    'code' => 'code',
+                    'redirect_uri' => 'redirect_uri',
+                ],
+            ])
+            ->andReturn($response = m::mock(stdClass::class));
+        $response
+            ->shouldReceive('getBody')
+            ->andReturn($accessTokenResponseBody);
+
+        $reflection = new \ReflectionClass($provider);
+        $reflectionProperty = $reflection->getProperty('user');
+        $reflectionProperty->setAccessible(true);
+
+        $this->assertNull($reflectionProperty->getValue($provider));
+
+        $firstCall = $provider->user();
+
+        $this->assertInstanceOf(SocialiteOAuth2User::class, $reflectionProperty->getValue($provider));
+
+        $secondCall = $provider->user();
+
+        $this->assertSame($firstCall, $secondCall);
+    }
 }

@@ -19,6 +19,13 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     protected $credentialsResponseBody;
 
     /**
+     * The cached user instance.
+     *
+     * @var \SocialiteProviders\Manager\OAuth2\User|null
+     */
+    protected $user;
+
+    /**
      * @param  string  $providerName
      * @return string
      */
@@ -34,6 +41,10 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      */
     public function user()
     {
+        if ($this->user) {
+            return $this->user;
+        }
+
         if ($this->hasInvalidState()) {
             throw new InvalidStateException();
         }
@@ -41,15 +52,15 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
         $response = $this->getAccessTokenResponse($this->getCode());
         $this->credentialsResponseBody = $response;
 
-        $user = $this->mapUserToObject($this->getUserByToken(
+        $this->user = $this->mapUserToObject($this->getUserByToken(
             $token = $this->parseAccessToken($response)
         ));
 
-        if ($user instanceof User) {
-            $user->setAccessTokenResponseBody($this->credentialsResponseBody);
+        if ($this->user instanceof User) {
+            $this->user->setAccessTokenResponseBody($this->credentialsResponseBody);
         }
 
-        return $user->setToken($token)
+        return $this->user->setToken($token)
                     ->setRefreshToken($this->parseRefreshToken($response))
                     ->setExpiresIn($this->parseExpiresIn($response));
     }
