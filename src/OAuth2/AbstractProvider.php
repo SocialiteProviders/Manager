@@ -51,7 +51,8 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
 
         return $user->setToken($token)
                     ->setRefreshToken($this->parseRefreshToken($response))
-                    ->setExpiresIn($this->parseExpiresIn($response));
+                    ->setExpiresIn($this->parseExpiresIn($response))
+                    ->setApprovedScopes($this->parseApprovedScopes($response));
     }
 
     /**
@@ -85,5 +86,16 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     protected function parseExpiresIn($body)
     {
         return Arr::get($body, 'expires_in');
+    }
+
+    /**
+     * Get the approved scopes from the token response body
+     *
+     * @param  array  $body
+     * @return string
+     */
+    protected function parseApprovedScopes($body)
+    {
+        return explode($this->scopeSeparator, Arr::get($body, 'scope', ''));
     }
 }
