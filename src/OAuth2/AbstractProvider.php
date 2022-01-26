@@ -92,7 +92,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      * Get the approved scopes from the token response body.
      *
      * @param  array  $body
-     * @return string
+     * @return array
      */
     protected function parseApprovedScopes($body)
     {
