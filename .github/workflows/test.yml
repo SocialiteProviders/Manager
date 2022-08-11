@@ -4,24 +4,24 @@ on: [ pull_request, push ]
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     strategy:
       max-parallel: 15
       fail-fast: false
       matrix:
         coverage: [ 'none' ]
-        php-versions: [ '7.2', '7.3', '7.4', '8.0' ]
+        php-versions: [ '7.2', '7.3', '7.4', '8.0', '8.1' ]
         exclude:
-          - php-versions: '8.0'
+          - php-versions: '8.1'
         include:
-          - php-versions: '8.0'
+          - php-versions: '8.1'
             coverage: 'xdebug'
 
     name: PHP ${{ matrix.php-versions }}
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -40,5 +40,5 @@ jobs:
         run: vendor/bin/phpunit -v
 
       - name: Upload coverage results
-        uses: codecov/codecov-action@v1
         if: matrix.coverage != 'none'
+        uses: codecov/codecov-action@v3
