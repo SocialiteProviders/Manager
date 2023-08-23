@@ -1,6 +1,9 @@
 name: Test
 
-on: [ pull_request, push ]
+on:
+  pull_request:
+  push:
+    branches: [ master ]
 
 jobs:
   test:
@@ -11,11 +14,11 @@ jobs:
       fail-fast: false
       matrix:
         coverage: [ 'none' ]
-        php-versions: [ '7.4', '8.0', '8.1' ]
+        php-versions: [ '8.0', '8.1', '8.2' ]
         exclude:
-          - php-versions: '8.1'
+          - php-versions: '8.2'
         include:
-          - php-versions: '8.1'
+          - php-versions: '8.2'
             coverage: 'xdebug'
 
     name: PHP ${{ matrix.php-versions }}
