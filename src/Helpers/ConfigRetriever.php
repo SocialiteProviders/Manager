@@ -45,9 +45,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
             $this->getFromServices('client_id'),
             $this->getFromServices('client_secret'),
             $this->getFromServices('redirect'),
-            $this->getConfigItems($additionalConfigKeys, function ($key) {
-                return $this->getFromServices(strtolower($key));
-            })
+            $this->getConfigItems($additionalConfigKeys, fn($key) => $this->getFromServices(strtolower($key)))
         );
     }
 

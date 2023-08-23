@@ -20,10 +20,7 @@ class SocialiteWasCalled
      */
     protected $app;
 
-    /**
-     * @var \SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface
-     */
-    private $configRetriever;
+    private ConfigRetrieverInterface $configRetriever;
 
     /**
      * @param  \Illuminate\Contracts\Container\Container  $app
