@@ -54,9 +54,7 @@ class ConfigTest extends TestCase
         $key = 'key';
         $secret = 'secret';
         $callbackUri = 'uri';
-        $callbackFunc = function () use ($callbackUri) {
-            return $callbackUri;
-        };
+        $callbackFunc = fn() => $callbackUri;
         $result = [
             'client_id' => $key,
             'client_secret' => $secret,
