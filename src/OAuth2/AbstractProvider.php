@@ -61,8 +61,8 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
         }
 
         return $this->user->setToken($token)
-                    ->setRefreshToken($this->parseRefreshToken($response))
-                    ->setExpiresIn($this->parseExpiresIn($response));
+            ->setRefreshToken($this->parseRefreshToken($response))
+            ->setExpiresIn($this->parseExpiresIn($response));
     }
 
     /**

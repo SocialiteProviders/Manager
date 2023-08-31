@@ -54,7 +54,7 @@ class OAuthTwoTest extends TestCase
         $session = m::mock(SessionInterface::class);
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('A', 40),
-            'code' => 'code',
+            'code'  => 'code',
         ]);
         $request->setSession($session);
         $session
@@ -72,11 +72,11 @@ class OAuthTwoTest extends TestCase
                     'Accept' => 'application/json',
                 ],
                 'form_params' => [
-                    'grant_type' => 'authorization_code',
-                    'client_id' => 'client_id',
+                    'grant_type'    => 'authorization_code',
+                    'client_id'     => 'client_id',
                     'client_secret' => 'client_secret',
-                    'code' => 'code',
-                    'redirect_uri' => 'redirect_uri',
+                    'code'          => 'code',
+                    'redirect_uri'  => 'redirect_uri',
                 ],
             ])
             ->andReturn($response = m::mock(stdClass::class));
@@ -98,7 +98,7 @@ class OAuthTwoTest extends TestCase
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('A', 40),
-            'code' => 'code',
+            'code'  => 'code',
         ]);
         $request->setSession($session);
         $session
@@ -116,11 +116,11 @@ class OAuthTwoTest extends TestCase
                     'Accept' => 'application/json',
                 ],
                 'form_params' => [
-                    'grant_type' => 'authorization_code',
-                    'client_id' => 'client_id',
+                    'grant_type'    => 'authorization_code',
+                    'client_id'     => 'client_id',
                     'client_secret' => 'client_secret',
-                    'code' => 'code',
-                    'redirect_uri' => 'redirect_uri',
+                    'code'          => 'code',
+                    'redirect_uri'  => 'redirect_uri',
                 ],
             ])
             ->andReturn($response = m::mock(stdClass::class));
@@ -143,7 +143,7 @@ class OAuthTwoTest extends TestCase
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('A', 40),
-            'code' => 'code',
+            'code'  => 'code',
         ]);
         $request->setSession($session);
         $session
@@ -162,11 +162,11 @@ class OAuthTwoTest extends TestCase
                     'Accept' => 'application/json',
                 ],
                 'form_params' => [
-                    'grant_type' => 'authorization_code',
-                    'client_id' => 'client_id',
+                    'grant_type'    => 'authorization_code',
+                    'client_id'     => 'client_id',
                     'client_secret' => 'client_secret',
-                    'code' => 'code',
-                    'redirect_uri' => 'redirect_uri',
+                    'code'          => 'code',
+                    'redirect_uri'  => 'redirect_uri',
                 ],
             ])
             ->andReturn($response = m::mock(stdClass::class));
@@ -189,7 +189,7 @@ class OAuthTwoTest extends TestCase
         $session = m::mock(SessionInterface::class);
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('B', 40),
-            'code' => 'code',
+            'code'  => 'code',
         ]);
         $request->setSession($session);
         $session
@@ -211,7 +211,7 @@ class OAuthTwoTest extends TestCase
         $session = m::mock(SessionInterface::class);
         $request = Request::create('foo', 'GET', [
             'state' => 'state',
-            'code' => 'code',
+            'code'  => 'code',
         ]);
         $request->setSession($session);
         $session
@@ -231,7 +231,7 @@ class OAuthTwoTest extends TestCase
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('A', 40),
-            'code' => 'code',
+            'code'  => 'code',
         ]);
         $request->setSession($session);
         $session
@@ -250,11 +250,11 @@ class OAuthTwoTest extends TestCase
                     'Accept' => 'application/json',
                 ],
                 'form_params' => [
-                    'grant_type' => 'authorization_code',
-                    'client_id' => 'client_id',
+                    'grant_type'    => 'authorization_code',
+                    'client_id'     => 'client_id',
                     'client_secret' => 'client_secret',
-                    'code' => 'code',
-                    'redirect_uri' => 'redirect_uri',
+                    'code'          => 'code',
+                    'redirect_uri'  => 'redirect_uri',
                 ],
             ])
             ->andReturn($response = m::mock(stdClass::class));

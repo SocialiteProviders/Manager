@@ -172,8 +172,8 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
         ]);
 
         return $this->server->getTokenCredentials(
-                $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
-            );
+            $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
+        );
     }
 
     /**
