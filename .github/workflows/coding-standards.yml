@@ -1,0 +1,7 @@
+name: Fix code styling
+
+on: [ push ]
+
+jobs:
+  lint:
+    uses: socialiteproviders/.github/.github/workflows/coding-standards.yml@main
