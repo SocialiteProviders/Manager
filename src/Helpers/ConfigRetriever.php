@@ -121,11 +121,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
             }
         }
 
-
-
-
-
-            return $this->servicesArray = $configArray;
+        return $this->servicesArray = $configArray;
     }
 
     /**
