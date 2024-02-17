@@ -15,9 +15,9 @@ class ConfigTest extends TestCase
         $secret = 'secret';
         $callbackUri = 'uri';
         $result = [
-            'client_id' => $key,
+            'client_id'     => $key,
             'client_secret' => $secret,
-            'redirect' => $callbackUri,
+            'redirect'      => $callbackUri,
         ];
 
         $config = new Config($key, $secret, $callbackUri);
@@ -34,10 +34,10 @@ class ConfigTest extends TestCase
         $secret = 'secret';
         $callbackUri = 'uri';
         $result = [
-            'client_id' => $key,
+            'client_id'     => $key,
             'client_secret' => $secret,
-            'redirect' => $callbackUri,
-            'additional' => true,
+            'redirect'      => $callbackUri,
+            'additional'    => true,
         ];
         $additional = ['additional' => true];
 
@@ -54,12 +54,12 @@ class ConfigTest extends TestCase
         $key = 'key';
         $secret = 'secret';
         $callbackUri = 'uri';
-        $callbackFunc = fn() => $callbackUri;
+        $callbackFunc = fn () => $callbackUri;
         $result = [
-            'client_id' => $key,
+            'client_id'     => $key,
             'client_secret' => $secret,
-            'redirect' => $callbackUri,
-            'additional' => true,
+            'redirect'      => $callbackUri,
+            'additional'    => true,
         ];
         $additional = ['additional' => true];
 

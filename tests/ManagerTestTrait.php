@@ -94,9 +94,9 @@ trait ManagerTestTrait
     protected function config(): array
     {
         return [
-            'client_id' => 'test',
+            'client_id'     => 'test',
             'client_secret' => 'test',
-            'redirect' => 'test',
+            'redirect'      => 'test',
         ];
     }
 
@@ -107,8 +107,8 @@ trait ManagerTestTrait
     protected function oauth1FormattedConfig(array $config): array
     {
         return [
-            'identifier' => $config['client_id'],
-            'secret' => $config['client_secret'],
+            'identifier'   => $config['client_id'],
+            'secret'       => $config['client_secret'],
             'callback_uri' => $config['redirect'],
         ];
     }
@@ -117,7 +117,7 @@ trait ManagerTestTrait
     {
         static $provider = null;
 
-        if (is_null($provider)) {
+        if ($provider === null) {
             $provider = $this->mockStub('OAuth2ProviderStub')->shouldDeferMissing();
         }
 
@@ -128,7 +128,7 @@ trait ManagerTestTrait
     {
         static $provider = null;
 
-        if (is_null($provider)) {
+        if ($provider === null) {
             $provider = $this->mockStub('OAuth1ProviderStub');
         }
 
