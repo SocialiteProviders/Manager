@@ -39,7 +39,9 @@ class ConfigRetriever implements ConfigRetrieverInterface
         $this->providerName = $providerName;
         $this->getConfigFromServicesArray($providerName);
 
-        $this->additionalConfigKeys = $additionalConfigKeys = array_unique($additionalConfigKeys + ['guzzle']);
+        $this->additionalConfigKeys = $additionalConfigKeys = array_unique(
+            array_merge($additionalConfigKeys, ['guzzle']),
+        );
 
         return new Config(
             $this->getFromServices('client_id'),

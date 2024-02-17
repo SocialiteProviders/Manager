@@ -76,6 +76,39 @@ class ConfigRetrieverTest extends TestCase
         $this->assertSame($uri, $result['redirect']);
         $this->assertSame($additionalConfigItem, $result['additional']);
     }
+
+    /**
+     * @test
+     */
+    public function it_retrieves_a_config_from_the_services_with_guzzle(): void
+    {
+        $providerName = 'test';
+        $key = 'key';
+        $secret = 'secret';
+        $uri = 'uri';
+        $additionalConfigItem = 'test';
+        $config = [
+            'client_id' => $key,
+            'client_secret' => $secret,
+            'redirect' => $uri,
+            'additional' => $additionalConfigItem,
+            'guzzle' => ['verify' => false],
+        ];
+        self::$functions
+            ->shouldReceive('config')
+            ->with("services.{$providerName}")
+            ->once()
+            ->andReturn($config);
+        $configRetriever = new ConfigRetriever();
+
+        $result = $configRetriever->fromServices($providerName, ['additional'])->get();
+
+        $this->assertSame($key, $result['client_id']);
+        $this->assertSame($secret, $result['client_secret']);
+        $this->assertSame($uri, $result['redirect']);
+        $this->assertSame($additionalConfigItem, $result['additional']);
+        $this->assertSame(['verify' => false], $result['guzzle']);
+    }
 }
 
 namespace SocialiteProviders\Manager\Helpers;
