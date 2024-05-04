@@ -39,15 +39,15 @@ class ConfigRetriever implements ConfigRetrieverInterface
         $this->providerName = $providerName;
         $this->getConfigFromServicesArray($providerName);
 
-        $this->additionalConfigKeys = $additionalConfigKeys = array_unique($additionalConfigKeys + ['guzzle']);
+        $this->additionalConfigKeys = $additionalConfigKeys = array_unique(
+            array_merge($additionalConfigKeys, ['guzzle']),
+        );
 
         return new Config(
             $this->getFromServices('client_id'),
             $this->getFromServices('client_secret'),
             $this->getFromServices('redirect'),
-            $this->getConfigItems($additionalConfigKeys, function ($key) {
-                return $this->getFromServices(strtolower($key));
-            })
+            $this->getConfigItems($additionalConfigKeys, fn($key) => $this->getFromServices(strtolower($key)))
         );
     }
 
