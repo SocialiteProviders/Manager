@@ -51,12 +51,12 @@ class OAuthTwoTest extends TestCase
      */
     public function userReturnsAUserInstanceForTheAuthenticatedRequest(): void
     {
-        $session = m::mock(SessionInterface::class);
+        $session = m::mock(SessionContract::class);
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('A', 40),
             'code' => 'code',
         ]);
-        $request->setSession($session);
+        $request->setLaravelSession($session);
         $session
             ->shouldReceive('pull')
             ->once()
@@ -94,13 +94,13 @@ class OAuthTwoTest extends TestCase
      */
     public function access_token_response_body_is_accessible_from_user(): void
     {
-        $session = m::mock(SessionInterface::class);
+        $session = m::mock(SessionContract::class);
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('A', 40),
             'code' => 'code',
         ]);
-        $request->setSession($session);
+        $request->setLaravelSession($session);
         $session
             ->shouldReceive('pull')
             ->once()
@@ -139,13 +139,13 @@ class OAuthTwoTest extends TestCase
      */
     public function regular_laravel_socialite_class_works_as_well(): void
     {
-        $session = m::mock(SessionInterface::class);
+        $session = m::mock(SessionContract::class);
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('A', 40),
             'code' => 'code',
         ]);
-        $request->setSession($session);
+        $request->setLaravelSession($session);
         $session
             ->shouldReceive('pull')
             ->once()
@@ -186,12 +186,12 @@ class OAuthTwoTest extends TestCase
     {
         $this->expectExceptionObject(new InvalidStateException());
 
-        $session = m::mock(SessionInterface::class);
+        $session = m::mock(SessionContract::class);
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('B', 40),
             'code' => 'code',
         ]);
-        $request->setSession($session);
+        $request->setLaravelSession($session);
         $session
             ->shouldReceive('pull')
             ->once()
@@ -208,12 +208,12 @@ class OAuthTwoTest extends TestCase
     {
         $this->expectExceptionObject(new InvalidStateException());
 
-        $session = m::mock(SessionInterface::class);
+        $session = m::mock(SessionContract::class);
         $request = Request::create('foo', 'GET', [
             'state' => 'state',
             'code' => 'code',
         ]);
-        $request->setSession($session);
+        $request->setLaravelSession($session);
         $session
             ->shouldReceive('pull')
             ->once()
@@ -227,13 +227,13 @@ class OAuthTwoTest extends TestCase
      */
     public function userObjectShouldBeCachedOnFirstCall(): void
     {
-        $session = m::mock(SessionInterface::class);
+        $session = m::mock(SessionContract::class);
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('A', 40),
             'code' => 'code',
         ]);
-        $request->setSession($session);
+        $request->setLaravelSession($session);
         $session
             ->shouldReceive('pull')
             ->once()
