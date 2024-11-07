@@ -40,7 +40,7 @@ class ServiceProvider extends SocialiteServiceProvider
         }
 
         if (! $this->app->bound(ConfigRetrieverInterface::class)) {
-            $this->app->singleton(ConfigRetrieverInterface::class, fn() => new ConfigRetriever());
+            $this->app->singleton(ConfigRetrieverInterface::class, fn () => new ConfigRetriever);
         }
     }
 }
