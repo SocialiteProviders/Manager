@@ -15,7 +15,7 @@ class UserTest extends TestCase
     public function we_should_be_able_to_set_the_credentials_body(): void
     {
         $credentialsBody = ['test'];
-        $user = (new User())->setAccessTokenResponseBody($credentialsBody);
+        $user = (new User)->setAccessTokenResponseBody($credentialsBody);
 
         $this->assertSame($user->accessTokenResponseBody, $credentialsBody);
     }

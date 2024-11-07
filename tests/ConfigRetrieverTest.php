@@ -23,7 +23,7 @@ class ConfigRetrieverTest extends TestCase
             ->with("services.{$providerName}")
             ->once()
             ->andReturn(null);
-        $configRetriever = new ConfigRetriever();
+        $configRetriever = new ConfigRetriever;
 
         $configRetriever->fromServices($providerName)->get();
     }
@@ -41,7 +41,7 @@ class ConfigRetrieverTest extends TestCase
             ->with("services.{$providerName}")
             ->once()
             ->andReturn([]);
-        $configRetriever = new ConfigRetriever();
+        $configRetriever = new ConfigRetriever;
 
         $configRetriever->fromServices($providerName)->get();
     }
@@ -57,17 +57,17 @@ class ConfigRetrieverTest extends TestCase
         $uri = 'uri';
         $additionalConfigItem = 'test';
         $config = [
-            'client_id' => $key,
+            'client_id'     => $key,
             'client_secret' => $secret,
-            'redirect' => $uri,
-            'additional' => $additionalConfigItem,
+            'redirect'      => $uri,
+            'additional'    => $additionalConfigItem,
         ];
         self::$functions
             ->shouldReceive('config')
             ->with("services.{$providerName}")
             ->once()
             ->andReturn($config);
-        $configRetriever = new ConfigRetriever();
+        $configRetriever = new ConfigRetriever;
 
         $result = $configRetriever->fromServices($providerName, ['additional'])->get();
 
@@ -88,18 +88,18 @@ class ConfigRetrieverTest extends TestCase
         $uri = 'uri';
         $additionalConfigItem = 'test';
         $config = [
-            'client_id' => $key,
+            'client_id'     => $key,
             'client_secret' => $secret,
-            'redirect' => $uri,
-            'additional' => $additionalConfigItem,
-            'guzzle' => ['verify' => false],
+            'redirect'      => $uri,
+            'additional'    => $additionalConfigItem,
+            'guzzle'        => ['verify' => false],
         ];
         self::$functions
             ->shouldReceive('config')
             ->with("services.{$providerName}")
             ->once()
             ->andReturn($config);
-        $configRetriever = new ConfigRetriever();
+        $configRetriever = new ConfigRetriever;
 
         $result = $configRetriever->fromServices($providerName, ['additional'])->get();
 
@@ -127,7 +127,7 @@ function config($key)
 
 function app()
 {
-    return new applicationStub();
+    return new applicationStub;
 }
 
 class applicationStub

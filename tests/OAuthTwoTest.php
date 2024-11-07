@@ -12,7 +12,6 @@ use SocialiteProviders\Manager\OAuth2\User;
 use SocialiteProviders\Manager\Test\Stubs\OAuthTwoTestProviderStub;
 use stdClass;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class OAuthTwoTest extends TestCase
 {
@@ -54,7 +53,7 @@ class OAuthTwoTest extends TestCase
         $session = m::mock(SessionContract::class);
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('A', 40),
-            'code' => 'code',
+            'code'  => 'code',
         ]);
         $request->setLaravelSession($session);
         $session
@@ -72,11 +71,11 @@ class OAuthTwoTest extends TestCase
                     'Accept' => 'application/json',
                 ],
                 'form_params' => [
-                    'grant_type' => 'authorization_code',
-                    'client_id' => 'client_id',
+                    'grant_type'    => 'authorization_code',
+                    'client_id'     => 'client_id',
                     'client_secret' => 'client_secret',
-                    'code' => 'code',
-                    'redirect_uri' => 'redirect_uri',
+                    'code'          => 'code',
+                    'redirect_uri'  => 'redirect_uri',
                 ],
             ])
             ->andReturn($response = m::mock(stdClass::class));
@@ -98,7 +97,7 @@ class OAuthTwoTest extends TestCase
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('A', 40),
-            'code' => 'code',
+            'code'  => 'code',
         ]);
         $request->setLaravelSession($session);
         $session
@@ -116,11 +115,11 @@ class OAuthTwoTest extends TestCase
                     'Accept' => 'application/json',
                 ],
                 'form_params' => [
-                    'grant_type' => 'authorization_code',
-                    'client_id' => 'client_id',
+                    'grant_type'    => 'authorization_code',
+                    'client_id'     => 'client_id',
                     'client_secret' => 'client_secret',
-                    'code' => 'code',
-                    'redirect_uri' => 'redirect_uri',
+                    'code'          => 'code',
+                    'redirect_uri'  => 'redirect_uri',
                 ],
             ])
             ->andReturn($response = m::mock(stdClass::class));
@@ -143,7 +142,7 @@ class OAuthTwoTest extends TestCase
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('A', 40),
-            'code' => 'code',
+            'code'  => 'code',
         ]);
         $request->setLaravelSession($session);
         $session
@@ -162,11 +161,11 @@ class OAuthTwoTest extends TestCase
                     'Accept' => 'application/json',
                 ],
                 'form_params' => [
-                    'grant_type' => 'authorization_code',
-                    'client_id' => 'client_id',
+                    'grant_type'    => 'authorization_code',
+                    'client_id'     => 'client_id',
                     'client_secret' => 'client_secret',
-                    'code' => 'code',
-                    'redirect_uri' => 'redirect_uri',
+                    'code'          => 'code',
+                    'redirect_uri'  => 'redirect_uri',
                 ],
             ])
             ->andReturn($response = m::mock(stdClass::class));
@@ -184,12 +183,12 @@ class OAuthTwoTest extends TestCase
      */
     public function exceptionIsThrownIfStateIsInvalid(): void
     {
-        $this->expectExceptionObject(new InvalidStateException());
+        $this->expectExceptionObject(new InvalidStateException);
 
         $session = m::mock(SessionContract::class);
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('B', 40),
-            'code' => 'code',
+            'code'  => 'code',
         ]);
         $request->setLaravelSession($session);
         $session
@@ -206,12 +205,12 @@ class OAuthTwoTest extends TestCase
      */
     public function exceptionIsThrownIfStateIsNotSet(): void
     {
-        $this->expectExceptionObject(new InvalidStateException());
+        $this->expectExceptionObject(new InvalidStateException);
 
         $session = m::mock(SessionContract::class);
         $request = Request::create('foo', 'GET', [
             'state' => 'state',
-            'code' => 'code',
+            'code'  => 'code',
         ]);
         $request->setLaravelSession($session);
         $session
@@ -231,7 +230,7 @@ class OAuthTwoTest extends TestCase
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
         $request = Request::create('foo', 'GET', [
             'state' => str_repeat('A', 40),
-            'code' => 'code',
+            'code'  => 'code',
         ]);
         $request->setLaravelSession($session);
         $session
@@ -250,11 +249,11 @@ class OAuthTwoTest extends TestCase
                     'Accept' => 'application/json',
                 ],
                 'form_params' => [
-                    'grant_type' => 'authorization_code',
-                    'client_id' => 'client_id',
+                    'grant_type'    => 'authorization_code',
+                    'client_id'     => 'client_id',
                     'client_secret' => 'client_secret',
-                    'code' => 'code',
-                    'redirect_uri' => 'redirect_uri',
+                    'code'          => 'code',
+                    'redirect_uri'  => 'redirect_uri',
                 ],
             ])
             ->andReturn($response = m::mock(stdClass::class));

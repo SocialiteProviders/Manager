@@ -26,13 +26,12 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     protected $user;
 
     /**
-     * @param string $providerName
-     *
+     * @param  string  $providerName
      * @return string
      */
     public static function serviceContainerKey($providerName)
     {
-        return SocialiteWasCalled::SERVICE_CONTAINER_PREFIX . $providerName;
+        return SocialiteWasCalled::SERVICE_CONTAINER_PREFIX.$providerName;
     }
 
     /**
@@ -47,7 +46,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
         }
 
         if ($this->hasInvalidState()) {
-            throw new InvalidStateException();
+            throw new InvalidStateException;
         }
 
         $response = $this->getAccessTokenResponse($this->getCode());
@@ -70,8 +69,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Get the access token from the token response body.
      *
-     * @param array $body
-     *
+     * @param  array  $body
      * @return string
      */
     protected function parseAccessToken($body)
@@ -82,8 +80,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Get the refresh token from the token response body.
      *
-     * @param array $body
-     *
+     * @param  array  $body
      * @return string
      */
     protected function parseRefreshToken($body)
@@ -94,8 +91,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Get the expires in from the token response body.
      *
-     * @param array $body
-     *
+     * @param  array  $body
      * @return string
      */
     protected function parseExpiresIn($body)
@@ -106,15 +102,14 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Get the approved scopes from the token response body.
      *
-     * @param array $body
-     *
+     * @param  array  $body
      * @return array
      */
     protected function parseApprovedScopes($body)
     {
         $scopesRaw = Arr::get($body, 'scope', null);
 
-        if (!is_array($scopesRaw) && !is_string($scopesRaw)) {
+        if (! is_array($scopesRaw) && ! is_string($scopesRaw)) {
             return [];
         }
 

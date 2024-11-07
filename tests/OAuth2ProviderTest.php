@@ -21,7 +21,7 @@ class OAuth2ProviderTest extends TestCase
      */
     public function it_throws_if_there_is_no_config_in_services_or_env(): void
     {
-        $this->expectExceptionObject(new MissingConfigException());
+        $this->expectExceptionObject(new MissingConfigException);
 
         $providerName = 'bar';
         $providerClass = $this->oauth2ProviderStubClass();

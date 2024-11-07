@@ -7,6 +7,7 @@ use SocialiteProviders\Manager\OAuth2\AbstractProvider;
 class OAuth2ProviderStub extends AbstractProvider
 {
     protected $test = 'test';
+
     public const IDENTIFIER = 'TEST';
 
     /**
