@@ -13,6 +13,13 @@ trait ConfigTrait
     protected $config;
 
     /**
+     * The additional config keys that are allowed to be retrieved from the config.
+     *
+     * @var array
+     */
+    protected static array $additionalConfigKeys = [];
+
+    /**
      * @param  \SocialiteProviders\Manager\Contracts\OAuth1\ProviderInterface|\SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface  $config
      */
     public function setConfig(ConfigInterface $config)
@@ -28,11 +35,13 @@ trait ConfigTrait
     }
 
     /**
+     * Get the additional config keys.
+     *
      * @return array
      */
     public static function additionalConfigKeys()
     {
-        return [];
+        return self::$additionalConfigKeys;
     }
 
     /**
