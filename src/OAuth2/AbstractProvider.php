@@ -117,6 +117,6 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
             return $scopesRaw;
         }
 
-        return explode($this->scopeSeparator, Arr::get($body, 'scope', ''));
+        return explode($this->scopeSeparator, (string) Arr::get($body, 'scope', ''));
     }
 }

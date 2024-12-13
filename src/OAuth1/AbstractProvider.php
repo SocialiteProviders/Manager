@@ -55,7 +55,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
         $user->setToken($tokenCredentials->getIdentifier(), $tokenCredentials->getSecret());
 
         if ($user instanceof User) {
-            parse_str($token['credentialsResponseBody'], $credentialsResponseBody);
+            parse_str((string) $token['credentialsResponseBody'], $credentialsResponseBody);
 
             if (! $credentialsResponseBody || ! is_array($credentialsResponseBody)) {
                 throw new CredentialsException('Unable to parse token credentials response.');
