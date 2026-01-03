@@ -8,6 +8,21 @@ use SocialiteProviders\Manager\Contracts\ConfigInterface;
 trait ConfigTrait
 {
     /**
+     * @var string|null
+     */
+    protected $clientId;
+
+    /**
+     * @var string|null
+     */
+    protected $clientSecret;
+
+    /**
+     * @var string|null
+     */
+    protected $redirectUrl;
+
+    /**
      * @var array
      */
     protected $config;
