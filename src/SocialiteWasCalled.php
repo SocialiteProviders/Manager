@@ -73,7 +73,7 @@ class SocialiteWasCalled
      * @param  null|string  $oauth1Server
      * @return \Laravel\Socialite\One\AbstractProvider|\Laravel\Socialite\Two\AbstractProvider
      */
-    protected function buildProvider(SocialiteManager $socialite, $providerName, $providerClass, $oauth1Server)
+    public function buildProvider(SocialiteManager $socialite, $providerName, $providerClass, $oauth1Server)
     {
         if ($this->isOAuth1($oauth1Server)) {
             return $this->buildOAuth1Provider($socialite, $providerClass, $providerName, $oauth1Server);
