@@ -51,10 +51,12 @@ class SocialiteWasCalled
             $this->classExtends($providerClass, SocialiteOAuth1AbstractProvider::class);
         }
 
+        $extendSocialiteBy = $this;
+
         $socialite->extend(
             $providerName,
-            function () use ($socialite, $providerName, $providerClass, $oauth1Server) {
-                $provider = $this->buildProvider($socialite, $providerName, $providerClass, $oauth1Server);
+            function () use ($extendSocialiteBy, $socialite, $providerName, $providerClass, $oauth1Server) {
+                $provider = $extendSocialiteBy->buildProvider($socialite, $providerName, $providerClass, $oauth1Server);
                 if (defined('SOCIALITEPROVIDERS_STATELESS') && SOCIALITEPROVIDERS_STATELESS) {
                     return $provider->stateless();
                 }
