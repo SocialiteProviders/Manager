@@ -51,10 +51,12 @@ class SocialiteWasCalled
             $this->classExtends($providerClass, SocialiteOAuth1AbstractProvider::class);
         }
 
+        $instance = $this;
+
         $socialite->extend(
             $providerName,
-            function () use ($socialite, $providerName, $providerClass, $oauth1Server) {
-                $provider = $this->buildProvider($socialite, $providerName, $providerClass, $oauth1Server);
+            function () use ($socialite, $providerName, $providerClass, $oauth1Server, $instance) {
+                $provider = $instance->buildProvider($socialite, $providerName, $providerClass, $oauth1Server);
                 if (defined('SOCIALITEPROVIDERS_STATELESS') && SOCIALITEPROVIDERS_STATELESS) {
                     return $provider->stateless();
                 }
@@ -71,7 +73,7 @@ class SocialiteWasCalled
      * @param  null|string  $oauth1Server
      * @return \Laravel\Socialite\One\AbstractProvider|\Laravel\Socialite\Two\AbstractProvider
      */
-    protected function buildProvider(SocialiteManager $socialite, $providerName, $providerClass, $oauth1Server)
+    public function buildProvider(SocialiteManager $socialite, $providerName, $providerClass, $oauth1Server)
     {
         if ($this->isOAuth1($oauth1Server)) {
             return $this->buildOAuth1Provider($socialite, $providerClass, $providerName, $oauth1Server);
