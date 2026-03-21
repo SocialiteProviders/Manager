@@ -40,8 +40,16 @@ jobs:
         run: composer validate --strict
 
       - name: Run Tests
+        if: matrix.coverage == 'none'
         run: vendor/bin/phpunit -v
 
-      - name: Upload coverage results
+      - name: Run Tests with Coverage
+        if: matrix.coverage != 'none'
+        run: vendor/bin/phpunit -v --coverage-text --coverage-clover=build/logs/clover.xml
+
+      - name: Upload coverage to Codecov
         if: matrix.coverage != 'none'
         uses: codecov/codecov-action@v5
+        with:
+          files: build/logs/clover.xml
+          fail_ci_if_error: false
