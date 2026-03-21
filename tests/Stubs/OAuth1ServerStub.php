@@ -8,6 +8,22 @@ use SocialiteProviders\Manager\OAuth1\User;
 
 class OAuth1ServerStub extends Server
 {
+    public $http;
+
+    public function createHttpClient()
+    {
+        if ($this->http) {
+            return $this->http;
+        }
+
+        return parent::createHttpClient();
+    }
+
+    public function exposedFormatScopes(array $scopes, string $separator): string
+    {
+        return $this->formatScopes($scopes, $separator);
+    }
+
     /**
      * Get the URL for retrieving temporary credentials.
      *
