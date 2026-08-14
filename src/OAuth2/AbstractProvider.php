@@ -67,6 +67,26 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     }
 
     /**
+     * Refresh a user's access token with a refresh token.
+     *
+     * @param  string  $refreshToken
+     * @return \SocialiteProviders\Manager\OAuth2\Token
+     */
+    public function refreshToken($refreshToken)
+    {
+        $response = $this->getRefreshTokenResponse($refreshToken);
+
+        $token = new Token(
+            $this->parseAccessToken($response),
+            $this->parseRefreshToken($response),
+            $this->parseExpiresIn($response),
+            $this->parseApprovedScopes($response)
+        );
+
+        return $token->setAccessTokenResponseBody($response);
+    }
+
+    /**
      * Get the access token from the token response body.
      *
      * @param  array  $body
