@@ -11,7 +11,7 @@ class Token extends \Laravel\Socialite\Two\Token
      *
      * @var array
      */
-    public $accessTokenResponseBody;
+    public $accessTokenResponseBody = [];
 
     /**
      * Set the credentials on the user.
