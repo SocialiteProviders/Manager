@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Two\InvalidStateException;
 use Laravel\Socialite\Two\User as SocialiteOAuth2User;
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use SocialiteProviders\Manager\OAuth2\User;
 use SocialiteProviders\Manager\Test\Stubs\OAuthTwoTestProviderStub;
@@ -17,10 +18,8 @@ class OAuthTwoTest extends TestCase
 {
     use ManagerTestTrait;
 
-    /**
-     * @test
-     */
-    public function redirectGeneratesTheProperSymfonyRedirectResponse(): void
+    #[Test]
+    public function redirect_generates_the_proper_symfony_redirect_response(): void
     {
         $session = m::mock(SessionContract::class);
         $request = Request::create('foo');
@@ -35,9 +34,7 @@ class OAuthTwoTest extends TestCase
         $this->assertSame('http://auth.url', $response->getTargetUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_return_the_service_container_key(): void
     {
         $result = OAuthTwoTestProviderStub::serviceContainerKey(OAuthTwoTestProviderStub::PROVIDER_NAME);
@@ -45,10 +42,8 @@ class OAuthTwoTest extends TestCase
         $this->assertSame('SocialiteProviders.config.test', $result);
     }
 
-    /**
-     * @test
-     */
-    public function userReturnsAUserInstanceForTheAuthenticatedRequest(): void
+    #[Test]
+    public function user_returns_a_user_instance_for_the_authenticated_request(): void
     {
         $session = m::mock(SessionContract::class);
         $request = Request::create('foo', 'GET', [
@@ -88,9 +83,7 @@ class OAuthTwoTest extends TestCase
         $this->assertSame('foo', $user->id);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function access_token_response_body_is_accessible_from_user(): void
     {
         $session = m::mock(SessionContract::class);
@@ -133,9 +126,7 @@ class OAuthTwoTest extends TestCase
         $this->assertSame($user->accessTokenResponseBody, json_decode($accessTokenResponseBody, true));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function regular_laravel_socialite_class_works_as_well(): void
     {
         $session = m::mock(SessionContract::class);
@@ -178,10 +169,8 @@ class OAuthTwoTest extends TestCase
         $this->assertSame('foo', $user->id);
     }
 
-    /**
-     * @test
-     */
-    public function exceptionIsThrownIfStateIsInvalid(): void
+    #[Test]
+    public function exception_is_thrown_if_state_is_invalid(): void
     {
         $this->expectExceptionObject(new InvalidStateException);
 
@@ -200,10 +189,8 @@ class OAuthTwoTest extends TestCase
         $provider->user();
     }
 
-    /**
-     * @test
-     */
-    public function exceptionIsThrownIfStateIsNotSet(): void
+    #[Test]
+    public function exception_is_thrown_if_state_is_not_set(): void
     {
         $this->expectExceptionObject(new InvalidStateException);
 
@@ -221,10 +208,8 @@ class OAuthTwoTest extends TestCase
         $provider->user();
     }
 
-    /**
-     * @test
-     */
-    public function userObjectShouldBeCachedOnFirstCall(): void
+    #[Test]
+    public function user_object_should_be_cached_on_first_call(): void
     {
         $session = m::mock(SessionContract::class);
         $accessTokenResponseBody = '{"access_token": "access_token", "test": "test"}';
@@ -263,7 +248,6 @@ class OAuthTwoTest extends TestCase
 
         $reflection = new \ReflectionClass($provider);
         $reflectionProperty = $reflection->getProperty('user');
-        $reflectionProperty->setAccessible(true);
 
         $this->assertNull($reflectionProperty->getValue($provider));
 

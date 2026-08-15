@@ -4,6 +4,7 @@ namespace SocialiteProviders\Manager\Test;
 
 use Laravel\Socialite\Contracts\Factory as SocialiteFactoryContract;
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use SocialiteProviders\Manager\Exception\InvalidArgumentException;
 use SocialiteProviders\Manager\SocialiteWasCalled;
@@ -12,9 +13,7 @@ class OAuth1ProviderTest extends TestCase
 {
     use ManagerTestTrait;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_build_a_provider_and_extend_socialite(): void
     {
         $providerName = 'bar';
@@ -56,9 +55,7 @@ class OAuth1ProviderTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_throws_if_given_an_invalid_oauth1_provider(): void
     {
         $this->expectExceptionObject(new InvalidArgumentException("FooBar doesn't exist"));
@@ -87,9 +84,7 @@ class OAuth1ProviderTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_throws_if_given_an_invalid_oauth1_server(): void
     {
         $this->expectExceptionObject(new InvalidArgumentException("FooBar doesn't exist"));

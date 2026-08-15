@@ -2,6 +2,7 @@
 
 namespace SocialiteProviders\Manager\Test;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use SocialiteProviders\Manager\Exception\MissingConfigException;
 use SocialiteProviders\Manager\Helpers\ConfigRetriever;
@@ -10,9 +11,7 @@ class ConfigRetrieverTest extends TestCase
 {
     use ManagerTestTrait;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_throws_if_there_is_a_problem_with_the_services_config(): void
     {
         $this->expectExceptionObject(new MissingConfigException('There is no services entry for test'));
@@ -28,9 +27,7 @@ class ConfigRetrieverTest extends TestCase
         $configRetriever->fromServices($providerName)->get();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_throws_if_there_are_missing_items_in_the_services_config(): void
     {
         $this->expectExceptionObject(new MissingConfigException('There is no services entry for test'));
@@ -46,9 +43,7 @@ class ConfigRetrieverTest extends TestCase
         $configRetriever->fromServices($providerName)->get();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_retrieves_a_config_from_the_services(): void
     {
         $providerName = 'test';
@@ -77,9 +72,7 @@ class ConfigRetrieverTest extends TestCase
         $this->assertSame($additionalConfigItem, $result['additional']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_retrieves_a_config_from_the_services_with_guzzle(): void
     {
         $providerName = 'test';

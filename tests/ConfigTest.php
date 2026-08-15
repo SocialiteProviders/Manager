@@ -2,13 +2,12 @@
 
 namespace SocialiteProviders\Manager;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class ConfigTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_returns_a_config_array(): void
     {
         $key = 'key';
@@ -25,9 +24,7 @@ class ConfigTest extends TestCase
         $this->assertSame($result, $config->get());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_allows_additional_config_items(): void
     {
         $key = 'key';
@@ -46,9 +43,7 @@ class ConfigTest extends TestCase
         $this->assertSame($result, $config->get());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_allows_closure_config_redirect()
     {
         $key = 'key';
