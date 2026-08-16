@@ -4,6 +4,7 @@ namespace SocialiteProviders\Manager;
 
 use Illuminate\Support\Arr;
 use SocialiteProviders\Manager\Contracts\ConfigInterface;
+use SocialiteProviders\Manager\Contracts\OAuth1\ProviderInterface;
 
 trait ConfigTrait
 {
@@ -20,7 +21,7 @@ trait ConfigTrait
     protected static array $additionalConfigKeys = [];
 
     /**
-     * @param  \SocialiteProviders\Manager\Contracts\OAuth1\ProviderInterface|\SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface  $config
+     * @param  ProviderInterface|Contracts\OAuth2\ProviderInterface  $config
      */
     public function setConfig(ConfigInterface $config)
     {

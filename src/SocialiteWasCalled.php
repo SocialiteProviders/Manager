@@ -8,6 +8,7 @@ use Laravel\Socialite\One\AbstractProvider as SocialiteOAuth1AbstractProvider;
 use Laravel\Socialite\SocialiteManager;
 use Laravel\Socialite\Two\AbstractProvider as SocialiteOAuth2AbstractProvider;
 use League\OAuth1\Client\Server\Server as OAuth1Server;
+use SocialiteProviders\Manager\Contracts\ConfigInterface;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 use SocialiteProviders\Manager\Exception\InvalidArgumentException;
 
@@ -16,15 +17,15 @@ class SocialiteWasCalled
     public const SERVICE_CONTAINER_PREFIX = 'SocialiteProviders.config.';
 
     /**
-     * @var \Illuminate\Contracts\Container\Container
+     * @var Application
      */
     protected $app;
 
     private ConfigRetrieverInterface $configRetriever;
 
     /**
-     * @param  \Illuminate\Contracts\Container\Container  $app
-     * @param  \SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface  $configRetriever
+     * @param  Application  $app
+     * @param  ConfigRetrieverInterface  $configRetriever
      */
     public function __construct(Application $app, ConfigRetrieverInterface $configRetriever)
     {
@@ -67,11 +68,11 @@ class SocialiteWasCalled
     }
 
     /**
-     * @param  \Laravel\Socialite\SocialiteManager  $socialite
+     * @param  SocialiteManager  $socialite
      * @param  string  $providerName
      * @param  string  $providerClass
      * @param  null|string  $oauth1Server
-     * @return \Laravel\Socialite\One\AbstractProvider|\Laravel\Socialite\Two\AbstractProvider
+     * @return SocialiteOAuth1AbstractProvider|SocialiteOAuth2AbstractProvider
      */
     public function buildProvider(SocialiteManager $socialite, $providerName, $providerClass, $oauth1Server)
     {
@@ -85,11 +86,11 @@ class SocialiteWasCalled
     /**
      * Build an OAuth 1 provider instance.
      *
-     * @param  \Laravel\Socialite\SocialiteManager  $socialite
+     * @param  SocialiteManager  $socialite
      * @param  string  $providerClass  must extend Laravel\Socialite\One\AbstractProvider
      * @param  string  $providerName
      * @param  string  $oauth1Server  must extend League\OAuth1\Client\Server\Server
-     * @return \Laravel\Socialite\One\AbstractProvider
+     * @return SocialiteOAuth1AbstractProvider
      */
     protected function buildOAuth1Provider(SocialiteManager $socialite, $providerClass, $providerName, $oauth1Server)
     {
@@ -114,7 +115,7 @@ class SocialiteWasCalled
      * @param  SocialiteManager  $socialite
      * @param  string  $providerClass  must extend Laravel\Socialite\Two\AbstractProvider
      * @param  string  $providerName
-     * @return \Laravel\Socialite\Two\AbstractProvider
+     * @return SocialiteOAuth2AbstractProvider
      */
     protected function buildOAuth2Provider(SocialiteManager $socialite, $providerClass, $providerName)
     {
@@ -132,7 +133,7 @@ class SocialiteWasCalled
     /**
      * @param  string  $providerClass
      * @param  string  $providerName
-     * @return \SocialiteProviders\Manager\Contracts\ConfigInterface
+     * @return ConfigInterface
      */
     protected function getConfig(string $providerClass, string $providerName)
     {
@@ -157,7 +158,7 @@ class SocialiteWasCalled
      * @param  string  $baseClass
      * @return void
      *
-     * @throws \SocialiteProviders\Manager\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     private function classExtends($class, $baseClass)
     {
@@ -170,7 +171,7 @@ class SocialiteWasCalled
      * @param  string  $providerClass
      * @return void
      *
-     * @throws \SocialiteProviders\Manager\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     private function classExists($providerClass)
     {

@@ -21,7 +21,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * The cached user instance.
      *
-     * @var \SocialiteProviders\Manager\OAuth2\User|null
+     * @var User|null
      */
     protected $user;
 
@@ -35,9 +35,9 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     }
 
     /**
-     * @return \SocialiteProviders\Manager\OAuth2\User
+     * @return User
      *
-     * @throws \Laravel\Socialite\Two\InvalidStateException
+     * @throws InvalidStateException
      */
     public function user()
     {

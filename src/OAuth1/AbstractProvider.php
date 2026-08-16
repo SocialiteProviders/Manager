@@ -87,7 +87,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Redirect the user to the authentication page for the provider.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function redirect()
     {
@@ -156,7 +156,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Get the token credentials for the request.
      *
-     * @return \League\OAuth1\Client\Credentials\TokenCredentials
+     * @return TokenCredentials
      */
     protected function getToken()
     {

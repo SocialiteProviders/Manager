@@ -4,6 +4,7 @@ namespace SocialiteProviders\Manager\Helpers;
 
 use Closure;
 use SocialiteProviders\Manager\Config;
+use SocialiteProviders\Manager\Contracts\ConfigInterface;
 use SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface;
 use SocialiteProviders\Manager\Exception\MissingConfigException;
 
@@ -32,7 +33,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
     /**
      * @param  string  $providerName
      * @param  array  $additionalConfigKeys
-     * @return \SocialiteProviders\Manager\Contracts\ConfigInterface
+     * @return ConfigInterface
      */
     public function fromServices($providerName, array $additionalConfigKeys = [])
     {
@@ -53,7 +54,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
 
     /**
      * @param  array  $configKeys
-     * @param  \Closure  $keyRetrievalClosure
+     * @param  Closure  $keyRetrievalClosure
      * @return array
      */
     protected function getConfigItems(array $configKeys, Closure $keyRetrievalClosure)
@@ -63,7 +64,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
 
     /**
      * @param  array  $keys
-     * @param  \Closure  $keyRetrievalClosure
+     * @param  Closure  $keyRetrievalClosure
      * @return array
      */
     protected function retrieveItemsFromConfig(array $keys, Closure $keyRetrievalClosure)
@@ -81,7 +82,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
      * @param  string  $key
      * @return string|null
      *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
+     * @throws MissingConfigException
      */
     protected function getFromServices($key)
     {
@@ -104,7 +105,7 @@ class ConfigRetriever implements ConfigRetrieverInterface
      * @param  string  $providerName
      * @return array
      *
-     * @throws \SocialiteProviders\Manager\Exception\MissingConfigException
+     * @throws MissingConfigException
      */
     protected function getConfigFromServicesArray($providerName)
     {
