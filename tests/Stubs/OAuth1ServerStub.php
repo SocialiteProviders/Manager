@@ -54,7 +54,7 @@ class OAuth1ServerStub extends Server
      *
      * @param  mixed  $data
      * @param  TokenCredentials  $tokenCredentials
-     * @return \SocialiteProviders\Manager\OAuth1\User
+     * @return User
      */
     public function userDetails($data, TokenCredentials $tokenCredentials)
     {

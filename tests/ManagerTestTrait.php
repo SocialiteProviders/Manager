@@ -26,7 +26,7 @@ trait ManagerTestTrait
     }
 
     /**
-     * @return \Mockery\MockInterface|\SocialiteProviders\Manager\Contracts\Helpers\ConfigRetrieverInterface
+     * @return MockInterface|ConfigRetrieverInterface
      */
     protected function configRetrieverMock()
     {
@@ -34,7 +34,7 @@ trait ManagerTestTrait
     }
 
     /**
-     * @return \Mockery\MockInterface|\Illuminate\Contracts\Container\Container
+     * @return MockInterface|ContainerContract
      */
     protected function appMock()
     {
@@ -42,7 +42,7 @@ trait ManagerTestTrait
     }
 
     /**
-     * @return \Mockery\MockInterface|\Illuminate\Contracts\Foundation\Application
+     * @return MockInterface|Application
      */
     protected function appMockWithBooted()
     {
@@ -57,7 +57,7 @@ trait ManagerTestTrait
     }
 
     /**
-     * @return \Mockery\MockInterface|\Laravel\Socialite\SocialiteManager
+     * @return MockInterface|SocialiteManager
      */
     protected function socialiteMock()
     {
@@ -65,7 +65,7 @@ trait ManagerTestTrait
     }
 
     /**
-     * @return \Mockery\MockInterface|\Illuminate\Http\Request
+     * @return MockInterface|HttpRequest
      */
     protected function buildRequest()
     {
@@ -152,7 +152,7 @@ trait ManagerTestTrait
 
     /**
      * @param  string  $stub
-     * @return \Mockery\MockInterface
+     * @return MockInterface
      */
     protected function mockStub($stub): MockInterface
     {
