@@ -7,7 +7,6 @@
 [![Total Downloads](https://poser.pugx.org/socialiteproviders/manager/downloads.svg)](https://packagist.org/packages/socialiteproviders/manager) 
 [![Latest Unstable Version](https://poser.pugx.org/socialiteproviders/manager/v/unstable.svg)](https://packagist.org/packages/socialiteproviders/manager) 
 [![License](https://poser.pugx.org/socialiteproviders/manager/license.svg)](https://packagist.org/packages/socialiteproviders/manager)
-[![StyleCI](https://github.styleci.io/repos/30993504/shield?branch=master)](https://github.styleci.io/repos/30993504?branch=master)
 
 ## About
 
