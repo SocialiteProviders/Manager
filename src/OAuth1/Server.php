@@ -14,6 +14,27 @@ abstract class Server extends BaseServer
     use ConfigTrait;
 
     /**
+     * The client ID set via the dynamic config.
+     *
+     * @var string
+     */
+    protected $clientId;
+
+    /**
+     * The client secret set via the dynamic config.
+     *
+     * @var string
+     */
+    protected $clientSecret;
+
+    /**
+     * The redirect URL set via the dynamic config.
+     *
+     * @var string
+     */
+    protected $redirectUrl;
+
+    /**
      * The custom parameters to be sent with the request.
      *
      * @var array
@@ -39,12 +60,12 @@ abstract class Server extends BaseServer
      * the temporary credentials identifier as passed back by the server
      * and finally the verifier code.
      *
-     * @param  \League\OAuth1\Client\Credentials\TemporaryCredentials  $temporaryCredentials
+     * @param  TemporaryCredentials  $temporaryCredentials
      * @param  string  $temporaryIdentifier
      * @param  string  $verifier
      * @return array
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function getTokenCredentials(TemporaryCredentials $temporaryCredentials, $temporaryIdentifier, $verifier)
     {

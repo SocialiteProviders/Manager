@@ -34,13 +34,13 @@
         "source": "https://github.com/socialiteproviders/manager"
     },
     "require": {
-        "php": "^8.2",
-        "illuminate/support": "^11.0 || ^12.0 || ^13.0",
-        "laravel/socialite": "^5.5"
+        "php": "^8.3",
+        "illuminate/support": "^12.0 || ^13.0",
+        "laravel/socialite": "^5.29"
     },
     "require-dev": {
-        "mockery/mockery": "^1.2",
-        "phpunit/phpunit": "^9.0"
+        "mockery/mockery": "^1.6",
+        "phpunit/phpunit": "^12.5"
     },
     "minimum-stability": "stable",
     "autoload": {

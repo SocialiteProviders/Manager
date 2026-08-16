@@ -1,0 +1,27 @@
+name: Lint
+
+on:
+  pull_request:
+  push:
+    branches: [ master ]
+
+jobs:
+  pint:
+    runs-on: ubuntu-latest
+
+    name: Code style
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: json, mbstring
+          coverage: none
+          tools: pint
+
+      - name: Check code style
+        run: pint --test

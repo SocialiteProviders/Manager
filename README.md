@@ -1,6 +1,6 @@
 # Socialite Providers Manager
 
-[![Build Status](https://travis-ci.org/SocialiteProviders/Manager.svg)](https://travis-ci.org/SocialiteProviders/Manager)
+[![Test](https://github.com/SocialiteProviders/Manager/actions/workflows/test.yml/badge.svg)](https://github.com/SocialiteProviders/Manager/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/SocialiteProviders/Manager/branch/master/graph/badge.svg)](https://codecov.io/gh/SocialiteProviders/Manager)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SocialiteProviders/Manager/?branch=master) 
 [![Latest Stable Version](https://poser.pugx.org/socialiteproviders/manager/v/stable.svg)](https://packagist.org/packages/socialiteproviders/manager) 
@@ -8,7 +8,6 @@
 [![Latest Unstable Version](https://poser.pugx.org/socialiteproviders/manager/v/unstable.svg)](https://packagist.org/packages/socialiteproviders/manager) 
 [![License](https://poser.pugx.org/socialiteproviders/manager/license.svg)](https://packagist.org/packages/socialiteproviders/manager)
 [![StyleCI](https://github.styleci.io/repos/30993504/shield?branch=master)](https://github.styleci.io/repos/30993504?branch=master)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/ddb2f0df-6d85-431c-8e68-6164b08dd852/small.png)](https://insight.sensiolabs.com/projects/ddb2f0df-6d85-431c-8e68-6164b08dd852)
 
 ## About
 
@@ -20,7 +19,6 @@ A package for Laravel Socialite that allows you to easily add new providers or o
 * Instantiation is deferred until Socialite is called
 * You can override current providers
 * You can create new providers
-* Lumen usage is easy
 * `stateless()` can be set to `true` or `false`
 * You can override a config dynamically
 * It retrieves environment variables directly from the `.env` file instead of also having to configure the services array.
@@ -33,17 +31,15 @@ A package for Laravel Socialite that allows you to easily add new providers or o
 
 ## Reference
 
-* [Laravel docs about events](https://laravel.com/docs/7.x/events)
-* [Laracasts video on events in Laravel 5](https://laracasts.com/lessons/laravel-5-events)
-* [Laravel Socialite Docs](https://github.com/laravel/socialite)  
-* [Laracasts Socialite video](https://laracasts.com/series/whats-new-in-laravel-5/episodes/9)
+* [Laravel docs about events](https://laravel.com/docs/13.x/events)
+* [Laravel Socialite Docs](https://laravel.com/docs/13.x/socialite)
 
 
 ## Creating a Handler
 
 Below is an example handler.  You need to add this full class name to the `listen[]` in the `EventServiceProvider`.
 
-* [See also the Laravel docs about events](https://laravel.com/docs/7.x/events).
+* [See also the Laravel docs about events](https://laravel.com/docs/13.x/events).
 * `providername` is the name of the provider such as `meetup`.
 * You will need to change your the namespacing and class names of course.  
 
@@ -65,8 +61,7 @@ class ProviderNameExtendSocialite
 
 ## Creating a Provider
 
-* Look at the already created [providers](https://socialiteproviders.netlify.app/) for inspiration.
-* [See this article on Medium](https://medium.com/@morrislaptop/adding-auth-providers-to-laravel-socialite-ca0335929e42)
+* Look at the already created [providers](https://socialiteproviders.com/) for inspiration.
 
 ## Overriding a Built-in Provider
 
@@ -91,7 +86,7 @@ return Socialite::with('provider-name')->setConfig($config)->redirect();
 
 ## Creating an OAuth1 Server Class
 
-Take a look at the other [OAuth1 providers](https://socialiteproviders.netlify.app/) for inspiration. 
+Take a look at the other [OAuth1 providers](https://socialiteproviders.com/) for inspiration. 
 
 ## Getting the Access Token Response Body
 

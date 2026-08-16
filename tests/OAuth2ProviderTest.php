@@ -5,6 +5,7 @@ namespace SocialiteProviders\Manager\Test;
 use Laravel\Socialite\Contracts\Factory as SocialiteFactoryContract;
 use Laravel\Socialite\One\AbstractProvider;
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use SocialiteProviders\Manager\Config;
 use SocialiteProviders\Manager\Exception\InvalidArgumentException;
@@ -16,9 +17,7 @@ class OAuth2ProviderTest extends TestCase
 {
     use ManagerTestTrait;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_throws_if_there_is_no_config_in_services_or_env(): void
     {
         $this->expectExceptionObject(new MissingConfigException);
@@ -55,9 +54,7 @@ class OAuth2ProviderTest extends TestCase
         $event->extendSocialite($providerName, $providerClass);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_allows_the_config_to_be_retrieved_from_the_services_array(): void
     {
         $providerName = 'bar';
@@ -92,9 +89,7 @@ class OAuth2ProviderTest extends TestCase
         $event->extendSocialite($providerName, $providerClass);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_allows_a_custom_config_to_be_passed_dynamically(): void
     {
         $provider = new OAuth2ProviderStub(
@@ -109,9 +104,7 @@ class OAuth2ProviderTest extends TestCase
         $this->assertSame($provider, $result);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_retrieves_from_the_config_if_no_config_is_provided(): void
     {
         $providerName = 'bar';
@@ -145,9 +138,7 @@ class OAuth2ProviderTest extends TestCase
         $event->extendSocialite($providerName, $providerClass);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_build_a_provider_and_extend_socialite(): void
     {
         $providerName = 'bar';
@@ -186,9 +177,7 @@ class OAuth2ProviderTest extends TestCase
         $event->extendSocialite($providerName, $providerClass);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_throws_if_given_a_bad_provider_class_name(): void
     {
         $this->expectExceptionObject(new InvalidArgumentException("FooBar doesn't exist"));
@@ -229,9 +218,7 @@ class OAuth2ProviderTest extends TestCase
         $event->extendSocialite($providerName, $this->invalidClass());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_throws_if_given_an_invalid_oauth2_provider(): void
     {
         $this->expectExceptionObject(new InvalidArgumentException("FooBar doesn't exist"));
@@ -252,9 +239,7 @@ class OAuth2ProviderTest extends TestCase
         $event->extendSocialite($providerName, $this->invalidClass());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_throws_if_oauth1_server_is_passed_for_oauth2(): void
     {
         $this->expectExceptionObject(new InvalidArgumentException(
