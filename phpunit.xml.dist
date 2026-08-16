@@ -18,13 +18,6 @@
         </include>
     </source>
 
-    <coverage>
-        <report>
-            <clover outputFile="build/logs/clover.xml"/>
-            <text outputFile="php://stdout"/>
-        </report>
-    </coverage>
-
     <testsuites>
         <testsuite name="SocialiteProviders Manager Test Suite">
             <directory suffix="Test.php">./tests</directory>
