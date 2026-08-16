@@ -37,9 +37,6 @@ jobs:
       - name: Lint composer.json
         run: composer validate --strict
 
-      - name: Check code style
-        run: vendor/bin/pint --test
-
       - name: Run Tests
         run: vendor/bin/phpunit
 

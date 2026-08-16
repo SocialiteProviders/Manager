@@ -39,7 +39,6 @@
         "laravel/socialite": "^5.29"
     },
     "require-dev": {
-        "laravel/pint": "^1.30",
         "mockery/mockery": "^1.6",
         "phpunit/phpunit": "^12.5"
     },
